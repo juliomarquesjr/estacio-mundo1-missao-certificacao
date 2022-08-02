@@ -20,6 +20,7 @@ class Tecnico:
     def __str__(self):
         return f'Tecnico: {self._nome} - CPF: {self._cpf} - Telefone: {self._telefone}'
 
-## Somente será usado para testar a classe isoladamente, sem vinculo com o restante do sistema
+## Somente será usado para testar a classe isoladamente,
+# sem vinculo com o restante do sistema
 if __name__ == "__main__":
     print(Tecnico('Nome Teste', '123456', '1199998888', 'manha', 'beta'))
