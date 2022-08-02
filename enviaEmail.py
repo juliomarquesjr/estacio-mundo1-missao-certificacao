@@ -19,7 +19,7 @@ class Email:
 
         if(server):
             self.mensagem = mensagem
-            server.sendmail(self._usuario, self._destinatario, f'Subject: {self._assunto}\n {self.mensagem}')
+            server.sendmail(self._usuario, self._destinatario, f'Subject: {self._assunto} \n{self.mensagem}')
             server.quit()
             return True
         else:
