@@ -22,7 +22,8 @@ class Email:
         finally:
             server.quit()
 
-## Somente será usado para testar a classe isoladamente, sem vinculo com o restante do sistema
+## Somente será usado para testar a classe isoladamente,
+# sem vinculo com o restante do sistema
 if __name__ == "__main__":
     email = Email('juliomarquesjr@yahoo.com.br', 'Teste Classe Email')
     print(email.enviar_mensagem('Teste de email da classe Email'))
