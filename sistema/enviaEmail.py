@@ -1,4 +1,7 @@
 import smtplib as smt
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 from banco import Banco
 
 class Email:
@@ -6,21 +9,23 @@ class Email:
 
         #Consulta configurações no banco
         config_data = Banco().consultar_dados('configuracoes')
-        print(config_data)
 
-        self._destinatario = destinatario
-        self._assunto = assunto
         self._host = config_data[0]
-        self._usuario = config_data[1]
         self._senha = config_data[2]
         self._porta = config_data[3]
 
+        self.msg = MIMEMultipart()
+        self.msg['From'] = config_data[1]
+        self.msg['To'] = destinatario
+        self.msg['Subject'] = assunto
+
     def enviar_mensagem(self, mensagem):
+        self. msg.attach(MIMEText(mensagem, 'plain'))
+
         try:
             server = smt.SMTP_SSL(self._host, self._porta)
-            server.login(self._usuario, self._senha)
-            self.mensagem = mensagem
-            server.sendmail(self._usuario, self._destinatario, f'Subject: {self._assunto} \n{self.mensagem}')
+            server.login(self.msg['From'], self._senha)
+            server.sendmail(self.msg['From'], self.msg['To'], self.msg.as_string())
             return True
         except:
             print("Erro ao enviar email")
@@ -31,5 +36,6 @@ class Email:
 ## Somente será usado para testar a classe isoladamente,
 # sem vinculo com o restante do sistema
 if __name__ == "__main__":
-    email = Email('juliomarquesjr@yahoo.com.br', 'Teste Classe Email - Banco')
-    print(email.enviar_mensagem('Teste de email da classe Email com banco'))
+    pass
+    #email = Email('juliomarquesjr@yahoo.com.br', 'Teste Classe Email - Banco 2')
+    #print(email.enviar_mensagem('Teste de email da classe Email com banco'))
