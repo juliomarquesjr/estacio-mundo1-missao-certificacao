@@ -75,11 +75,13 @@ class Banco:
             self.cursor.close()
             self.conexao.close()
 
-    def consultar_dados(self, tabela, where = False):
-        if where == False:
+    def consultar_dados(self, tabela, where = 'none'):
+        if where == 'none':
             self.sql = f'SELECT * FROM {tabela}'
         else:
             self.sql = f'SELECT * FROM {tabela} WHERE ({where})'
+
+        print(self.sql)
 
         self.conexao = self._conectar()
         self.cursor = self.conexao.cursor()
@@ -92,7 +94,7 @@ class Banco:
             for rec in recset:
                 registros.append(rec)
 
-            return registros[0]
+            return (*registros, )
 
         except (Exception, psycopg2.DatabaseError) as error:
             print("Error: %s" % error)
@@ -108,5 +110,5 @@ if __name__ == "__main__":
     #print(Banco().adicionar_dados('configuracoes', ('mail.maximweb.com.br', 'julio@maximweb.com.br', 'bTv6Y7QHw1ZT', 465)))
     #print(Banco().remover_dados('testes','id = 4'))
 
-    print(Banco().consultar_dados(tabela='configuracoes'))
+    print(Banco().consultar_dados(tabela='tecnico'))
 
