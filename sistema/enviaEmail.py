@@ -8,7 +8,7 @@ class Email:
     def __init__(self, destinatario, assunto):
 
         #Consulta configurações no banco
-        config_data = Banco().consultar_dados('configuracoes')
+        config_data = Banco().consultar_dados('configuracoes')[0]
 
         self._host = config_data[0]
         self._senha = config_data[2]
@@ -37,5 +37,5 @@ class Email:
 # sem vinculo com o restante do sistema
 if __name__ == "__main__":
     pass
-    #email = Email('juliomarquesjr@yahoo.com.br', 'Teste Classe Email - Banco 2')
-    #print(email.enviar_mensagem('Teste de email da classe Email com banco'))
+    email = Email('juliomarquesjr@yahoo.com.br', 'Teste Classe Email - Banco 2')
+    print(email.enviar_mensagem('Teste de email da classe Email com banco'))
