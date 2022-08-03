@@ -80,6 +80,7 @@ class Tecnico():
 ## Somente será usado para testar a classe isoladamente,
 # sem vinculo com o restante do sistema
 if __name__ == "__main__":
-    novo_tecnico = Tecnico(nome='Juca da Silva', cpf='452145785', telefone='887788995', turno='tarde', nome_equipe='beta')
-    novo_tecnico.nome = "Juca da Silveira"
-    print(novo_tecnico.consulta_banco())
+    pass
+    #novo_tecnico = Tecnico(nome='Juca da Silva', cpf='452145785', telefone='887788995', turno='tarde', nome_equipe='beta')
+    #novo_tecnico.nome = "Juca da Silveira"
+    #print(novo_tecnico.consulta_banco())
