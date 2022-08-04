@@ -8,18 +8,23 @@ class Banco:
         self._porta = '5432'
         self._banco = 'postgres'
 
-    def _conectar(self):
-        self.conn = psycopg2.connect(host=self._host,
-                                     database=self._banco,
-                                     user=self._usuario,
-                                     password=self._senha,
-                                     port=self._porta)
-        return self.conn
+    def conectar(self):
+        try:
+            conn = psycopg2.connect(host=self._host,
+                                         database=self._banco,
+                                         user=self._usuario,
+                                         password=self._senha,
+                                         port=self._porta)
+            return conn
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("Error: %s" % error)
+            return False
+
 
     def adicionar_dados(self, tabela, dados):
         self.sql = f"INSERT into {tabela} values {dados}"
 
-        self.conexao = self._conectar()
+        self.conexao = self.conectar()
         self.cursor = self.conexao.cursor()
 
         try:
@@ -37,7 +42,7 @@ class Banco:
     def atualizar_dados(self, tabela, set, where):
         self.sql = f"UPDATE {tabela} SET {set} WHERE {where}"
 
-        self.conexao = self._conectar()
+        self.conexao = self.conectar()
         self.cursor = self.conexao.cursor()
 
         try:
@@ -55,7 +60,7 @@ class Banco:
     def remover_dados(self, tabela, where):
         self.sql = f'DELETE from {tabela} WHERE ({where})'
 
-        self.conexao = self._conectar()
+        self.conexao = self.conectar()
         self.cursor = self.conexao.cursor()
 
         try:
@@ -81,7 +86,7 @@ class Banco:
         else:
             self.sql = f'SELECT * FROM {tabela} WHERE ({where})'
 
-        self.conexao = self._conectar()
+        self.conexao = self.conectar()
         self.cursor = self.conexao.cursor()
 
         try:
