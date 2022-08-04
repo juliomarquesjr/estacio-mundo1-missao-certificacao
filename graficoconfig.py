@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, Button, Entry, messagebox
+from tkinter import Label, Button, Entry, messagebox, PhotoImage
 
 from config import Config
 from sistema.centraliza_janelas import center
@@ -8,7 +8,10 @@ class GraficoConfig(Config):
     def __init__(self):
         super().__init__()
         self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
-        self._principal.geometry("200x175")
+        #self._principal.geometry("250x175")
+
+        self._principal.minsize(250, 175) and self._principal.maxsize(250, 175)
+
         self._principal.title('Configurações')
         center(self._principal)
 
@@ -17,13 +20,16 @@ class GraficoConfig(Config):
         self.lbsenha = Label(self._principal, text="Senha: ")
         self.lbporta = Label(self._principal, text="Porta: ")
 
-        self.cxhost = Entry(self._principal, width=15)
-        self.cxusuario = Entry(self._principal, width=15)
-        self.cxsenha = Entry(self._principal, width=15)
-        self.cxporta = Entry(self._principal, width=15)
+        self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
+        self.icon_sair = PhotoImage(file="assets/icones/icon_saida.png")
 
-        self.btsalvar = Button(self._principal, text="Salvar", command=self._salvar)
-        self.btfechar = Button(self._principal, text="Fechar", command=self._principal.destroy)
+        self.cxhost = Entry(self._principal, width=20)
+        self.cxusuario = Entry(self._principal, width=20)
+        self.cxsenha = Entry(self._principal, width=20)
+        self.cxporta = Entry(self._principal, width=20)
+
+        self.btsalvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5, text="Salvar", command=self._salvar)
+        self.btfechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5, text="Fechar", command=self._principal.destroy)
 
         self.lbhost.place(x=20, y=10)
         self.cxhost.place(x=75, y=10)
@@ -33,8 +39,8 @@ class GraficoConfig(Config):
         self.cxsenha.place(x=75, y=70)
         self.lbporta.place(x=20, y=100)
         self.cxporta.place(x=75, y=100)
-        self.btsalvar.place(x=90, y=140)
-        self.btfechar.place(x=140, y=140)
+        self.btsalvar.place(x=45, y=140)
+        self.btfechar.place(x=120, y=140)
 
         self._preenche_campos()
         self._principal.mainloop()
