@@ -6,7 +6,7 @@ class Config:
 
     def _salvar_configuracao(self, dados = False):
         if dados != False:
-            self._banco.atualizar_dados(tabela='configuracoes', where='id = 1',
+            return self._banco.atualizar_dados(tabela='configuracoes', where='id = 1',
                                         set=f"email_host = '{dados[0]}', "
                                             f"email_usuario = '{dados[1]}', "
                                             f"email_senha = '{dados[2]}', "

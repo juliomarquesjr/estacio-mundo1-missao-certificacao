@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, Button, Entry
+from tkinter import Label, Button, Entry, messagebox
 from config import Config
 
 class GraficoConfig(Config):
@@ -47,10 +47,15 @@ class GraficoConfig(Config):
             self.cxporta.insert(0, dados[3])
 
     def _salvar(self):
-        self._salvar_configuracao(dados=(self.cxhost.get(),
+        resposta = self._salvar_configuracao(dados=(self.cxhost.get(),
                                          self.cxusuario.get(),
                                          self.cxsenha.get(),
                                          self.cxporta.get()))
+
+        if resposta:
+            tkinter.messagebox.showinfo('Salvar Configuração', 'Dados salvos com sucesso!')
+        else:
+            tkinter.messagebox.showerror('Erro ao Salvar', "Erro ao salvar as informações. Por favor, verifique os campos.")
 
 
 janela = GraficoConfig()
