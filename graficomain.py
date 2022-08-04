@@ -4,24 +4,25 @@ from tkinter import Button
 import tkinter as tk
 import tkinter.font as tkFont
 
-def acao():
-    print("Pressionado")
+from graficoconfig import GraficoConfig
+from sistema.centraliza_janelas import center
 
+def abrir_configuracoes():
+    janela = GraficoConfig()
 
 principal = tkinter.Tk()
 principal.geometry("600x400")
 principal.title('Conteúdo Audiovisual LTDA')
-
+center(principal)
 
 lbsistema = Label(principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
 lbexpira = Label(principal, text="Reservas Expirando",font=tkFont.Font(size=15))
 
-
-bttecnico = Button(principal, text="Técnicos", command=acao)
-btferramenta = Button(principal, text="Ferramentas", command=acao)
-btreservar = Button(principal, text="Reservas", command=acao)
-btconfig = Button(principal, text="Configurações", command=acao)
-btsair = Button(principal, text="Sair", command=principal.quit)
+bttecnico = Button(principal, text="Técnicos")
+btferramenta = Button(principal, text="Ferramentas")
+btreservar = Button(principal, text="Reservas")
+btconfig = Button(principal, text="Configurações", command=abrir_configuracoes)
+btsair = Button(principal, text="Sair", command=principal.destroy)
 
 lbsistema.pack(side=tk.TOP)
 lbexpira.place(x=10,y=50)

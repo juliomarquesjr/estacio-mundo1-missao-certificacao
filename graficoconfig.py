@@ -1,13 +1,16 @@
 import tkinter
 from tkinter import Label, Button, Entry, messagebox
+
 from config import Config
+from sistema.centraliza_janelas import center
 
 class GraficoConfig(Config):
     def __init__(self):
         super().__init__()
-        self._principal = tkinter.Tk()
+        self._principal = tkinter.Toplevel()
         self._principal.geometry("200x175")
         self._principal.title('Configurações')
+        center(self._principal)
 
         self.lbhost = Label(self._principal, text="Host: ")
         self.lbusuario = Label(self._principal, text="Usuário: ")
@@ -20,7 +23,7 @@ class GraficoConfig(Config):
         self.cxporta = Entry(self._principal, width=15)
 
         self.btsalvar = Button(self._principal, text="Salvar", command=self._salvar)
-        self.btfechar = Button(self._principal, text="Fechar", command=self._principal.quit)
+        self.btfechar = Button(self._principal, text="Fechar", command=self._principal.destroy)
 
         self.lbhost.place(x=20, y=10)
         self.cxhost.place(x=75, y=10)
@@ -46,6 +49,12 @@ class GraficoConfig(Config):
             self.cxsenha.insert(0, dados[2])
             self.cxporta.insert(0, dados[3])
 
+    def quit(self):
+        self._principal.quit()
+
+    def abrir_janela(self):
+        self._principal.mainloop()
+
     def _salvar(self):
         resposta = self._salvar_configuracao(dados=(self.cxhost.get(),
                                          self.cxusuario.get(),
@@ -56,6 +65,3 @@ class GraficoConfig(Config):
             tkinter.messagebox.showinfo('Salvar Configuração', 'Dados salvos com sucesso!')
         else:
             tkinter.messagebox.showerror('Erro ao Salvar', "Erro ao salvar as informações. Por favor, verifique os campos.")
-
-
-janela = GraficoConfig()
