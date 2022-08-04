@@ -81,8 +81,6 @@ class Banco:
         else:
             self.sql = f'SELECT * FROM {tabela} WHERE ({where})'
 
-        print(self.sql)
-
         self.conexao = self._conectar()
         self.cursor = self.conexao.cursor()
 
