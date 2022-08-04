@@ -52,5 +52,3 @@ class GraficoMain:
         self.btsair.place(x=530,y=360)
 
         self.principal.mainloop()
-
-janela = GraficoMain()
