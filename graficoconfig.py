@@ -7,7 +7,7 @@ from sistema.centraliza_janelas import center
 class GraficoConfig(Config):
     def __init__(self):
         super().__init__()
-        self._principal = tkinter.Toplevel()
+        self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
         self._principal.geometry("200x175")
         self._principal.title('Configurações')
         center(self._principal)
@@ -52,9 +52,6 @@ class GraficoConfig(Config):
     def quit(self):
         self._principal.quit()
 
-    def abrir_janela(self):
-        self._principal.mainloop()
-
     def _salvar(self):
         resposta = self._salvar_configuracao(dados=(self.cxhost.get(),
                                          self.cxusuario.get(),
@@ -65,3 +62,5 @@ class GraficoConfig(Config):
             tkinter.messagebox.showinfo('Salvar Configuração', 'Dados salvos com sucesso!')
         else:
             tkinter.messagebox.showerror('Erro ao Salvar', "Erro ao salvar as informações. Por favor, verifique os campos.")
+
+        self._principal.lift()  # Puxa a janela novamente para frente após exibir o aviso

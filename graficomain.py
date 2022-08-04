@@ -7,30 +7,30 @@ import tkinter.font as tkFont
 from graficoconfig import GraficoConfig
 from sistema.centraliza_janelas import center
 
-def abrir_configuracoes():
-    janela = GraficoConfig()
+class GraficoMain:
+    def __init__(self):
+        self.principal = tkinter.Tk()
+        self.principal.geometry("600x400")
+        self.principal.title('Conteúdo Audiovisual LTDA')
+        center(self.principal)
 
-principal = tkinter.Tk()
-principal.geometry("600x400")
-principal.title('Conteúdo Audiovisual LTDA')
-center(principal)
+        self.lbsistema = Label(self.principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
+        self.lbexpira = Label(self.principal, text="Reservas Expirando",font=tkFont.Font(size=15))
 
-lbsistema = Label(principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
-lbexpira = Label(principal, text="Reservas Expirando",font=tkFont.Font(size=15))
+        self.bttecnico = Button(self.principal, text="Técnicos")
+        self.btferramenta = Button(self.principal, text="Ferramentas")
+        self.btreservar = Button(self.principal, text="Reservas")
+        self.btconfig = Button(self.principal, text="Configurações", command=GraficoConfig)
+        self.btsair = Button(self.principal, text="Sair", command=self.principal.destroy)
 
-bttecnico = Button(principal, text="Técnicos")
-btferramenta = Button(principal, text="Ferramentas")
-btreservar = Button(principal, text="Reservas")
-btconfig = Button(principal, text="Configurações", command=abrir_configuracoes)
-btsair = Button(principal, text="Sair", command=principal.destroy)
+        self.lbsistema.pack(side=tk.TOP)
+        self.lbexpira.place(x=10,y=50)
+        self.bttecnico.place(x=10,y=360)
+        self.btferramenta.place(x=75,y=360)
+        self.btreservar.place(x=160,y=360)
+        self.btconfig.place(x=225,y=360)
+        self.btsair.place(x=550,y=360)
 
-lbsistema.pack(side=tk.TOP)
-lbexpira.place(x=10,y=50)
-bttecnico.place(x=10,y=360)
-btferramenta.place(x=75,y=360)
-btreservar.place(x=160,y=360)
-btconfig.place(x=225,y=360)
-btsair.place(x=550,y=360)
+        self.principal.mainloop()
 
-
-principal.mainloop()
+janela = GraficoMain()
