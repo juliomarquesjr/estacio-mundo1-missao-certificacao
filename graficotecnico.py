@@ -9,6 +9,7 @@ def acao():
 
 principal = tkinter.Tk()
 principal.geometry("400x175")
+principal.title('Técnicos')
 
 
 lbnome = Label(principal, text="Nome: ")
@@ -27,9 +28,8 @@ cxturno['values'] = ("Manhã","Tarde","Noite")
 
 
 bteditar = Button(principal, text="Editar", command=acao)
-btremover = Button(principal, text="Remover", command=acao)
 btsalvar = Button(principal, text="Salvar", command=acao)
-btfechar = Button(principal, text="Fechar", command=acao)
+btfechar = Button(principal, text="Fechar", command=principal.quit)
 
 
 lbnome.place(x=10,y=10)
@@ -42,8 +42,7 @@ lbequipe.place(x=10,y=70)
 cxequipe.place(x=60,y=70)
 lbturno.place(x=10,y=100)
 cxturno.place(x=60,y=100)
-bteditar.place(x=180,y=140)
-btremover.place(x=225,y=140)
+bteditar.place(x=10,y=140)
 btsalvar.place(x=290,y=140)
 btfechar.place(x=340,y=140)
 

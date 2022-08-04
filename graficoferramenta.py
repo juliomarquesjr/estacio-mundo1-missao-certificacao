@@ -2,13 +2,13 @@ import tkinter
 from tkinter import Label
 from tkinter import Entry
 from tkinter import Button
-from tkinter import ttk
 
 def acao():
     print("Pressionado")
 
 principal = tkinter.Tk()
 principal.geometry("500x230")
+principal.title('Ferramentas')
 
 
 lbcodigo = Label(principal, text="Código: ")
@@ -36,9 +36,8 @@ cxdesc = Entry(principal, width = 65)
 
 
 bteditar = Button(principal, text="Editar", command=acao)
-btremover = Button(principal, text="Remover", command=acao)
 btsalvar = Button(principal, text="Salvar", command=acao)
-btfechar = Button(principal, text="Fechar", command=acao)
+btfechar = Button(principal, text="Fechar", command=principal.quit)
 
 
 lbcodigo.place(x=10,y=10)
@@ -61,8 +60,7 @@ lbfab.place(x=10,y=130)
 cxfab.place(x=75,y=130)
 lbdesc.place(x=10,y=160)
 cxdesc.place(x=75,y=160)
-bteditar.place(x=280,y=195)
-btremover.place(x=325,y=195)
+bteditar.place(x=10,y=195)
 btsalvar.place(x=390,y=195)
 btfechar.place(x=440,y=195)
 
