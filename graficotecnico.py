@@ -1,50 +1,48 @@
 import tkinter
-from tkinter import Label
-from tkinter import Entry
-from tkinter import Button
-from tkinter import ttk
+from tkinter import Label, ttk, Button, Entry
 
-def acao():
-    print("Pressionado")
+from sistema.centraliza_janelas import center
 
-principal = tkinter.Tk()
-principal.geometry("400x175")
-principal.title('Técnicos')
+class GraficoTecnico:
+    def __init__(self):
 
+        self.principal = tkinter.Toplevel()
+        self.principal.geometry("400x175")
+        self.principal.title('Técnicos')
+        center(self.principal)
 
-lbnome = Label(principal, text="Nome: ")
-lbcpf = Label(principal, text="CPF: ")
-lbtel = Label(principal, text="Telefone: ")
-lbequipe = Label(principal, text="Equipe: ")
-lbturno = Label(principal, text="Turno: ")
+        self.lbnome = Label(self.principal, text="Nome: ")
+        self.lbcpf = Label(self.principal, text="CPF: ")
+        self.lbtel = Label(self.principal, text="Telefone: ")
+        self.lbequipe = Label(self.principal, text="Equipe: ")
+        self.lbturno = Label(self.principal, text="Turno: ")
 
+        self.cxnome = Entry(self.principal, width = 45)
+        self.cxcpf = Entry(self.principal, width = 16)
+        self.cxtel = Entry(self.principal, width = 14)
+        self.cxequipe = Entry(self.principal, width = 35)
+        self.cxturno = ttk.Combobox(self.principal)
+        self.cxturno['values'] = ("Manhã","Tarde","Noite")
 
-cxnome = Entry(principal, width = 45)
-cxcpf = Entry(principal, width = 16)
-cxtel = Entry(principal, width = 14)
-cxequipe = Entry(principal, width = 35)
-cxturno = ttk.Combobox(principal)
-cxturno['values'] = ("Manhã","Tarde","Noite")
+        self.bteditar = Button(self.principal, text="Editar", command=self.acao)
+        self.btsalvar = Button(self.principal, text="Salvar", command=self.acao)
+        self.btfechar = Button(self.principal, text="Fechar", command=self.principal.destroy)
 
+        self.lbnome.place(x=10,y=10)
+        self.cxnome.place(x=60,y=10)
+        self.lbcpf.place(x=10,y=40)
+        self.cxcpf.place(x=60,y=40)
+        self.lbtel.place(x=185,y=40)
+        self.cxtel.place(x=245,y=40)
+        self.lbequipe.place(x=10,y=70)
+        self.cxequipe.place(x=60,y=70)
+        self.lbturno.place(x=10,y=100)
+        self.cxturno.place(x=60,y=100)
+        self.bteditar.place(x=10,y=140)
+        self.btsalvar.place(x=290,y=140)
+        self.btfechar.place(x=340,y=140)
 
-bteditar = Button(principal, text="Editar", command=acao)
-btsalvar = Button(principal, text="Salvar", command=acao)
-btfechar = Button(principal, text="Fechar", command=principal.quit)
+        self.principal.mainloop()
 
-
-lbnome.place(x=10,y=10)
-cxnome.place(x=60,y=10)
-lbcpf.place(x=10,y=40)
-cxcpf.place(x=60,y=40)
-lbtel.place(x=185,y=40)
-cxtel.place(x=245,y=40)
-lbequipe.place(x=10,y=70)
-cxequipe.place(x=60,y=70)
-lbturno.place(x=10,y=100)
-cxturno.place(x=60,y=100)
-bteditar.place(x=10,y=140)
-btsalvar.place(x=290,y=140)
-btfechar.place(x=340,y=140)
-
-
-principal.mainloop()
+    def acao(self):
+        print("Pressionado")

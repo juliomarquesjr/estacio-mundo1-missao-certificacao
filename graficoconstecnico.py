@@ -3,6 +3,7 @@ from tkinter import Label
 from tkinter import Entry
 from tkinter import Button
 
+from graficotecnico import GraficoTecnico
 from sistema.centraliza_janelas import center
 
 class GraficoConsultaTecnico:
@@ -18,10 +19,10 @@ class GraficoConsultaTecnico:
         self.cxbusca = Entry(self._principal, width=60)
 
         self.btpesquisa = Button(self._principal, text="Pesquisar", command=self.acao)
-        self.btcadastrar = Button(self._principal, text="Cadastrar", command=self.acao)
+        self.btcadastrar = Button(self._principal, text="Cadastrar", command=GraficoTecnico)
         self.btvisul_edit = Button(self._principal, text="Visualizar/Editar", command=self.acao)
         self.btremover = Button(self._principal, text="Remover", command=self.acao)
-        self.btfechar = Button(self._principal, text="Fechar", command=self._principal.quit)
+        self.btfechar = Button(self._principal, text="Fechar", command=self._principal.destroy)
 
         self.lbbusca.place(x=10, y=10)
         self.cxbusca.place(x=10, y=40)
