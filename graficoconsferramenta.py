@@ -26,7 +26,7 @@ class GraficoConsultaFerramenta:
         self.cxbusca.place(x=10, y=40)
         self.btpesquisa.place(x=380, y=35)
         self.lblista.place(x=10, y=80)
-        self.btcadastrar.place(x=290,y=140)
+        self.btcadastrar.place(x=290,y=170)
         self.btvisul_edit.place(x=10,y=140)
         self.btremover.place(x=290,y=140)
         self.btfechar.place(x=340,y=140)
