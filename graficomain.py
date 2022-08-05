@@ -5,7 +5,9 @@ import tkinter as tk
 import tkinter.font as tkFont
 
 from graficoconfig import GraficoConfig
-from graficoconsferramenta import GraficoConsultaTecnico
+from graficoconsferramenta import GraficoConsultaFerramenta
+from graficoconstecnico import GraficoConsultaTecnico
+
 from sistema.centraliza_janelas import center
 
 class GraficoMain:
@@ -26,7 +28,7 @@ class GraficoMain:
 
         ## Inicio da Lista de Reservas
         self.bttecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
-        self.btferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas")
+        self.btferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
         self.btreservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas")
         self.btconfig = Button(self.principal, text="Configurações", image=self.icon_config, height=22, padx=5, compound='left', command=GraficoConfig)
         self.btsair = Button(self.principal, text="Sair", image=self.icon_saida, compound='left', height=22, padx=5, command=self.principal.destroy)

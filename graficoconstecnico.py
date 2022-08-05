@@ -3,38 +3,37 @@ from tkinter import Label
 from tkinter import Entry
 from tkinter import Button
 
-def acao():
-    print("Pressionado")
+from sistema.centraliza_janelas import center
 
-principal = tkinter.Tk()
-principal.geometry("450x300")
-principal.title('Consultas - Técnicos')
+class GraficoConsultaTecnico:
+    def __init__(self):
+        self._principal = tkinter.Toplevel()
+        self._principal.geometry("450x300")
+        self._principal.title('Consultas - Técnicos')
+        center(self._principal)
 
+        self.lbbusca = Label(self._principal, text="Buscar Técnico: ")
+        self.lblista = Label(self._principal, text="Lista de Técnicos: ")
 
-lbbusca = Label(principal, text="Buscar Técnico: ")
-lblista = Label(principal, text="Lista de Técnicos: ")
+        self.cxbusca = Entry(self._principal, width=60)
 
+        self.btpesquisa = Button(self._principal, text="Pesquisar", command=self.acao)
+        self.btcadastrar = Button(self._principal, text="Cadastrar", command=self.acao)
+        self.btvisul_edit = Button(self._principal, text="Visualizar/Editar", command=self.acao)
+        self.btremover = Button(self._principal, text="Remover", command=self.acao)
+        self.btfechar = Button(self._principal, text="Fechar", command=self._principal.quit)
 
-cxbusca = Entry(principal, width = 60)
+        self.lbbusca.place(x=10, y=10)
+        self.cxbusca.place(x=10, y=40)
+        self.btpesquisa.place(x=380, y=35)
+        self.lblista.place(x=10, y=80)
+        self.btcadastrar.place(x=290,y=140)
+        self.btvisul_edit.place(x=10,y=140)
+        self.btremover.place(x=290,y=140)
+        self.btfechar.place(x=340,y=140)
 
+        self._principal.mainloop()
 
-btpesquisa = Button(principal, text="Pesquisar", command=acao)
-btcadastrar = Button(principal, text="Cadastrar", command=acao)
-btvisul_edit = Button(principal, text="Visualizar/Editar", command=acao)
-btremover = Button(principal, text="Remover", command=acao)
-btfechar = Button(principal, text="Fechar", command=principal.quit)
+    def acao(self):
+        print("Pressionado")
 
-
-
-
-lbbusca.place(x=10,y=10)
-cxbusca.place(x=10,y=40)
-btpesquisa.place(x=380,y=35)
-lblista.place(x=10,y=80)
-#btcadastrar.place(x=290,y=140)
-#btvisul_edit.place(x=10,y=140)
-#btremover.place(x=290,y=140)
-#btfechar.place(x=340,y=140)
-
-
-principal.mainloop()
