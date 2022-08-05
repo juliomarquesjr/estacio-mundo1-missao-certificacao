@@ -13,7 +13,12 @@ from sistema.centraliza_janelas import center
 class GraficoMain:
     def __init__(self):
         self.principal = tkinter.Tk()
+
+        ## Ajustar tamanho da janela e não permitir maximizar
         self.principal.geometry("600x400")
+        self.principal.minsize(600, 400)
+        self.principal.maxsize(600, 400)
+
         self.principal.title('Conteúdo Audiovisual LTDA')
         center(self.principal)
 

@@ -9,8 +9,9 @@ class GraficoConfig(Config):
     def __init__(self):
         super().__init__()
         self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
-        self._principal.geometry("250x175")
 
+        ## Ajustar tamanho da janela e não permitir maximizar
+        self._principal.geometry("250x175")
         self._principal.minsize(250, 175)
         self._principal.maxsize(250, 175)
 
