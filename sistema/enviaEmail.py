@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from banco import Banco
 
 class Email:
-    def __init__(self, destinatario, assunto):
+    def __init__(self, destinatario):
 
         #Consulta configurações no banco
         config_data = Banco().consultar_dados('configuracoes')[0]
@@ -17,7 +17,7 @@ class Email:
         self.msg = MIMEMultipart()
         self.msg['From'] = config_data[1]
         self.msg['To'] = destinatario
-        self.msg['Subject'] = assunto
+        self.msg['Subject'] = config_data[5]
 
     def enviar_mensagem(self, mensagem):
         self. msg.attach(MIMEText(mensagem, 'plain'))
@@ -36,6 +36,6 @@ class Email:
 ## Somente será usado para testar a classe isoladamente,
 # sem vinculo com o restante do sistema
 if __name__ == "__main__":
-    pass
-    email = Email('juliomarquesjr@yahoo.com.br', 'Teste Classe Email - Banco 2')
+    #pass
+    email = Email('juliomarquesjr@yahoo.com.br')
     print(email.enviar_mensagem('Teste de email da classe Email com banco'))

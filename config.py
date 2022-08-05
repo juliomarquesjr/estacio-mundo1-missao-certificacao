@@ -10,7 +10,8 @@ class Config:
                                         set=f"email_host = '{dados[0]}', "
                                             f"email_usuario = '{dados[1]}', "
                                             f"email_senha = '{dados[2]}', "
-                                            f"email_porta = {dados[3]}" )
+                                            f"email_porta = {dados[3]}, "
+                                            f"email_remetente = '{dados[4]}'" )
 
     def _carregar_configuracao(self):
         return self._banco.consultar_dados('configuracoes', f"id = 1")

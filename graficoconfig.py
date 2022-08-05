@@ -10,69 +10,82 @@ class GraficoConfig(Config):
         super().__init__()
         self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
 
-        ## Ajustar tamanho da janela e não permitir maximizar
-        self._principal.geometry("250x175")
-        self._principal.minsize(250, 175)
-        self._principal.maxsize(250, 175)
+        ## Ajustar tamanho da janela e não permitir maximizar.
+        self._principal.geometry("250x200")
+        self._principal.minsize(250, 200)
+        self._principal.maxsize(250, 200)
 
         self._principal.title('Configurações')
         center(self._principal)
 
-        self.lbhost = Label(self._principal, text="Host: ")
-        self.lbusuario = Label(self._principal, text="Usuário: ")
-        self.lbsenha = Label(self._principal, text="Senha: ")
-        self.lbporta = Label(self._principal, text="Porta: ")
+        ## Labels.
+        self.lb_host = Label(self._principal, text="Host: ")
+        self.lb_usuario = Label(self._principal, text="Usuário: ")
+        self.lb_senha = Label(self._principal, text="Senha: ")
+        self.lb_porta = Label(self._principal, text="Porta: ")
+        self.lb_remetente = Label(self._principal, text="Remente: ")
 
+        ## Icones.
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_sair = PhotoImage(file="assets/icones/icon_saida.png")
 
-        self.cxhost = Entry(self._principal, width=20)
-        self.cxusuario = Entry(self._principal, width=20)
-        self.cxsenha = Entry(self._principal, width=20)
-        self.cxporta = Entry(self._principal, width=20)
+        ## Caixas de texto.
+        self.cx_host = Entry(self._principal, width=27)
+        self.cx_usuario = Entry(self._principal, width=27)
+        self.cx_senha = Entry(self._principal, width=27)
+        self.cx_porta = Entry(self._principal, width=15)
+        self.cx_remetente = Entry(self._principal, width=27)
 
-        self.btsalvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5,
+        ## Botões.
+        self.bt_salvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5,
                                text="Salvar", command=self._salvar)
-        self.btfechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5, text="Fechar",
+        self.bt_fechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5, text="Fechar",
                                command=self._principal.destroy)
 
-        self.lbhost.place(x=20, y=10)
-        self.cxhost.place(x=75, y=10)
-        self.lbusuario.place(x=20, y=40)
-        self.cxusuario.place(x=75, y=40)
-        self.lbsenha.place(x=20, y=70)
-        self.cxsenha.place(x=75, y=70)
-        self.lbporta.place(x=20, y=100)
-        self.cxporta.place(x=75, y=100)
-        self.btsalvar.place(x=45, y=140)
-        self.btfechar.place(x=120, y=140)
+        ## Alinhamento dos componentes
+        self.lb_host.place(x=5, y=10)
+        self.lb_usuario.place(x=5, y=40)
+        self.lb_senha.place(x=5, y=70)
+        self.lb_porta.place(x=5, y=100)
+        self.lb_remetente.place(x=5, y=130)
 
-        self._preenche_campos()
-        self._principal.mainloop()
+        self.cx_host.place(x=75, y=10)
+        self.cx_usuario.place(x=75, y=40)
+        self.cx_senha.place(x=75, y=70)
+        self.cx_porta.place(x=75, y=100)
+        self.cx_remetente.place(x=75, y=130)
 
+        self.bt_salvar.place(x=95, y=165)
+        self.bt_fechar.place(x=170, y=165)
+
+        self._preenche_campos() ## Função para preencher os campos no momento que a classe é estanciada.
+        self._principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada.
+
+    ## Preenche os campos
     def _preenche_campos(self):
         dados = self._carregar_configuracao()[0]
 
+        # Havendo dados ele completa os campos do formulário.
         if dados != False:
-            print(dados)
-            self.cxhost.insert(0, dados[0])
-            self.cxusuario.insert(0, dados[1])
-            self.cxsenha.insert(0, dados[2])
-            self.cxporta.insert(0, dados[3])
+            self.cx_host.insert(0, dados[0])
+            self.cx_usuario.insert(0, dados[1])
+            self.cx_senha.insert(0, dados[2])
+            self.cx_porta.insert(0, dados[3])
+            self.cx_remetente.insert(0, dados[5])
 
-    def quit(self):
-        self._principal.quit()
-
+    ## Salva dados no banco.
     def _salvar(self):
-        resposta = self._salvar_configuracao(dados=(self.cxhost.get(),
-                                                    self.cxusuario.get(),
-                                                    self.cxsenha.get(),
-                                                    self.cxporta.get()))
+        resposta = self._salvar_configuracao(dados=(self.cx_host.get(),
+                                                    self.cx_usuario.get(),
+                                                    self.cx_senha.get(),
+                                                    self.cx_porta.get(),
+                                                    self.cx_remetente.get()))
 
+        ## Mostra alert de sucesso ou erro dependendo da resposta do banco.
         if resposta:
             tkinter.messagebox.showinfo('Salvar Configuração', 'Dados salvos com sucesso!')
         else:
             tkinter.messagebox.showerror('Erro ao Salvar',
                                          "Erro ao salvar as informações. Por favor, verifique os campos.")
 
-        self._principal.lift()  # Puxa a janela novamente para frente após exibir o aviso
+        self._principal.lift()  # Puxa a janela novamente para frente após exibir o aviso.
