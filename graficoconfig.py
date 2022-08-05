@@ -8,39 +8,39 @@ from sistema.centraliza_janelas import center
 class GraficoConfig(Config):
     def __init__(self):
         super().__init__()
-        self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
+        self.principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
 
         ## Ajustar tamanho da janela e não permitir maximizar.
-        self._principal.geometry("250x200")
-        self._principal.minsize(250, 200)
-        self._principal.maxsize(250, 200)
+        self.principal.geometry("250x200")
+        self.principal.minsize(250, 200)
+        self.principal.maxsize(250, 200)
 
-        self._principal.title('Configurações')
-        center(self._principal)
+        self.principal.title('Configurações')
+        center(self.principal)
 
         ## Labels.
-        self.lb_host = Label(self._principal, text="Host: ")
-        self.lb_usuario = Label(self._principal, text="Usuário: ")
-        self.lb_senha = Label(self._principal, text="Senha: ")
-        self.lb_porta = Label(self._principal, text="Porta: ")
-        self.lb_remetente = Label(self._principal, text="Remente: ")
+        self.lb_host = Label(self.principal, text="Host: ")
+        self.lb_usuario = Label(self.principal, text="Usuário: ")
+        self.lb_senha = Label(self.principal, text="Senha: ")
+        self.lb_porta = Label(self.principal, text="Porta: ")
+        self.lb_remetente = Label(self.principal, text="Remente: ")
 
         ## Icones.
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_sair = PhotoImage(file="assets/icones/icon_saida.png")
 
         ## Caixas de texto.
-        self.cx_host = Entry(self._principal, width=27)
-        self.cx_usuario = Entry(self._principal, width=27)
-        self.cx_senha = Entry(self._principal, width=27)
-        self.cx_porta = Entry(self._principal, width=15)
-        self.cx_remetente = Entry(self._principal, width=27)
+        self.cx_host = Entry(self.principal, width=27)
+        self.cx_usuario = Entry(self.principal, width=27)
+        self.cx_senha = Entry(self.principal, width=27)
+        self.cx_porta = Entry(self.principal, width=15)
+        self.cx_remetente = Entry(self.principal, width=27)
 
         ## Botões.
-        self.bt_salvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5,
+        self.bt_salvar = Button(self.principal, image=self.icon_salvar, compound='left', height=22, padx=5,
                                text="Salvar", command=self._salvar)
-        self.bt_fechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5, text="Fechar",
-                               command=self._principal.destroy)
+        self.bt_fechar = Button(self.principal, image=self.icon_sair, compound='left', height=22, padx=5, text="Fechar",
+                               command=self.principal.destroy)
 
         ## Alinhamento dos componentes
         self.lb_host.place(x=5, y=10)
@@ -59,7 +59,7 @@ class GraficoConfig(Config):
         self.bt_fechar.place(x=170, y=165)
 
         self._preenche_campos() ## Função para preencher os campos no momento que a classe é estanciada.
-        self._principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada.
+        self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada.
 
     ## Preenche os campos
     def _preenche_campos(self):
@@ -88,4 +88,4 @@ class GraficoConfig(Config):
             tkinter.messagebox.showerror('Erro ao Salvar',
                                          "Erro ao salvar as informações. Por favor, verifique os campos.")
 
-        self._principal.lift()  # Puxa a janela novamente para frente após exibir o aviso.
+        self.principal.lift()  # Puxa a janela novamente para frente após exibir o aviso.
