@@ -8,15 +8,14 @@ from sistema.centraliza_janelas import center
 
 class GraficoFerramenta(Ferramenta):
     def __init__(self):
-        #super().__init__()
-        self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
+        super().__init__()
+        self._principal = tkinter.Toplevel()   # Top Level pois ela é filha de graficomain.py
         self._principal.geometry("500x230")
         self._principal.minsize(500, 230)
         self._principal.maxsize(500, 230)
         self._principal.title('Ferramentas')
         center(self._principal)
 
-        #self.icon_editar = PhotoImage(file="assets/icones/icon_editar.png")
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_sair = PhotoImage(file="assets/icones/icon_saida.png")
 
@@ -42,12 +41,6 @@ class GraficoFerramenta(Ferramenta):
         self.cxfab = Entry(self._principal, width=35)
         self.cxdesc = Entry(self._principal, width=65)
 
-#bteditar = Button(principal, text="Editar", command=acao)
-#btsalvar = Button(principal, text="Salvar", command=acao)
-#btfechar = Button(principal, text="Fechar", command=principal.quit)
-
-        self.bteditar = Button(self._principal, image=self.icon_editar, compound='left', height=22, padx=5,
-                               text="Editar", command=self._editar)
         self.btsalvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5,
                                text="Salvar", command=self._salvar)
         self.btfechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5,
@@ -73,9 +66,48 @@ class GraficoFerramenta(Ferramenta):
         self.cxfab.place(x=75, y=130)
         self.lbdesc.place(x=10, y=160)
         self.cxdesc.place(x=75, y=160)
-        self.bteditar.place(x=10, y=195)
         self.btsalvar.place(x=390, y=195)
         self.btfechar.place(x=440, y=195)
 
-        if __name__ == "__main__":
-            GraficoFerramenta()
+        self._preenche_campos()
+        self._principal.mainloop()
+
+    def _preenche_campos(self):
+        dados = self._carregar_ferramentas()[0]
+
+        if dados != False:
+            print(dados)
+
+            self.cxcodigo.insert(0, dados[0])
+            self.cxtamanho.insert(0, dados[1])
+            self.cxvolts.insert(0, dados[2])
+            self.cxund.insert(0, dados[3])
+            self.cxtipo.insert(0, dados[4])
+            self.cxmat.insert(0, dados[5])
+            self.cxref.insert(0, dados[6])
+            self.cxtemp.insert(0, dados[7])
+            self.cxfab.insert(0, dados[8])
+            self.cxdesc.insert(0, dados[9])
+
+    def quit(self):
+        self._principal.quit()
+
+    def _salvar(self):
+        resposta = self._salvar_ferramentas(dados=(self.cxcodigo.get(),
+                                                   self.cxtamanho.get(),
+                                                   self.cxvolts.get(),
+                                                   self.cxund.get(),
+                                                   self.cxtipo.get(),
+                                                   self.cxmat.get(),
+                                                   self.cxref.get(),
+                                                   self.cxtemp.get(),
+                                                   self.cxfab.get(),
+                                                   self.cxdesc.get()))
+
+        if resposta:
+            tkinter.messagebox.showinfo('Salvar Ferramentas', 'Dados salvos com sucesso!')
+        else:
+            tkinter.messagebox.showerror('Erro ao Salvar',
+                                         "Erro ao salvar as informações. Por favor, verifique os campos.")
+
+        self._principal.lift()  # Puxa a janela novamente para frente após exibir o aviso
