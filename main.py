@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, Button, Entry, messagebox, PhotoImage
+from tkinter import messagebox
 
 from graficomain import GraficoMain
 from sistema.banco import Banco
