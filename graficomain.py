@@ -52,3 +52,6 @@ class GraficoMain:
         self.btsair.place(x=530,y=360)
 
         self.principal.mainloop()
+
+if __name__ == "__main__":
+    GraficoMain()
