@@ -4,11 +4,12 @@ from tkinter import Label, Button, Entry, messagebox, PhotoImage
 from config import Config
 from sistema.centraliza_janelas import center
 
+
 class GraficoConfig(Config):
     def __init__(self):
         super().__init__()
         self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
-        #self._principal.geometry("250x175")
+        self._principal.geometry("250x175")
 
         self._principal.minsize(250, 175)
         self._principal.maxsize(250, 175)
@@ -29,8 +30,10 @@ class GraficoConfig(Config):
         self.cxsenha = Entry(self._principal, width=20)
         self.cxporta = Entry(self._principal, width=20)
 
-        self.btsalvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5, text="Salvar", command=self._salvar)
-        self.btfechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5, text="Fechar", command=self._principal.destroy)
+        self.btsalvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5,
+                               text="Salvar", command=self._salvar)
+        self.btfechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5, text="Fechar",
+                               command=self._principal.destroy)
 
         self.lbhost.place(x=20, y=10)
         self.cxhost.place(x=75, y=10)
@@ -61,13 +64,14 @@ class GraficoConfig(Config):
 
     def _salvar(self):
         resposta = self._salvar_configuracao(dados=(self.cxhost.get(),
-                                         self.cxusuario.get(),
-                                         self.cxsenha.get(),
-                                         self.cxporta.get()))
+                                                    self.cxusuario.get(),
+                                                    self.cxsenha.get(),
+                                                    self.cxporta.get()))
 
         if resposta:
             tkinter.messagebox.showinfo('Salvar Configuração', 'Dados salvos com sucesso!')
         else:
-            tkinter.messagebox.showerror('Erro ao Salvar', "Erro ao salvar as informações. Por favor, verifique os campos.")
+            tkinter.messagebox.showerror('Erro ao Salvar',
+                                         "Erro ao salvar as informações. Por favor, verifique os campos.")
 
         self._principal.lift()  # Puxa a janela novamente para frente após exibir o aviso
