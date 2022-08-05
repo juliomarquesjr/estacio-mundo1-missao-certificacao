@@ -10,7 +10,8 @@ class GraficoConfig(Config):
         self._principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
         #self._principal.geometry("250x175")
 
-        self._principal.minsize(250, 175) and self._principal.maxsize(250, 175)
+        self._principal.minsize(250, 175)
+        self._principal.maxsize(250, 175)
 
         self._principal.title('Configurações')
         center(self._principal)
