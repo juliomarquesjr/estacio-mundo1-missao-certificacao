@@ -34,8 +34,6 @@ class GraficoConsultaTecnico:
 
         ## Lista de Técnicos
         self.nomes_colunas = ('col1', 'col2', 'col3')
-        self.liste_tecnicos = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=12)
-
         self.liste_tecnicos = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
         self.liste_tecnicos.column('col1', width=210, stretch=False)
         self.liste_tecnicos.column('col2', width=205, stretch=False)
