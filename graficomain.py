@@ -15,9 +15,9 @@ class GraficoMain:
         self.principal = tkinter.Tk()
 
         ## Ajustar tamanho da janela e não permitir maximizar
-        self.principal.geometry("600x400")
-        self.principal.minsize(600, 400)
-        self.principal.maxsize(600, 400)
+        self.principal.geometry("700x440")
+        self.principal.minsize(700, 440)
+        self.principal.maxsize(450, 440)
 
         self.principal.title('Conteúdo Audiovisual LTDA')
         center(self.principal)
@@ -28,36 +28,35 @@ class GraficoMain:
         self.icon_ferramenta = PhotoImage(file="assets/icones/icon_ferramenta.png")
         self.icon_tecnico = PhotoImage(file="assets/icones/icon_tecnico.png")
 
-        self.lbsistema = Label(self.principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
-        self.lbexpira = Label(self.principal, text="Reservas Expirando",font=tkFont.Font(size=15))
+        self.lb_sistema = Label(self.principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
+        self.lb_expira = Label(self.principal, text="Reservas Expirando",font=tkFont.Font(size=15))
 
-
-        self.bttecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
-        self.btferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
-        self.btreservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas")
-        self.btconfig = Button(self.principal, text="Configurações", image=self.icon_config, height=22, padx=5, compound='left', command=GraficoConfig)
-        self.btsair = Button(self.principal, text="Sair", image=self.icon_saida, compound='left', height=22, padx=5, command=self.principal.destroy)
+        self.bt_tecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
+        self.bt_ferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
+        self.bt_reservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas")
+        self.bt_config = Button(self.principal, text="Configurações", image=self.icon_config, height=22, padx=5, compound='left', command=GraficoConfig)
+        self.bt_sair = Button(self.principal, text="Sair", image=self.icon_saida, compound='left', height=22, padx=5, command=self.principal.destroy)
 
         ## Inicio da Lista de Reservas
         self.nomes_colunas = ('col1', 'col2', 'col3')
-        self.lista_reservas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=12)
-        self.lista_reservas.column('col1', width=205, stretch=False)
-        self.lista_reservas.column('col2', width=205, stretch=False)
-        self.lista_reservas.column('col3', width=165, stretch=False)
+        self.lista_reservas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=14)
+        self.lista_reservas.column('col1', width=255, stretch=False)
+        self.lista_reservas.column('col2', width=255, stretch=False)
+        self.lista_reservas.column('col3', width=168, stretch=False)
 
         self.lista_reservas.heading('col1', text='Ferramenta')
         self.lista_reservas.heading('col2', text='Tecnico')
         self.lista_reservas.heading('col3', text="Previsão de Entrega")
         ## Fim da lista de reserva
 
-        self.lbsistema.pack(side=tk.TOP)
-        self.lbexpira.place(x=10,y=50)
+        self.lb_sistema.pack(side=tk.TOP)
+        self.lb_expira.place(x=10,y=50)
         self.lista_reservas.place(x=10, y=80)
-        self.bttecnico.place(x=10,y=360)
-        self.btferramenta.place(x=100,y=360)
-        self.btreservar.place(x=210,y=360)
-        self.btconfig.place(x=300,y=360)
-        self.btsair.place(x=530,y=360)
+        self.bt_tecnico.place(x=10,y=400)
+        self.bt_ferramenta.place(x=100,y=400)
+        self.bt_reservar.place(x=210,y=400)
+        self.bt_config.place(x=300,y=400)
+        self.bt_sair.place(x=635,y=400)
 
         self.principal.mainloop()
 
