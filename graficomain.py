@@ -31,13 +31,14 @@ class GraficoMain:
         self.lbsistema = Label(self.principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
         self.lbexpira = Label(self.principal, text="Reservas Expirando",font=tkFont.Font(size=15))
 
-        ## Inicio da Lista de Reservas
+
         self.bttecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
         self.btferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
         self.btreservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas")
         self.btconfig = Button(self.principal, text="Configurações", image=self.icon_config, height=22, padx=5, compound='left', command=GraficoConfig)
         self.btsair = Button(self.principal, text="Sair", image=self.icon_saida, compound='left', height=22, padx=5, command=self.principal.destroy)
 
+        ## Inicio da Lista de Reservas
         self.nomes_colunas = ('col1', 'col2', 'col3')
         self.lista_reservas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=12)
         self.lista_reservas.column('col1', width=205, stretch=False)
