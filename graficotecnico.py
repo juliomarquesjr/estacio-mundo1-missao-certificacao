@@ -1,48 +1,57 @@
 import tkinter
-from tkinter import Label, ttk, Button, Entry
+from tkinter import Label, ttk, Button, Entry, PhotoImage
 
 from sistema.centraliza_janelas import center
 
 class GraficoTecnico:
     def __init__(self):
-
         self.principal = tkinter.Toplevel()
-        self.principal.geometry("400x175")
+
+        self.principal.geometry("400x150")
         self.principal.title('Técnicos')
+        self.principal.resizable(height=False, width=False)
         center(self.principal)
 
-        self.lbnome = Label(self.principal, text="Nome: ")
-        self.lbcpf = Label(self.principal, text="CPF: ")
-        self.lbtel = Label(self.principal, text="Telefone: ")
-        self.lbequipe = Label(self.principal, text="Equipe: ")
-        self.lbturno = Label(self.principal, text="Turno: ")
+        ## Labels
+        self.lb_nome = Label(self.principal, text="Nome: ")
+        self.lb_cpf = Label(self.principal, text="CPF: ")
+        self.lb_tel = Label(self.principal, text="Telefone: ")
+        self.lb_equipe = Label(self.principal, text="Equipe: ")
+        self.lb_turno = Label(self.principal, text="Turno: ")
 
-        self.cxnome = Entry(self.principal, width = 45)
-        self.cxcpf = Entry(self.principal, width = 16)
-        self.cxtel = Entry(self.principal, width = 14)
-        self.cxequipe = Entry(self.principal, width = 35)
-        self.cxturno = ttk.Combobox(self.principal)
-        self.cxturno['values'] = ("Manhã","Tarde","Noite")
+        ## Icones
+        self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
+        self.icon_fechar = PhotoImage(file="assets/icones/icon_saida.png")
+        self.icon_editar = PhotoImage(file="assets/icones/icon_editar.png")
 
-        self.bteditar = Button(self.principal, text="Editar", command=self.acao)
-        self.btsalvar = Button(self.principal, text="Salvar", command=self.acao)
-        self.btfechar = Button(self.principal, text="Fechar", command=self.principal.destroy)
+        ## Caixas de Texto
+        self.cx_nome = Entry(self.principal, width=54)
+        self.cx_cpf = Entry(self.principal, width=22)
+        self.cx_tel = Entry(self.principal, width=20)
+        self.cx_equipe = Entry(self.principal, width=22)
+        self.cx_turno = ttk.Combobox(self.principal, width=17)
+        self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
 
-        self.lbnome.place(x=10,y=10)
-        self.cxnome.place(x=60,y=10)
-        self.lbcpf.place(x=10,y=40)
-        self.cxcpf.place(x=60,y=40)
-        self.lbtel.place(x=185,y=40)
-        self.cxtel.place(x=245,y=40)
-        self.lbequipe.place(x=10,y=70)
-        self.cxequipe.place(x=60,y=70)
-        self.lbturno.place(x=10,y=100)
-        self.cxturno.place(x=60,y=100)
-        self.bteditar.place(x=10,y=140)
-        self.btsalvar.place(x=290,y=140)
-        self.btfechar.place(x=340,y=140)
+        ## Botoes
+        self.bt_editar = Button(self.principal, text="Editar", image=self.icon_editar, compound='left', padx=5, height=22)
+        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22)
+        self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5, height=22, command=self.principal.destroy)
 
-        self.principal.mainloop()
+        ## Alinhamento dos componentes
+        self.lb_nome.place(x=10,y=10)
+        self.lb_cpf.place(x=10, y=40)
+        self.lb_tel.place(x=205, y=40)
+        self.lb_equipe.place(x=10, y=70)
+        self.lb_turno.place(x=205, y=70)
 
-    def acao(self):
-        print("Pressionado")
+        self.cx_nome.place(x=60,y=10)
+        self.cx_cpf.place(x=60, y=40)
+        self.cx_tel.place(x=265, y=40)
+        self.cx_equipe.place(x=60, y=70)
+        self.cx_turno.place(x=265, y=70)
+
+        self.bt_editar.place(x=10,y=110)
+        self.bt_salvar.place(x=85,y=110)
+        self.bt_fechar.place(x=320,y=110)
+
+        self.principal.mainloop() ## Abre a janela no momento em que a classe é estanciada
