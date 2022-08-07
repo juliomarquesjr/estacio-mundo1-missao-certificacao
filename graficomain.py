@@ -58,7 +58,7 @@ class GraficoMain:
         self.bt_config.place(x=300,y=400)
         self.bt_sair.place(x=635,y=400)
 
-        self.principal.mainloop()
+        self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
 if __name__ == "__main__":
     GraficoMain()
