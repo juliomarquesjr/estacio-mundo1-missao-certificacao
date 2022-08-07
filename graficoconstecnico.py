@@ -33,14 +33,14 @@ class GraficoConsultaTecnico:
 
         ## Lista de Técnicos
         self.nomes_colunas = ('col1', 'col2', 'col3')
-        self.liste_tecnicos = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
-        self.liste_tecnicos.column('col1', width=210, stretch=False)
-        self.liste_tecnicos.column('col2', width=205, stretch=False)
-        self.liste_tecnicos.column('col3', width=165, stretch=False)
+        self.lista_tecnicos = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
+        self.lista_tecnicos.column('col1', width=210, stretch=False)
+        self.lista_tecnicos.column('col2', width=205, stretch=False)
+        self.lista_tecnicos.column('col3', width=165, stretch=False)
 
-        self.liste_tecnicos.heading('col1', text='Nome Copleto')
-        self.liste_tecnicos.heading('col2', text='Telefone')
-        self.liste_tecnicos.heading('col3', text="Cargo")
+        self.lista_tecnicos.heading('col1', text='Nome Copleto')
+        self.lista_tecnicos.heading('col2', text='Telefone')
+        self.lista_tecnicos.heading('col3', text="Cargo")
         ## Fim da lista de reserva
 
         ## Botões.
@@ -60,7 +60,7 @@ class GraficoConsultaTecnico:
         self.bt_pesquisa.place(x=425, y=35)
         self.bt_limpar.place(x=518, y=35)
 
-        self.liste_tecnicos.place(x=10, y=80)
+        self.lista_tecnicos.place(x=10, y=80)
 
         self.bt_cadastrar.place(x=10, y=320)
         self.bt_visul_edit.place(x=105,y=320)
