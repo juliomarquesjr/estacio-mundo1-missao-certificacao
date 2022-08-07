@@ -26,46 +26,46 @@ class GraficoFerramenta():
         self.lbfab = Label(self._principal, text="Fabricante: ")
         self.lbdesc = Label(self._principal, text="Descrição: ")
 
-        self.cxcodigo = Entry(self._principal, width=15)
-        self.cxtamanho = Entry(self._principal, width=25)
+        self.cxcodigo = Entry(self._principal, width=20)
+        self.cxtamanho = Entry(self._principal, width=20)
         self.cxvolts = Entry(self._principal, width=20)
-        self.cxund = Entry(self._principal, width=20)
+        self.cxund = Entry(self._principal, width=15)
         self.cxtipo = Entry(self._principal, width=20)
         self.cxmat = Entry(self._principal, width=20)
-        self.cxref = Entry(self._principal, width=30)
+        self.cxref = Entry(self._principal, width=25)
         self.cxtemp = Entry(self._principal, width=7)
-        self.cxfab = Entry(self._principal, width=35)
-        self.cxdesc = Entry(self._principal, width=65)
+        self.cxfab = Entry(self._principal, width=30)
+        self.cxdesc = Entry(self._principal, width=35)
 
         self.btsalvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5,
                                text="Salvar")
         self.btfechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5,
                                text="Fechar", command=self._principal.destroy)
 
-        self.lbcodigo.place(x=10, y=10)
-        self.cxcodigo.place(x=60, y=10)
+        self.lbcodigo.place(x=7, y=40)
+        self.cxcodigo.place(x=60, y=40)
         self.lbtamanho.place(x=260, y=10)
-        self.cxtamanho.place(x=320, y=10)
-        self.lbvolts.place(x=10, y=40)
-        self.cxvolts.place(x=70, y=40)
-        self.lbund.place(x=295, y=40)
-        self.cxund.place(x=350, y=40)
-        self.lbtipo.place(x=10, y=70)
-        self.cxtipo.place(x=45, y=70)
-        self.lbmat.place(x=295, y=70)
-        self.cxmat.place(x=350, y=70)
+        self.cxtamanho.place(x=327, y=10)
+        self.lbvolts.place(x=9, y=70)
+        self.cxvolts.place(x=80, y=70)
+        self.lbund.place(x=260, y=40)
+        self.cxund.place(x=320, y=40)
+        self.lbtipo.place(x=7, y=10)
+        self.cxtipo.place(x=45, y=10)
+        self.lbmat.place(x=265, y=70)
+        self.cxmat.place(x=327, y=70)
         self.lbref.place(x=10, y=100)
-        self.cxref.place(x=75, y=100)
-        self.lbtemp.place(x=340, y=100)
-        self.cxtemp.place(x=425, y=100)
+        self.cxref.place(x=87, y=100)
+        self.lbtemp.place(x=300, y=100)
+        self.cxtemp.place(x=400, y=100)
         self.lbfab.place(x=10, y=130)
-        self.cxfab.place(x=75, y=130)
+        self.cxfab.place(x=85, y=130)
         self.lbdesc.place(x=10, y=160)
-        self.cxdesc.place(x=75, y=160)
-        self.btsalvar.place(x=390, y=195)
-        self.btfechar.place(x=440, y=195)
+        self.cxdesc.place(x=80, y=160)
+        self.btsalvar.place(x=10, y=190)
+        self.btfechar.place(x=400, y=190)
 
-        # self._preenche_campos()
+        self._preenche_campos()
         self._principal.mainloop()
 
     # def _preenche_campos(self):
@@ -84,7 +84,9 @@ class GraficoFerramenta():
     #         self.cxref.insert(0, dados[6])
     #         self.cxtemp.insert(0, dados[7])
     #         self.cxfab.insert(0, dados[8])
-    #         self.cxdesc.insert(0, dados[9])
+    #         self.cxdesc.insert(0, dados[9])sudo apt-get update
+    # sudo apt-get install libpq-dev python-dev
+    # sudo pip install psycopg2
 
 
     # def _salvar(self):
