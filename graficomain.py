@@ -16,8 +16,8 @@ class GraficoMain:
 
         ## Ajustar tamanho da janela e não permitir maximizar
         self.principal.geometry("700x440")
-        self.principal.minsize(700, 440)
-        self.principal.maxsize(450, 440)
+        self.principal.resizable(width=False, height=False)
+
 
         self.principal.title('Conteúdo Audiovisual LTDA')
         center(self.principal)
