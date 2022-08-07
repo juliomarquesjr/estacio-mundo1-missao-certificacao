@@ -11,8 +11,7 @@ class GraficoConsultaTecnico:
 
         ## Ajustar tamanho da janela e não permitir maximizar.
         self.principal.geometry("600x360")
-        self.principal.minsize(600, 360)
-        self.principal.maxsize(600, 360)
+        self.principal.resizable(width=False, height=False)
 
         self.principal.title('Consultas - Técnicos')
         center(self.principal)
