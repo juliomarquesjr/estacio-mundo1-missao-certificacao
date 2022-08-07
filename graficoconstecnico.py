@@ -67,4 +67,4 @@ class GraficoConsultaTecnico:
         self.bt_remover.place(x=235, y=320)
         self.bt_fechar.place(x=520,y=320)
 
-        self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada.
+        self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
