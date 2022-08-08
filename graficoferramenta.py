@@ -65,7 +65,7 @@ class GraficoFerramenta():
         self.btsalvar.place(x=10, y=190)
         self.btfechar.place(x=400, y=190)
 
-        self._preenche_campos()
+        #self._preenche_campos()
         self._principal.mainloop()
 
     # def _preenche_campos(self):
