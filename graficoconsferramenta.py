@@ -75,8 +75,6 @@ class GraficoConsultaFerramenta:
         self.lista_ferramentas.delete(*self.lista_ferramentas.get_children())
         consulta = Banco().consultar_dados('ferramenta')
 
-        print(consulta)
-
         for valor in consulta:
             self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2]))
 
