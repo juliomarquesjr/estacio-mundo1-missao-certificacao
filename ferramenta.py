@@ -1,3 +1,5 @@
+from sistema.banco import Banco
+
 class Ferramenta:
     def __init__(self, cod_ferramenta, descricao, fabricante, voltagem, part_number,
                  tamanho, und_medida, tipo_ferramenta, material_ferramenta, tempo_max_reserva):
@@ -20,6 +22,19 @@ class Ferramenta:
     @property
     def tempo_max_reserva(self):
         return self._tempo_max_reserva
+
+    def cadastra_banco(self):
+        self.resp = Banco().adicionar_dados(tabela='ferramenta', dados=(self._cod_ferramenta,
+                                                                        self._descricao,
+                                                                        self._fabricante,
+                                                                        self._voltagem,
+                                                                        self._part_number,
+                                                                        self._tamanho,
+                                                                        self._und_medida,
+                                                                        self._tipo_ferramenta,
+                                                                        self._material_ferramenta,
+                                                                        self._tempo_max_reserva))
+        return self.resp
 
     def __str__(self):
         return f'Cod: {self._cod_ferramenta} - {self._descricao} / {self._fabricante} - ' \

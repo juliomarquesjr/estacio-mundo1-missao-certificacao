@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, PhotoImage, Button
+from tkinter import Label, PhotoImage, Button, messagebox
 from tkinter.ttk import Treeview
 import tkinter as tk
 import tkinter.font as tkFont
@@ -7,6 +7,7 @@ import tkinter.font as tkFont
 from graficoconfig import GraficoConfig
 from graficoconsferramenta import GraficoConsultaFerramenta
 from graficoconstecnico import GraficoConsultaTecnico
+from graficoreserva import GraficoReserva
 
 from sistema.centraliza_janelas import center
 
@@ -33,8 +34,9 @@ class GraficoMain:
 
         self.bt_tecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
         self.bt_ferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
-        self.bt_reservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas")
+        self.bt_reservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas",command=GraficoReserva)
         self.bt_config = Button(self.principal, text="Configurações", image=self.icon_config, height=22, padx=5, compound='left', command=GraficoConfig)
+        self.bt_sobre = Button(self.principal, text="Sobre", image=self.icon_config, height=22, padx=5,compound='left', command=self.sobre)
         self.bt_sair = Button(self.principal, text="Sair", image=self.icon_saida, compound='left', height=22, padx=5, command=self.principal.destroy)
 
         ## Inicio da Lista de Reservas
@@ -56,9 +58,13 @@ class GraficoMain:
         self.bt_ferramenta.place(x=100,y=400)
         self.bt_reservar.place(x=210,y=400)
         self.bt_config.place(x=300,y=400)
+        self.bt_sobre.place(x=420, y=400)
         self.bt_sair.place(x=635,y=400)
 
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
+
+    def sobre(self):
+        tk.messagebox.showinfo('Criadores', 'Diego Gomes\nJulio Marques\nKauã Marques\nValéria Souza ')
 
 if __name__ == "__main__":
     GraficoMain()
