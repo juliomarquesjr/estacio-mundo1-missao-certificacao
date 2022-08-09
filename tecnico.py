@@ -2,7 +2,7 @@ from sistema.banco import Banco
 
 class Tecnico:
     def __init__(self, nome, cpf, telefone, turno, nome_equipe):
-        self._nome = nome.title()
+        self._nome = nome
         self._cpf = cpf
         self._telefone = telefone
         self._turno = turno

@@ -5,6 +5,8 @@ from tkinter.ttk import Treeview
 from graficotecnico import GraficoTecnico
 from sistema.centraliza_janelas import center
 
+from sistema.banco import Banco
+
 class GraficoConsultaTecnico:
     def __init__(self):
         self.principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
@@ -40,12 +42,12 @@ class GraficoConsultaTecnico:
 
         self.lista_tecnicos.heading('col1', text='Nome Copleto')
         self.lista_tecnicos.heading('col2', text='Telefone')
-        self.lista_tecnicos.heading('col3', text="Cargo")
+        self.lista_tecnicos.heading('col3', text="Equipe")
         ## Fim da lista de reserva
 
         ## Botões.
-        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=icon_pesquisar, compound='left', padx=5, height=22)
-        self.bt_limpar = Button(self.principal, text="Limpar", image=icon_limpar, compound='left', padx=5, height=22)
+        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=icon_pesquisar, compound='left', padx=5, height=22, command=self.pesquisa_tecnico)
+        self.bt_limpar = Button(self.principal, text="Limpar", image=icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
         self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=icon_cadastrar, compound='left', padx=5, height=22, command=GraficoTecnico)
         self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=icon_editar, compound='left', padx=5, height=22)
         self.bt_remover = Button(self.principal, text="Remover", image=icon_remover, compound='left', padx=5, height=22)
@@ -67,4 +69,23 @@ class GraficoConsultaTecnico:
         self.bt_remover.place(x=235, y=320)
         self.bt_fechar.place(x=520,y=320)
 
+        self.consulta_tecnicos()
+
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
+
+
+    def consulta_tecnicos(self):
+        self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
+        consulta = Banco().consultar_dados('tecnico')
+        for valor in consulta:
+            self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[2], valor[4]))
+
+    def pesquisa_tecnico(self):
+        self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
+        consulta = Banco().consultar_dados('tecnico', where=f"nome = '{self.cx_busca.get()}'")
+        for valor in consulta:
+            self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[2], valor[4]))
+
+    def limpar_pesquisa(self):
+        self.cx_busca.delete(0, 'end')
+        self.consulta_tecnicos()
