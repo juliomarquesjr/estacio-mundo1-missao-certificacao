@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, Entry, Button, PhotoImage
+from tkinter import Label, Entry, Button, PhotoImage, messagebox
 from tkinter.ttk import Treeview
 
 from graficotecnico import GraficoTecnico
@@ -41,7 +41,7 @@ class GraficoConsultaTecnico:
         self.lista_tecnicos.column('col3', width=165, stretch=False)
 
         self.lista_tecnicos.heading('col1', text='Nome Copleto')
-        self.lista_tecnicos.heading('col2', text='Telefone')
+        self.lista_tecnicos.heading('col2', text='CPF')
         self.lista_tecnicos.heading('col3', text="Equipe")
         ## Fim da lista de reserva
 
@@ -50,7 +50,7 @@ class GraficoConsultaTecnico:
         self.bt_limpar = Button(self.principal, text="Limpar", image=icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
         self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=icon_cadastrar, compound='left', padx=5, height=22, command=GraficoTecnico)
         self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=icon_editar, compound='left', padx=5, height=22)
-        self.bt_remover = Button(self.principal, text="Remover", image=icon_remover, compound='left', padx=5, height=22)
+        self.bt_remover = Button(self.principal, text="Remover", image=icon_remover, compound='left', padx=5, height=22, command=self.remover_tecncio)
         self.bt_fechar = Button(self.principal, text="Fechar", image=icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
 
         ## Alinhamento dos componentes
@@ -78,14 +78,28 @@ class GraficoConsultaTecnico:
         self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
         consulta = Banco().consultar_dados('tecnico')
         for valor in consulta:
-            self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[2], valor[4]))
+            self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
 
     def pesquisa_tecnico(self):
         self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
         consulta = Banco().consultar_dados('tecnico', where=f"nome = '{self.cx_busca.get()}'")
         for valor in consulta:
-            self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[2], valor[4]))
+            self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
 
     def limpar_pesquisa(self):
         self.cx_busca.delete(0, 'end')
         self.consulta_tecnicos()
+
+    def remover_tecncio(self):
+        for iten_selcionado in self.lista_tecnicos.selection():
+            cpf_selecionado = self.lista_tecnicos.item(iten_selcionado)['values'][1]
+
+        consulta = Banco().remover_dados('tecnico', where=f"cpf = '{cpf_selecionado}'")
+
+        if consulta:
+            tkinter.messagebox.showinfo("Remover técnico", "Técnico Removido com sucesso!")
+        else:
+            tkinter.messagebox.showerror("Falha ao remover", "Não foi possível remover o técnico. Por favor, tente novamente.")
+
+        self.consulta_tecnicos()
+        self.principal.lift()

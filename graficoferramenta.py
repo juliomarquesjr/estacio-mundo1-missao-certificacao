@@ -86,6 +86,8 @@ class GraficoFerramenta():
         else:
             tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")
 
+        self.principal.lift()
+
     # def _preenche_campos(self):
     #     pass
     #     dados = self._carregar_ferramentas()[0]

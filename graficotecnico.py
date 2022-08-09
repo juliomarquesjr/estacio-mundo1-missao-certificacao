@@ -70,3 +70,5 @@ class GraficoTecnico():
             tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!")
         else:
             tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")
+
+        self.principal.lift()
