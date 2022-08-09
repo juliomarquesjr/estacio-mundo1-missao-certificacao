@@ -1,9 +1,10 @@
 import tkinter
-from tkinter import Label, ttk, Button, Entry, PhotoImage
+from tkinter import Label, ttk, Button, Entry, PhotoImage, messagebox
 
 from sistema.centraliza_janelas import center
+from tecnico import Tecnico
 
-class GraficoTecnico:
+class GraficoTecnico():
     def __init__(self):
         self.principal = tkinter.Toplevel()
 
@@ -11,6 +12,7 @@ class GraficoTecnico:
         self.principal.title('Técnicos')
         self.principal.resizable(height=False, width=False)
         center(self.principal)
+
 
         ## Labels
         self.lb_nome = Label(self.principal, text="Nome: ")
@@ -34,7 +36,7 @@ class GraficoTecnico:
 
         ## Botoes
         self.bt_editar = Button(self.principal, text="Editar", image=self.icon_editar, compound='left', padx=5, height=22)
-        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22)
+        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22, command=self.cadastrar)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5, height=22, command=self.principal.destroy)
 
         ## Alinhamento dos componentes
@@ -54,4 +56,17 @@ class GraficoTecnico:
         self.bt_salvar.place(x=85,y=110)
         self.bt_fechar.place(x=320,y=110)
 
+
         self.principal.mainloop() ## Abre a janela no momento em que a classe é estanciada
+
+    def cadastrar(self):
+        self.novo_tecnico = Tecnico(self.cx_nome.get(),
+                                    self.cx_cpf.get(),
+                                    self.cx_tel.get(),
+                                    self.cx_turno.get(),
+                                    self.cx_equipe.get())
+
+        if self.novo_tecnico.cadastra_banco():
+            tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!")
+        else:
+            tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")

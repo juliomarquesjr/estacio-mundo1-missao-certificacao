@@ -1,6 +1,6 @@
 from sistema.banco import Banco
 
-class Tecnico():
+class Tecnico:
     def __init__(self, nome, cpf, telefone, turno, nome_equipe):
         self._nome = nome.title()
         self._cpf = cpf
