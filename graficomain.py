@@ -28,6 +28,7 @@ class GraficoMain:
         self.icon_reserva = PhotoImage(file="assets/icones/icon_reservas.png")
         self.icon_ferramenta = PhotoImage(file="assets/icones/icon_ferramenta.png")
         self.icon_tecnico = PhotoImage(file="assets/icones/icon_tecnico.png")
+        self.icon_sobre = PhotoImage(file="assets/icones/icon_about.png")
 
         self.lb_sistema = Label(self.principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
         self.lb_expira = Label(self.principal, text="Reservas Expirando",font=tkFont.Font(size=15))
@@ -35,8 +36,8 @@ class GraficoMain:
         self.bt_tecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
         self.bt_ferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
         self.bt_reservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas",command=GraficoReserva)
-        self.bt_config = Button(self.principal, text="Configurações", image=self.icon_config, height=22, padx=5, compound='left', command=GraficoConfig)
-        self.bt_sobre = Button(self.principal, text="Sobre", image=self.icon_config, height=22, padx=5,compound='left', command=self.sobre)
+        self.bt_config = Button(self.principal, text="Config Email", image=self.icon_config, height=22, padx=5, compound='left', command=GraficoConfig)
+        self.bt_sobre = Button(self.principal, text="Sobre", image=self.icon_sobre, height=22, padx=5, compound='left', command=self.sobre)
         self.bt_sair = Button(self.principal, text="Sair", image=self.icon_saida, compound='left', height=22, padx=5, command=self.principal.destroy)
 
         ## Inicio da Lista de Reservas
@@ -58,7 +59,7 @@ class GraficoMain:
         self.bt_ferramenta.place(x=100,y=400)
         self.bt_reservar.place(x=210,y=400)
         self.bt_config.place(x=300,y=400)
-        self.bt_sobre.place(x=420, y=400)
+        self.bt_sobre.place(x=412, y=400)
         self.bt_sair.place(x=635,y=400)
 
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!

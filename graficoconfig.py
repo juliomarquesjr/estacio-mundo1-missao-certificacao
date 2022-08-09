@@ -12,10 +12,9 @@ class GraficoConfig(Config):
 
         ## Ajustar tamanho da janela e não permitir maximizar.
         self.principal.geometry("250x200")
-        self.principal.minsize(250, 200)
-        self.principal.maxsize(250, 200)
+        self.principal.resizable(width=False, height=False)
 
-        self.principal.title('Configurações')
+        self.principal.title('Config Email')
         center(self.principal)
 
         ## Labels.
