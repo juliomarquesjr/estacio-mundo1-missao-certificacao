@@ -53,6 +53,8 @@ class GraficoTecnico():
         self.bt_salvar.place(x=245,y=110)
         self.bt_fechar.place(x=320,y=110)
 
+        self.principal.focus_force() #Mantem o focus na janela ativa
+        self.principal.grab_set() #Matem no top até ser fechada
 
         self.principal.mainloop() ## Abre a janela no momento em que a classe é estanciada
 
@@ -65,7 +67,7 @@ class GraficoTecnico():
 
         if self.novo_tecnico.cadastra_banco():
             tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!")
+            self.principal.destroy()
         else:
             tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")
-
-        self.principal.lift()
+            self.principal.lift()

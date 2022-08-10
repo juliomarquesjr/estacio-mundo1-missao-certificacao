@@ -58,6 +58,10 @@ class GraficoConfig(Config):
         self.bt_fechar.place(x=170, y=165)
 
         self._preenche_campos() ## Função para preencher os campos no momento que a classe é estanciada.
+
+        self.principal.focus_force()  # Mantem o focus na janela ativa
+        self.principal.grab_set()  # Matem no top até ser fechada
+
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada.
 
     ## Preenche os campos

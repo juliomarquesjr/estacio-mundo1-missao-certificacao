@@ -53,4 +53,7 @@ class GraficoReserva():
         self.bt_salvar.place(x=285,y=170)
         self.bt_fechar.place(x=360,y=170)
 
+        self.principal.focus_force()  # Mantem o focus na janela ativa
+        self.principal.grab_set()  # Matem no top até ser fechada
+
         self.principal.mainloop()

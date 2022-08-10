@@ -73,6 +73,9 @@ class GraficoConsultaTecnico:
 
         self.consulta_tecnicos()
 
+        self.principal.focus_force()  # Mantem o focus na janela ativa
+        self.principal.grab_set()  # Matem no top até ser fechada
+
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
 

@@ -6,42 +6,42 @@ from ferramenta import Ferramenta
 
 class GraficoFerramenta():
     def __init__(self):
-        self._principal = tkinter.Toplevel()   # Top Level pois ela é filha de graficomain.py
-        self._principal.geometry("480x230")
-        self._principal.minsize(480, 230)
-        self._principal.maxsize(480, 230)
-        self._principal.title('Ferramentas')
-        center(self._principal)
+        self.principal = tkinter.Toplevel()   # Top Level pois ela é filha de graficomain.py
+        self.principal.geometry("480x230")
+        self.principal.minsize(480, 230)
+        self.principal.maxsize(480, 230)
+        self.principal.title('Ferramentas')
+        center(self.principal)
 
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_sair = PhotoImage(file="assets/icones/icon_saida.png")
 
-        self.lbcodigo = Label(self._principal, text="Código: ")
-        self.lbtamanho = Label(self._principal, text="Tamanho: ")
-        self.lbvolts = Label(self._principal, text="Voltagem: ")
-        self.lbund = Label(self._principal, text="Unidade: ")
-        self.lbtipo = Label(self._principal, text="Tipo: ")
-        self.lbmat = Label(self._principal, text="Material: ")
-        self.lbref = Label(self._principal, text="Referência: ")
-        self.lbtemp = Label(self._principal, text="Tempo Limite: ")
-        self.lbfab = Label(self._principal, text="Fabricante: ")
-        self.lbdesc = Label(self._principal, text="Descrição: ")
+        self.lbcodigo = Label(self.principal, text="Código: ")
+        self.lbtamanho = Label(self.principal, text="Tamanho: ")
+        self.lbvolts = Label(self.principal, text="Voltagem: ")
+        self.lbund = Label(self.principal, text="Unidade: ")
+        self.lbtipo = Label(self.principal, text="Tipo: ")
+        self.lbmat = Label(self.principal, text="Material: ")
+        self.lbref = Label(self.principal, text="Referência: ")
+        self.lbtemp = Label(self.principal, text="Tempo Limite: ")
+        self.lbfab = Label(self.principal, text="Fabricante: ")
+        self.lbdesc = Label(self.principal, text="Descrição: ")
 
-        self.cxcodigo = Entry(self._principal, width=20)
-        self.cxtamanho = Entry(self._principal, width=25)
-        self.cxvolts = Entry(self._principal, width=20)
-        self.cxund = Entry(self._principal, width=20)
-        self.cxtipo = Entry(self._principal, width=20)
-        self.cxmat = Entry(self._principal, width=20)
-        self.cxref = Entry(self._principal, width=30)
-        self.cxtemp = Entry(self._principal, width=15)
-        self.cxfab = Entry(self._principal, width=35)
-        self.cxdesc = Entry(self._principal, width=65)
+        self.cxcodigo = Entry(self.principal, width=20)
+        self.cxtamanho = Entry(self.principal, width=25)
+        self.cxvolts = Entry(self.principal, width=20)
+        self.cxund = Entry(self.principal, width=20)
+        self.cxtipo = Entry(self.principal, width=20)
+        self.cxmat = Entry(self.principal, width=20)
+        self.cxref = Entry(self.principal, width=30)
+        self.cxtemp = Entry(self.principal, width=15)
+        self.cxfab = Entry(self.principal, width=35)
+        self.cxdesc = Entry(self.principal, width=65)
 
-        self.btsalvar = Button(self._principal, image=self.icon_salvar, compound='left', height=22, padx=5,
+        self.btsalvar = Button(self.principal, image=self.icon_salvar, compound='left', height=22, padx=5,
                                text="Salvar", command=self.cadastrar)
-        self.btfechar = Button(self._principal, image=self.icon_sair, compound='left', height=22, padx=5,
-                               text="Fechar", command=self._principal.destroy)
+        self.btfechar = Button(self.principal, image=self.icon_sair, compound='left', height=22, padx=5,
+                               text="Fechar", command=self.principal.destroy)
 
         self.lbtipo.place(x=10, y=10)
         self.cxtipo.place(x=47, y=10)
@@ -66,8 +66,10 @@ class GraficoFerramenta():
         self.btsalvar.place(x=325, y=190)
         self.btfechar.place(x=400, y=190)
 
-        #self._preenche_campos()
-        self._principal.mainloop()
+        self.principal.focus_force()  # Mantem o focus na janela ativa
+        self.principal.grab_set()  # Matem no top até ser fechada
+
+        self.principal.mainloop()
 
     def cadastrar(self):
         self.nova_ferramenta = Ferramenta(self.cxcodigo.get(),
@@ -83,48 +85,8 @@ class GraficoFerramenta():
 
         if self.nova_ferramenta.cadastra_banco():
             tkinter.messagebox.showinfo("Cadastro de Ferramenta", "Cadastro realizado com sucesso!")
+            self.principal.destroy()
         else:
             tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")
+            self.principal.lift()
 
-        self.principal.lift()
-
-    # def _preenche_campos(self):
-    #     pass
-    #     dados = self._carregar_ferramentas()[0]
-    #
-    #     if dados != False:
-    #         print(dados)
-    #
-    #         self.cxcodigo.insert(0, dados[0])
-    #         self.cxtamanho.insert(0, dados[1])
-    #         self.cxvolts.insert(0, dados[2])
-    #         self.cxund.insert(0, dados[3])
-    #         self.cxtipo.insert(0, dados[4])
-    #         self.cxmat.insert(0, dados[5])
-    #         self.cxref.insert(0, dados[6])
-    #         self.cxtemp.insert(0, dados[7])
-    #         self.cxfab.insert(0, dados[8])
-    #         self.cxdesc.insert(0, dados[9])sudo apt-get update
-    # sudo apt-get install libpq-dev python-dev
-    # sudo pip install psycopg2
-
-
-    # def _salvar(self):
-    #     resposta = self._salvar_ferramentas(dados=(self.cxcodigo.get(),
-    #                                                self.cxtamanho.get(),
-    #                                                self.cxvolts.get(),
-    #                                                self.cxund.get(),
-    #                                                self.cxtipo.get(),
-    #                                                self.cxmat.get(),
-    #                                                self.cxref.get(),
-    #                                                self.cxtemp.get(),
-    #                                                self.cxfab.get(),
-    #                                                self.cxdesc.get()))
-    #
-    #     if resposta:
-    #         tkinter.messagebox.showinfo('Salvar Ferramentas', 'Dados salvos com sucesso!')
-    #     else:
-    #         tkinter.messagebox.showerror('Erro ao Salvar',
-    #                                      "Erro ao salvar as informações. Por favor, verifique os campos.")
-    #
-    #     self._principal.lift()  # Puxa a janela novamente para frente após exibir o aviso

@@ -71,6 +71,10 @@ class GraficoConsultaFerramenta:
         self.bt_fechar.place(x=610, y=320)
 
         self.consulta_ferramentas()
+
+        self.principal.focus_force()  # Mantem o focus na janela ativa
+        self.principal.grab_set()  # Matem no top até ser fechada
+
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
     def consulta_ferramentas(self):
