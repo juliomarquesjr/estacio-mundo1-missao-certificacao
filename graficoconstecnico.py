@@ -94,7 +94,7 @@ class GraficoConsultaTecnico:
 
     def limpar_pesquisa(self):
         self.cx_busca.delete(0, 'end')
-        self.consulta_tecnicos()
+        #self.consulta_tecnicos()
 
     def remover_tecncio(self):
         for iten_selcionado in self.lista_tecnicos.selection():

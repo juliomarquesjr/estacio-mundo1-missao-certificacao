@@ -93,7 +93,7 @@ class GraficoConsultaFerramenta:
 
     def limpar_pesquisa(self):
         self.cx_busca.delete(0, 'end')
-        self.consulta_ferramentas()
+        #self.consulta_ferramentas()
 
     def remover_ferramenta(self):
         for iten_selcionado in self.lista_ferramentas.selection():
