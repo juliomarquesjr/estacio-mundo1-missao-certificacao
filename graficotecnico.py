@@ -24,7 +24,6 @@ class GraficoTecnico():
         ## Icones
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_fechar = PhotoImage(file="assets/icones/icon_saida.png")
-        self.icon_editar = PhotoImage(file="assets/icones/icon_editar.png")
 
         ## Caixas de Texto
         self.cx_nome = Entry(self.principal, width=54)
@@ -35,7 +34,6 @@ class GraficoTecnico():
         self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
 
         ## Botoes
-        self.bt_editar = Button(self.principal, text="Editar", image=self.icon_editar, compound='left', padx=5, height=22)
         self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22, command=self.cadastrar)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5, height=22, command=self.principal.destroy)
 
@@ -52,8 +50,7 @@ class GraficoTecnico():
         self.cx_equipe.place(x=60, y=70)
         self.cx_turno.place(x=265, y=70)
 
-        self.bt_editar.place(x=10,y=110)
-        self.bt_salvar.place(x=85,y=110)
+        self.bt_salvar.place(x=245,y=110)
         self.bt_fechar.place(x=320,y=110)
 
 

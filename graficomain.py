@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, PhotoImage, Button, messagebox
+from tkinter import Label, PhotoImage, Button, messagebox, Entry
 from tkinter.ttk import Treeview
 import tkinter as tk
 import tkinter.font as tkFont
@@ -29,10 +29,17 @@ class GraficoMain:
         self.icon_ferramenta = PhotoImage(file="assets/icones/icon_ferramenta.png")
         self.icon_tecnico = PhotoImage(file="assets/icones/icon_tecnico.png")
         self.icon_sobre = PhotoImage(file="assets/icones/icon_about.png")
+        self.icon_cadastrar = PhotoImage(file="assets/icones/icon_cadastrar.png")
+        self.icon_pesquisar = PhotoImage(file="assets/icones/icon_pesquisar.png")
+        self.icon_limpar = PhotoImage(file="assets/icones/icon_limpar.png")
 
-        self.lb_sistema = Label(self.principal, text="Sistema de Reservas",font=tkFont.Font(size=20))
-        self.lb_expira = Label(self.principal, text="Reservas Expirando",font=tkFont.Font(size=15))
+        self.lb_expira = Label(self.principal, text="Reservas",font=tkFont.Font(size=15))
 
+        self.cx_pesquisa = Entry(self.principal, width=67)
+
+        self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_cadastrar, compound='left', padx=5,height=22)
+        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5,height=22)
+        self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22)
         self.bt_tecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
         self.bt_ferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
         self.bt_reservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas",command=GraficoReserva)
@@ -52,8 +59,11 @@ class GraficoMain:
         self.lista_reservas.heading('col3', text="Previsão de Entrega")
         ## Fim da lista de reserva
 
-        self.lb_sistema.pack(side=tk.TOP)
-        self.lb_expira.place(x=10,y=50)
+        self.lb_expira.place(x=10,y=10)
+        self.cx_pesquisa.place(x=10,y=45)
+        self.bt_pesquisa.place(x=432, y=40)
+        self.bt_atualizar.place(x=527, y=40)
+        self.bt_limpar.place(x=617, y=40)
         self.lista_reservas.place(x=10, y=80)
         self.bt_tecnico.place(x=10,y=400)
         self.bt_ferramenta.place(x=100,y=400)

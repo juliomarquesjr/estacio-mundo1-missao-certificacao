@@ -11,7 +11,7 @@ class GraficoConsultaFerramenta:
         self.principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
 
         ## Ajustar tamanho da janela e não permitir maximizar.
-        self.principal.geometry("600x360")
+        self.principal.geometry("690x360")
         self.principal.resizable(width=False, height=False)
 
         self.principal.title('Consultas - Ferramentas')
@@ -35,9 +35,9 @@ class GraficoConsultaFerramenta:
         ## Lista de Ferramentas
         self.nomes_colunas = ('col1', 'col2', 'col3')
         self.lista_ferramentas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
-        self.lista_ferramentas.column('col1', width=210, stretch=False)
-        self.lista_ferramentas.column('col2', width=205, stretch=False)
-        self.lista_ferramentas.column('col3', width=165, stretch=False)
+        self.lista_ferramentas.column('col1', width=217, stretch=False)
+        self.lista_ferramentas.column('col2', width=245, stretch=False)
+        self.lista_ferramentas.column('col3', width=205, stretch=False)
 
         self.lista_ferramentas.heading('col1', text='Código')
         self.lista_ferramentas.heading('col2', text='Nome da Ferramenta')
@@ -46,6 +46,7 @@ class GraficoConsultaFerramenta:
 
         ## Botões.
         self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=icon_pesquisar, compound='left', padx=5, height=22, command=self.pesquisa_ferramenta)
+        self.bt_atualizar = Button(self.principal, text="Atualizar", image=icon_cadastrar, compound='left', padx=5,height=22)
         self.bt_limpar = Button(self.principal, text="Limpar", image=icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
         self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=icon_cadastrar, compound='left', padx=5, height=22, command=GraficoFerramenta)
         self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=icon_editar, compound='left', padx=5, height=22)
@@ -59,14 +60,15 @@ class GraficoConsultaFerramenta:
         self.cx_busca.place(x=10, y=40)
 
         self.bt_pesquisa.place(x=425, y=35)
-        self.bt_limpar.place(x=518, y=35)
+        self.bt_atualizar.place(x=518, y=35)
+        self.bt_limpar.place(x=608, y=35)
 
         self.lista_ferramentas.place(x=10, y=80)
 
         self.bt_cadastrar.place(x=10, y=320)
         self.bt_visul_edit.place(x=105, y=320)
         self.bt_remover.place(x=235, y=320)
-        self.bt_fechar.place(x=520, y=320)
+        self.bt_fechar.place(x=610, y=320)
 
         self.consulta_ferramentas()
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
