@@ -87,8 +87,9 @@ class GraficoConsultaFerramenta:
 
     def pesquisa_ferramenta(self):
         self.lista_ferramentas.delete(*self.lista_ferramentas.get_children())
-        consulta = Banco().consultar_dados('ferramenta', where=f"descricao_ferramenta = '{self.cx_busca.get()}'")
-        for valor in consulta:
+        self.consulta = Banco().consultar_nomes('ferramenta', 'descricao_ferramenta', like=self.cx_busca.get())
+
+        for valor in self.consulta:
             self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2]))
 
     def limpar_pesquisa(self):

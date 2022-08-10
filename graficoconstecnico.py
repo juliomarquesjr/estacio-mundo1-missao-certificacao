@@ -88,8 +88,9 @@ class GraficoConsultaTecnico:
 
     def pesquisa_tecnico(self):
         self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
-        consulta = Banco().consultar_dados('tecnico', where=f"nome = '{self.cx_busca.get()}'")
-        for valor in consulta:
+        self.consulta = Banco().consultar_nomes('tecnico', 'nome', like=self.cx_busca.get())
+
+        for valor in self.consulta:
             self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
 
     def limpar_pesquisa(self):

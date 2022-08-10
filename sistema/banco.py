@@ -107,6 +107,30 @@ class Banco:
             self.cursor.close()
             self.conexao.close()
 
+    def consultar_nomes(self, tabela, campo='none', like='none'):
+        self.sql = f"SELECT * FROM {tabela} WHERE {campo} ILIKE '%{like}%'"
+
+        self.conexao = self.conectar()
+        self.cursor = self.conexao.cursor()
+
+        try:
+            self.cursor.execute(self.sql)
+
+            recset = self.cursor.fetchall()
+            registros = []
+            for rec in recset:
+                registros.append(rec)
+
+            return (*registros, )
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("Error: %s" % error)
+            self.conexao.rollback()
+            return False
+        finally:
+            self.cursor.close()
+            self.conexao.close()
+
 ## Somente será usado para testar a classe isoladamente,
 # sem vinculo com o restante do sistema
 if __name__ == "__main__":
