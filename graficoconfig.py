@@ -83,8 +83,8 @@ class GraficoConfig(Config):
         ## Mostra alert de sucesso ou erro dependendo da resposta do banco.
         if resposta:
             tkinter.messagebox.showinfo('Salvar Configuração', 'Dados salvos com sucesso!')
+            self.principal.destroy()
         else:
             tkinter.messagebox.showerror('Erro ao Salvar',
                                          "Erro ao salvar as informações. Por favor, verifique os campos.")
-
-        self.principal.lift()  # Puxa a janela novamente para frente após exibir o aviso.
+            self.principal.lift()  # Puxa a janela novamente para frente após exibir o aviso.
