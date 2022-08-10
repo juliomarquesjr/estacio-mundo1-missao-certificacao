@@ -32,14 +32,15 @@ class GraficoMain:
         self.icon_cadastrar = PhotoImage(file="assets/icones/icon_cadastrar.png")
         self.icon_pesquisar = PhotoImage(file="assets/icones/icon_pesquisar.png")
         self.icon_limpar = PhotoImage(file="assets/icones/icon_limpar.png")
+        self.icon_atualizar = PhotoImage(file="assets/icones/icon_atualizar.png")
 
         self.lb_expira = Label(self.principal, text="Reservas",font=tkFont.Font(size=15))
         self.lb_buscar = Label(self.principal, text="Buscar:", font=tkFont.Font(size=10))
 
-        self.cx_pesquisa = Entry(self.principal, width=67)
+        self.cx_pesquisa = Entry(self.principal, width=68)
 
-        self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_cadastrar, compound='left', padx=5,height=22)
-        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5,height=22)
+        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5, height=22)
+        self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5,height=22)
         self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22)
         self.bt_tecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
         self.bt_ferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)

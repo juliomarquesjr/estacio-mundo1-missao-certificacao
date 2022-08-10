@@ -19,12 +19,13 @@ class GraficoConsultaTecnico:
         center(self.principal)
 
         ## Icones
-        icon_cadastrar = PhotoImage(file="assets/icones/icon_cadastrar.png")
-        icon_editar = PhotoImage(file="assets/icones/icon_editar.png")
-        icon_remover = PhotoImage(file="assets/icones/icon_remove.png")
-        icon_saida = PhotoImage(file="assets/icones/icon_saida.png")
-        icon_pesquisar = PhotoImage(file="assets/icones/icon_pesquisar.png")
-        icon_limpar = PhotoImage(file="assets/icones/icon_limpar.png")
+        self.icon_cadastrar = PhotoImage(file="assets/icones/icon_cadastrar.png")
+        self.icon_editar = PhotoImage(file="assets/icones/icon_editar.png")
+        self.icon_remover = PhotoImage(file="assets/icones/icon_remove.png")
+        self.icon_saida = PhotoImage(file="assets/icones/icon_saida.png")
+        self.icon_pesquisar = PhotoImage(file="assets/icones/icon_pesquisar.png")
+        self.icon_limpar = PhotoImage(file="assets/icones/icon_limpar.png")
+        self.icon_atualizar = PhotoImage(file="assets/icones/icon_atualizar.png")
 
         ## Labels.
         self.lb_busca = Label(self.principal, text="Buscar Técnico: ")
@@ -46,13 +47,13 @@ class GraficoConsultaTecnico:
         ## Fim da lista de reserva
 
         ## Botões.
-        self.bt_atualizar = Button(self.principal, text="Atualizar", image=icon_cadastrar, compound='left', padx=5,height=22)
-        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=icon_pesquisar, compound='left', padx=5, height=22, command=self.pesquisa_tecnico)
-        self.bt_limpar = Button(self.principal, text="Limpar", image=icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
-        self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=icon_cadastrar, compound='left', padx=5, height=22, command=GraficoTecnico)
-        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=icon_editar, compound='left', padx=5, height=22)
-        self.bt_remover = Button(self.principal, text="Remover", image=icon_remover, compound='left', padx=5, height=22, command=self.remover_tecncio)
-        self.bt_fechar = Button(self.principal, text="Fechar", image=icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
+        self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5,height=22)
+        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5, height=22, command=self.pesquisa_tecnico)
+        self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
+        self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoTecnico)
+        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22)
+        self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5, height=22, command=self.remover_tecncio)
+        self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
 
         ## Alinhamento dos componentes
         self.lb_busca.place(x=10, y=10)
