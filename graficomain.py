@@ -19,10 +19,10 @@ class GraficoMain:
         self.principal.geometry("760x440")
         self.principal.resizable(width=False, height=False)
 
-
         self.principal.title('Conteúdo Audiovisual LTDA')
         center(self.principal)
 
+        ## Icones
         self.icon_config = PhotoImage(file="assets/icones/icon_config.png")
         self.icon_saida = PhotoImage(file="assets/icones/icon_saida.png")
         self.icon_reserva = PhotoImage(file="assets/icones/icon_reservas.png")
@@ -34,14 +34,16 @@ class GraficoMain:
         self.icon_limpar = PhotoImage(file="assets/icones/icon_limpar.png")
         self.icon_atualizar = PhotoImage(file="assets/icones/icon_atualizar.png")
 
+        ## Caixas de texto
         self.lb_expira = Label(self.principal, text="Reservas",font=tkFont.Font(size=15))
         self.lb_buscar = Label(self.principal, text="Buscar:", font=tkFont.Font(size=10))
 
-        self.cx_pesquisa = Entry(self.principal, width=68)
+        self.cx_pesquisa = Entry(self.principal, width=45, font=32)
 
+        ## Botões
         self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5, height=22)
         self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5,height=22)
-        self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22)
+        self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
         self.bt_tecnico = Button(self.principal, image=self.icon_tecnico, height=22, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)
         self.bt_ferramenta = Button(self.principal, image=self.icon_ferramenta, height=22, compound='left', padx=5, text="Ferramentas", command=GraficoConsultaFerramenta)
         self.bt_reservar = Button(self.principal, image=self.icon_reserva, height=22, compound='left', padx=5, text="Reservas",command=GraficoReserva)
@@ -61,6 +63,7 @@ class GraficoMain:
         self.lista_reservas.heading('col3', text="Previsão de Entrega")
         ## Fim da lista de reserva
 
+        ## Alinhamento dos componentes
         self.lb_expira.place(x=10,y=10)
         self.lb_buscar.place(x=10, y=45)
         self.cx_pesquisa.place(x=65,y=45)
@@ -76,6 +79,9 @@ class GraficoMain:
         self.bt_sair.place(x=695,y=400)
 
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
+
+    def limpar_pesquisa(self):
+        self.cx_pesquisa.delete(0, 'end')
 
     def sobre(self):
         tk.messagebox.showinfo('Criadores', 'Diego Gomes\nJulio Marques\nKauã Marques\nValéria Souza ')
