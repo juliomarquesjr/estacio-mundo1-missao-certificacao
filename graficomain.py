@@ -16,7 +16,7 @@ class GraficoMain:
         self.principal = tkinter.Tk()
 
         ## Ajustar tamanho da janela e não permitir maximizar
-        self.principal.geometry("700x440")
+        self.principal.geometry("760x440")
         self.principal.resizable(width=False, height=False)
 
 
@@ -34,6 +34,7 @@ class GraficoMain:
         self.icon_limpar = PhotoImage(file="assets/icones/icon_limpar.png")
 
         self.lb_expira = Label(self.principal, text="Reservas",font=tkFont.Font(size=15))
+        self.lb_buscar = Label(self.principal, text="Buscar:", font=tkFont.Font(size=10))
 
         self.cx_pesquisa = Entry(self.principal, width=67)
 
@@ -50,9 +51,9 @@ class GraficoMain:
         ## Inicio da Lista de Reservas
         self.nomes_colunas = ('col1', 'col2', 'col3')
         self.lista_reservas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=14)
-        self.lista_reservas.column('col1', width=255, stretch=False)
-        self.lista_reservas.column('col2', width=255, stretch=False)
-        self.lista_reservas.column('col3', width=168, stretch=False)
+        self.lista_reservas.column('col1', width=265, stretch=False)
+        self.lista_reservas.column('col2', width=260, stretch=False)
+        self.lista_reservas.column('col3', width=210, stretch=False)
 
         self.lista_reservas.heading('col1', text='Ferramenta')
         self.lista_reservas.heading('col2', text='Tecnico')
@@ -60,17 +61,18 @@ class GraficoMain:
         ## Fim da lista de reserva
 
         self.lb_expira.place(x=10,y=10)
-        self.cx_pesquisa.place(x=10,y=45)
-        self.bt_pesquisa.place(x=432, y=40)
-        self.bt_atualizar.place(x=527, y=40)
-        self.bt_limpar.place(x=617, y=40)
+        self.lb_buscar.place(x=10, y=45)
+        self.cx_pesquisa.place(x=65,y=45)
+        self.bt_pesquisa.place(x=491, y=40)
+        self.bt_atualizar.place(x=585, y=40)
+        self.bt_limpar.place(x=675, y=40)
         self.lista_reservas.place(x=10, y=80)
         self.bt_tecnico.place(x=10,y=400)
         self.bt_ferramenta.place(x=100,y=400)
         self.bt_reservar.place(x=210,y=400)
         self.bt_config.place(x=300,y=400)
         self.bt_sobre.place(x=412, y=400)
-        self.bt_sair.place(x=635,y=400)
+        self.bt_sair.place(x=695,y=400)
 
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
