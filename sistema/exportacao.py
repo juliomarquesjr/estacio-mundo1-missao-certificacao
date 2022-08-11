@@ -1,3 +1,4 @@
+# time, instalar com: pip install openpyxl
 from openpyxl import Workbook
 wb = Workbook()
 
