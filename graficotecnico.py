@@ -16,15 +16,15 @@ from sistema.banco import Banco
 #    def ValidarEntradas(self):
 #     self.vcmd2 = (self.reserva(self.validadores_entry2), "%P")
 
-class GraficoTecnicoCadastrar():
-    def __init__(self):
+class GraficoTecnico:
+    def __init__(self, cpf=False):
         self.principal = tkinter.Toplevel()
+        self.cpf = cpf
 
         self.principal.geometry("400x150")
         self.principal.title('Técnicos')
         self.principal.resizable(height=False, width=False)
         center(self.principal)
-
 
         ## Labels
         self.lb_nome = Label(self.principal, text="Nome: ")
@@ -36,6 +36,7 @@ class GraficoTecnicoCadastrar():
         ## Icones
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_fechar = PhotoImage(file="assets/icones/icon_saida.png")
+
         ## Caixas de Texto
         self.cx_nome = Entry(self.principal, width=54)
         self.cx_cpf = Entry(self.principal, width=22)
@@ -45,7 +46,7 @@ class GraficoTecnicoCadastrar():
         self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
 
         ## Botoes
-        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22, command=self.cadastrar)
+        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22, command=self.salvar)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5, height=22, command=self.principal.destroy)
 
         ## Alinhamento dos componentes
@@ -67,7 +68,17 @@ class GraficoTecnicoCadastrar():
         self.principal.focus_force() #Mantem o focus na janela ativa
         self.principal.grab_set() #Matem no top até ser fechada
 
+        if self.cpf:
+            self.preencher_campos()
+
         self.principal.mainloop() ## Abre a janela no momento em que a classe é estanciada
+
+    def salvar(self):
+        print(self.cpf)
+        if self.cpf == False:
+            self.cadastrar()
+        else:
+            self.editar()
 
     def cadastrar(self):
         self.novo_tecnico = Tecnico(self.cx_nome.get(),
@@ -83,71 +94,21 @@ class GraficoTecnicoCadastrar():
             tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")
             self.principal.lift()
 
-class GraficoTecnicoEditar():
-    def __init__(self,dados):
-        self.principal = tkinter.Toplevel()
+    def preencher_campos(self):
+        self.dados = Banco().consultar_dados(tabela='tecnico', where=f"cpf = '{self.cpf}'")
 
-        self.principal.geometry("400x150")
-        self.principal.title('Técnicos')
-        self.principal.resizable(height=False, width=False)
-        center(self.principal)
-
-
-        ## Labels
-        self.lb_nome = Label(self.principal, text="Nome: ")
-        self.lb_cpf = Label(self.principal, text="CPF: ")
-        self.lb_tel = Label(self.principal, text="Telefone: ")
-        self.lb_equipe = Label(self.principal, text="Equipe: ")
-        self.lb_turno = Label(self.principal, text="Turno: ")
-
-        ## Icones
-        self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
-        self.icon_fechar = PhotoImage(file="assets/icones/icon_saida.png")
-
-        ## Caixas de Texto
-        self.cx_nome = Entry(self.principal, width=54)
-        self.cx_nome.insert(0,dados[0][0])
-        self.cx_cpf = Entry(self.principal, width=22)
-        self.cx_cpf.insert(0, dados[0][1])
-        self.cx_tel = Entry(self.principal, width=20)
-        self.cx_tel.insert(0, dados[0][2])
-        self.cx_equipe = Entry(self.principal, width=22)
-        self.cx_equipe.insert(0, dados[0][4])
-        self.cx_turno = ttk.Combobox(self.principal, width=17)
-        self.cx_turno.insert(0, dados[0][3])
-        self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
-
-        ## Botoes
-        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22, command=self.editar)
-        self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5, height=22, command=self.principal.destroy)
-
-        ## Alinhamento dos componentes
-        self.lb_nome.place(x=10,y=10)
-        self.lb_cpf.place(x=10, y=40)
-        self.lb_tel.place(x=205, y=40)
-        self.lb_equipe.place(x=10, y=70)
-        self.lb_turno.place(x=205, y=70)
-
-        self.cx_nome.place(x=60,y=10)
-        self.cx_cpf.place(x=60, y=40)
-        self.cx_tel.place(x=265, y=40)
-        self.cx_equipe.place(x=60, y=70)
-        self.cx_turno.place(x=265, y=70)
-
-        self.bt_salvar.place(x=245,y=110)
-        self.bt_fechar.place(x=320,y=110)
-
-        self.principal.focus_force() #Mantem o focus na janela ativa
-        self.principal.grab_set() #Matem no top até ser fechada
-
-        self.principal.mainloop() ## Abre a janela no momento em que a classe é estanciada
+        print(f'CPF Recebido: {self.cpf}')
+        self.cx_nome.insert(0, self.dados[0][0])
+        self.cx_cpf.insert(0, self.dados[0][1])
+        self.cx_tel.insert(0, self.dados[0][2])
+        self.cx_equipe.insert(0, self.dados[0][4])
+        self.cx_turno.insert(0, self.dados[0][3])
 
     def editar(self):
         self.atualiza = Banco().atualizar_dados('tecnico', set= f"nome = '{self.cx_nome.get()}',"
                                                                 f"telefone = '{self.cx_tel.get()}',"
                                                                 f"turno = '{self.cx_turno.get()}',"
                                                                 f"nome_equipe = '{self.cx_equipe.get()}'",where=f"cpf = '{self.cx_cpf.get()}'")
-
         if self.atualiza:
             tkinter.messagebox.showinfo("Editar técnico", "Técnico Editado com Sucesso!")
         else:
