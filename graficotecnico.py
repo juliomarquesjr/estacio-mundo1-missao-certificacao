@@ -4,6 +4,16 @@ from tkinter import Label, ttk, Button, Entry, PhotoImage, messagebox
 from sistema.centraliza_janelas import center
 from tecnico import Tecnico
 
+class Validadores:
+    def validadores_entry2(self, text):
+        if text == "": return True
+        try:
+            value = int(text)
+        except ValueError:
+            return False
+        return 0 >= 100
+    def ValidarEntradas(self):
+     self.vcmd2 = (self.reserva(self.validadores_entry2), "%P")
 class GraficoTecnico():
     def __init__(self):
         self.principal = tkinter.Toplevel()
@@ -24,7 +34,6 @@ class GraficoTecnico():
         ## Icones
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_fechar = PhotoImage(file="assets/icones/icon_saida.png")
-
         ## Caixas de Texto
         self.cx_nome = Entry(self.principal, width=54)
         self.cx_cpf = Entry(self.principal, width=22)
