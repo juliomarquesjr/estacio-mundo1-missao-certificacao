@@ -4,6 +4,7 @@ class Reserva:
         self.descricao = descricao
         self.data_retirada = data_retirada
         self.data_devolucao = data_devolucao
+        self.
 
     def reserva(self):
         pass
