@@ -1,4 +1,5 @@
-import openpyxl
+# openpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files
+# Para instalar, utilize o comando: pip install openpyxl
 from openpyxl import Workbook
 from openpyxl import load_workbook
 
