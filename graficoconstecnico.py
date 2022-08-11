@@ -2,7 +2,8 @@ import tkinter
 from tkinter import Label, Entry, Button, PhotoImage, messagebox
 from tkinter.ttk import Treeview
 
-from graficotecnico import GraficoTecnico
+from graficotecnico import GraficoTecnicoCadastrar
+from graficotecnico import GraficoTecnicoEditar
 from sistema.centraliza_janelas import center
 
 from sistema.banco import Banco
@@ -50,8 +51,8 @@ class GraficoConsultaTecnico:
         self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5, height=22, command=self.consulta_tecnicos)
         self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5, height=22, command=self.pesquisa_tecnico)
         self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
-        self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoTecnico)
-        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22)
+        self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoTecnicoCadastrar)
+        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22, command=self.preencher_tecnico)
         self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5, height=22, command=self.remover_tecncio)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
 
@@ -110,3 +111,12 @@ class GraficoConsultaTecnico:
 
         self.consulta_tecnicos()
         self.principal.lift()
+
+    def preencher_tecnico(self):
+        for item_selecionado in self.lista_tecnicos.selection():
+            self.cpf_selecionado = \
+            self.lista_tecnicos.item(item_selecionado)['values'][1]
+
+        self.consulta = Banco().consultar_dados(tabela='tecnico',where=f"cpf = '{self.cpf_selecionado}'")
+
+        GraficoTecnicoEditar(self.consulta)
