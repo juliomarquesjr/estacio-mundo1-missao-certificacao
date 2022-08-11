@@ -68,11 +68,13 @@ class GraficoTecnico:
         self.principal.focus_force() #Mantem o focus na janela ativa
         self.principal.grab_set() #Matem no top até ser fechada
 
+        ## Se estiver CPF, preenche os campos ativando o modo Edição
         if self.cpf:
             self.preencher_campos()
 
         self.principal.mainloop() ## Abre a janela no momento em que a classe é estanciada
 
+    ## Função para verificar se está no modo edição para salvar ou atualizar no banco
     def salvar(self):
         print(self.cpf)
         if self.cpf == False:
