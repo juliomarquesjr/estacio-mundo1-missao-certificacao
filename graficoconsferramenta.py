@@ -3,7 +3,8 @@ from tkinter import Label, Entry, Button, PhotoImage, messagebox
 from tkinter.ttk import Treeview
 
 from sistema.banco import Banco
-from graficoferramenta import GraficoFerramenta
+from graficoferramenta import GraficoFerramentaCadastrar
+from graficoferramenta import GraficoFerramentaEditar
 from sistema.centraliza_janelas import center
 
 class GraficoConsultaFerramenta:
@@ -49,8 +50,8 @@ class GraficoConsultaFerramenta:
         self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5, height=22, command=self.pesquisa_ferramenta)
         self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5,height=22, command=self.consulta_ferramentas)
         self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
-        self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoFerramenta)
-        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22)
+        self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoFerramentaCadastrar)
+        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22, command=self.preencher_ferramenta)
         self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5, height=22, command=self.remover_ferramenta)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
 
@@ -109,3 +110,11 @@ class GraficoConsultaFerramenta:
 
         self.consulta_ferramentas()
         self.principal.lift()
+
+    def preencher_ferramenta(self):
+        for item_selecionado in self.lista_ferramentas.selection():
+            self.cod_ferramenta_selecionado = \
+            self.lista_ferramentas.item(item_selecionado)['values'][0]
+
+        self.consulta = Banco().consultar_dados(tabela='ferramenta',where=f"cod_ferramenta = {self.cod_ferramenta_selecionado}")
+        GraficoFerramentaEditar(self.consulta)
