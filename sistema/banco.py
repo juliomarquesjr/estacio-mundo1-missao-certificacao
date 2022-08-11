@@ -2,11 +2,17 @@ import psycopg2
 
 class Banco:
     def __init__(self):
-        self._host = 'localhost'
-        self._usuario = 'postgres'
-        self._senha = '123456'
+        self._host = 'ec2-44-206-137-96.compute-1.amazonaws.com'
+        self._usuario = 'bxbdmvmqpovnon'
+        self._senha = '9be6c16d7cc05d0de7872cd14ab3ea8a1ce2a86a92b24a397f4686c0321ff30c'
         self._porta = '5432'
-        self._banco = 'postgres'
+        self._banco = 'd7v4r0efu4qak2'
+
+        # self._host = 'localhost'
+        # self._usuario = 'postgres'
+        # self._senha = '123456'
+        # self._porta = '5432'
+        # self._banco = 'postgres'
 
     def conectar(self):
         try:
