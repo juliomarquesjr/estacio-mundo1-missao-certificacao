@@ -1,21 +1,18 @@
-# openpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files
-# Para instalar, utilize o comando: pip install openpyxl
 from openpyxl import Workbook
-from openpyxl import load_workbook
+wb = Workbook()
 
+# grab the active worksheet
+ws = wb.active
 
-def export_to_excel(connection, query_string, headings, filepath):
-    cursor = connection.cursor()
-    cursor.execute(query_string)
-    data = cursor.fetchall()
-    cursor.close()
+# Data can be assigned directly to cells
+ws['A1'] = 42
 
+# Rows can also be appended
+ws.append([1, 2, 3])
 
-# Create a Workbook
-    wb = Workbook() # The Workbook is a Class for Excel file in openpyxl.
-    ws = wb.active
-    ws.title = "Lista"
-    wb.save (filename = 'assets/planilhas/lista.xlsx')
+# Python types will automatically be converted
+import datetime
+ws['A2'] = datetime.datetime.now()
 
-    wb = load_workbook('lista.xlsx')
-    print(wb.sheetnames)
+# Save the file
+wb.save("C:/Users/Valéria/PycharmProjects/missao_certificacao_mundo1_estacio/assets/planilhas/sample.xlsx")
