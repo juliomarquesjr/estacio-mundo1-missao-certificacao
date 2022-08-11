@@ -100,6 +100,7 @@ class GraficoTecnico:
         print(f'CPF Recebido: {self.cpf}')
         self.cx_nome.insert(0, self.dados[0][0])
         self.cx_cpf.insert(0, self.dados[0][1])
+        self.cx_cpf.config(state='disabled')
         self.cx_tel.insert(0, self.dados[0][2])
         self.cx_equipe.insert(0, self.dados[0][4])
         self.cx_turno.insert(0, self.dados[0][3])
