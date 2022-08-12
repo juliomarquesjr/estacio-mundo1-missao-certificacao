@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, Entry, Button, PhotoImage, messagebox
+from tkinter import Label, Entry, Button, PhotoImage, messagebox, ttk
 from tkinter.ttk import Treeview
 
 from graficotecnico import GraficoTecnico
@@ -32,7 +32,9 @@ class GraficoConsultaTecnico:
         self.lb_lista = Label(self.principal, text="Lista de Técnicos: ")
 
         ## Caixas de texto.
-        self.cx_busca = Entry(self.principal, width=45, font='32')
+        self.cx_busca = Entry(self.principal, width=35, font='32')
+        self.cx_opcoes = ttk.Combobox(self.principal, width=10)
+        self.cx_opcoes['values'] = ("Nome", "CPF", "Equipe")
 
         ## Lista de Técnicos
         self.nomes_colunas = ('col1', 'col2', 'col3')
@@ -41,7 +43,7 @@ class GraficoConsultaTecnico:
         self.lista_tecnicos.column('col2', width=235, stretch=False)
         self.lista_tecnicos.column('col3', width=195, stretch=False)
 
-        self.lista_tecnicos.heading('col1', text='Nome Completo')
+        self.lista_tecnicos.heading('col1', text='Nome')
         self.lista_tecnicos.heading('col2', text='CPF')
         self.lista_tecnicos.heading('col3', text="Equipe")
         ## Fim da lista de reserva
@@ -60,6 +62,7 @@ class GraficoConsultaTecnico:
         self.lb_lista.place(x=10, y=80)
 
         self.cx_busca.place(x=10, y=40)
+        self.cx_opcoes.place(x=335,y=41)
 
         self.bt_pesquisa.place(x=425, y=35)
         self.bt_atualizar.place(x=518, y=35)

@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, Entry, Button, PhotoImage, messagebox
+from tkinter import Label, Entry, Button, PhotoImage, messagebox, ttk
 from tkinter.ttk import Treeview
 
 from sistema.banco import Banco
@@ -32,7 +32,9 @@ class GraficoConsultaFerramenta:
         self.lb_lista = Label(self.principal, text="Lista de Ferramentas: ")
 
         ## Caixas de texto.
-        self.cx_busca = Entry(self.principal, width=45, font='32')
+        self.cx_busca = Entry(self.principal, width=35, font='32')
+        self.cx_opcoes = ttk.Combobox(self.principal, width=10)
+        self.cx_opcoes['values'] = ("Nome", "Código", "Fabricante")
 
         ## Lista de Ferramentas
         self.nomes_colunas = ('col1', 'col2', 'col3')
@@ -61,6 +63,7 @@ class GraficoConsultaFerramenta:
         self.lb_lista.place(x=10, y=80)
 
         self.cx_busca.place(x=10, y=40)
+        self.cx_opcoes.place(x=335, y=41)
 
         self.bt_pesquisa.place(x=425, y=35)
         self.bt_atualizar.place(x=518, y=35)

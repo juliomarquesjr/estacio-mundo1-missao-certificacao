@@ -126,7 +126,7 @@ class GraficoFerramenta:
                                                                 f"tempo_max_reserva = '{self.cx_temp.get()}'",where=f"cod_ferramenta = '{self.cx_codigo.get()}'")
 
         if self.atualiza:
-            tkinter.messagebox.showinfo("Editar ferramenta", "Ferramenta Editado com Sucesso!")
+            tkinter.messagebox.showinfo("Editar ferramenta", "Ferramenta Editada com Sucesso!")
         else:
             tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar a ferramenta. Por favor, tente novamente.")
 
