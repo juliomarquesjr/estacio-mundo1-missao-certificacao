@@ -16,7 +16,7 @@ class GraficoMain:
         self.principal = tkinter.Tk()
 
         ## Ajustar tamanho da janela e não permitir maximizar
-        self.principal.geometry("760x440")
+        self.principal.geometry("800x440")
         self.principal.resizable(width=False, height=False)
 
         self.principal.title('Conteúdo Audiovisual LTDA')
@@ -34,11 +34,12 @@ class GraficoMain:
         self.icon_limpar = PhotoImage(file="assets/icones/icon_limpar.png")
         self.icon_atualizar = PhotoImage(file="assets/icones/icon_atualizar.png")
 
-        ## Caixas de texto
+        ## Labels
         self.lb_expira = Label(self.principal, text="Reservas",font=tkFont.Font(size=15))
         self.lb_buscar = Label(self.principal, text="Buscar:", font=tkFont.Font(size=10))
 
-        self.cx_pesquisa = Entry(self.principal, width=45, font=32)
+        ## Caixas de texto
+        self.cx_pesquisa = Entry(self.principal, width=50, font=32)
 
         ## Botões
         self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5, height=22)
@@ -52,31 +53,38 @@ class GraficoMain:
         self.bt_sair = Button(self.principal, text="Sair", image=self.icon_saida, compound='left', height=22, padx=5, command=self.principal.destroy)
 
         ## Inicio da Lista de Reservas
-        self.nomes_colunas = ('col1', 'col2', 'col3')
+        self.nomes_colunas = ('col1', 'col2', 'col3', 'col4', 'col5', 'col6')
         self.lista_reservas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=14)
-        self.lista_reservas.column('col1', width=265, stretch=False)
-        self.lista_reservas.column('col2', width=260, stretch=False)
-        self.lista_reservas.column('col3', width=210, stretch=False)
+        self.lista_reservas.column('col1', width=40, stretch=False)
+        self.lista_reservas.column('col2', width=170, stretch=False)
+        self.lista_reservas.column('col3', width=170, stretch=False)
+        self.lista_reservas.column('col4', width=100, stretch=False)
+        self.lista_reservas.column('col5', width=100, stretch=False)
+        self.lista_reservas.column('col6', width=200, stretch=False)
 
-        self.lista_reservas.heading('col1', text='Ferramenta')
-        self.lista_reservas.heading('col2', text='Tecnico')
-        self.lista_reservas.heading('col3', text="Previsão de Entrega")
+        self.lista_reservas.heading('col1', text='Cod')
+        self.lista_reservas.heading('col2', text='Ferramenta')
+        self.lista_reservas.heading('col3', text='Tecnico')
+        self.lista_reservas.heading('col4', text="Retirada")
+        self.lista_reservas.heading('col5', text="Entrega")
+        self.lista_reservas.heading('col6', text="Descrição")
+
         ## Fim da lista de reserva
 
         ## Alinhamento dos componentes
         self.lb_expira.place(x=10,y=10)
         self.lb_buscar.place(x=10, y=45)
         self.cx_pesquisa.place(x=65,y=45)
-        self.bt_pesquisa.place(x=491, y=40)
-        self.bt_atualizar.place(x=585, y=40)
-        self.bt_limpar.place(x=675, y=40)
+        self.bt_pesquisa.place(x=533, y=40)
+        self.bt_atualizar.place(x=628, y=40)
+        self.bt_limpar.place(x=718, y=40)
         self.lista_reservas.place(x=10, y=80)
         self.bt_tecnico.place(x=10,y=400)
         self.bt_ferramenta.place(x=100,y=400)
         self.bt_reservar.place(x=210,y=400)
         self.bt_config.place(x=300,y=400)
         self.bt_sobre.place(x=412, y=400)
-        self.bt_sair.place(x=695,y=400)
+        self.bt_sair.place(x=735,y=400)
 
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
