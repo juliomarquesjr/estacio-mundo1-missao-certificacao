@@ -101,18 +101,24 @@ class GraficoConsultaTecnico:
         #self.consulta_tecnicos()
 
     def remover_tecncio(self):
+        self.cpf_selecionado = False
         for iten_selcionado in self.lista_tecnicos.selection():
             self.cpf_selecionado = self.lista_tecnicos.item(iten_selcionado)['values'][1]
 
-        self.consulta = Banco().remover_dados('tecnico', where=f"cpf = '{self.cpf_selecionado}'")
-
-        if self.consulta:
-            tkinter.messagebox.showinfo("Remover técnico", "Técnico Removido com sucesso!")
+        if self.cpf_selecionado == False:
+            tkinter.messagebox.showerror("Falha ao remover",
+                                         "Por favor, selecione um técnico para realizar a remoção.")
         else:
-            tkinter.messagebox.showerror("Falha ao remover", "Não foi possível remover o técnico. Por favor, tente novamente.")
+            self.consulta = Banco().remover_dados('tecnico', where=f"cpf = '{self.cpf_selecionado}'")
 
-        self.consulta_tecnicos()
+
+            if self.consulta:
+                tkinter.messagebox.showinfo("Remover técnico", "Técnico Removido com sucesso!")
+            else:
+                tkinter.messagebox.showerror("Falha ao remover", "Não foi possível remover o técnico. Por favor, tente novamente.")
+
         self.principal.lift()
+        self.consulta_tecnicos()
 
     def editar_tecnico(self):
         for item_selecionado in self.lista_tecnicos.selection():

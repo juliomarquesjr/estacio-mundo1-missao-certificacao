@@ -1,7 +1,7 @@
 from sistema.banco import Banco
 
 class Tecnico:
-    def __init__(self, nome, cpf, telefone, turno, nome_equipe):
+    def __init__(self, nome=False, cpf=False, telefone=False, turno=False, nome_equipe=False):
         self._nome = nome
         self._cpf = cpf
         self._telefone = telefone
@@ -19,7 +19,7 @@ class Tecnico:
     @nome.setter
     def nome(self, novo_nome):
         self._nome = novo_nome
-        self._atualiza_banco()
+        self.atualiza_banco()
 
     @property
     def cpf(self):
@@ -41,7 +41,7 @@ class Tecnico:
     @turno.setter
     def turno(self, novo_turno):
         self._turno = novo_turno
-        self._atualiza_banco()
+        self.atualiza_banco()
 
     @property
     def nome_equipe(self):
@@ -50,10 +50,10 @@ class Tecnico:
     @nome_equipe.setter
     def nome_equipe(self, nova_equipe):
         self._nome_equipe = nova_equipe
-        self._atualiza_banco()
+        self.atualiza_banco()
 
-    def consulta_banco(self):
-        self.resp = Banco().consultar_dados(tabela='tecnico', where="cpf = '{}'".format(self._cpf))
+    def consulta_banco(self, cpf):
+        self.resp = Banco().consultar_dados(tabela='tecnico', where=f"cpf = '{cpf}'")
 
         return self.resp
 
@@ -66,13 +66,10 @@ class Tecnico:
                                           where="cpf = '{}'".format(self.cpf))
         return self.resp
 
-    def _atualiza_banco(self):
-        self.resp = Banco().atualizar_dados(tabela='tecnico',
-                                            set=f"nome = '{self.nome}', "
-                                                f"telefone = '{self.telefone}', "
-                                                f"turno = '{self.turno}', "
-                                                f"nome_equipe = '{self.nome_equipe}'",
-                                            where="cpf = '{}'".format(self.cpf))
+    def atualiza_banco(self, set, where):
+        self.resp = Banco().atualizar_dados(tabela='tecnico', set=set, where=where)
+
+        return self.resp
 
     def __str__(self):
         return f'Técnico: {self._nome} - CPF: {self._cpf} - Telefone: {self._telefone}'

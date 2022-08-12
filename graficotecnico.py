@@ -97,7 +97,7 @@ class GraficoTecnico:
             self.principal.lift()
 
     def preencher_campos(self):
-        self.dados = Banco().consultar_dados(tabela='tecnico', where=f"cpf = '{self.cpf}'")
+        self.dados = Tecnico().consulta_banco(self.cpf)
 
         self.cx_nome.insert(0, self.dados[0][0])
         self.cx_cpf.insert(0, self.dados[0][1])
@@ -107,13 +107,14 @@ class GraficoTecnico:
         self.cx_turno.insert(0, self.dados[0][3])
 
     def editar(self):
-        self.atualiza = Banco().atualizar_dados('tecnico', set= f"nome = '{self.cx_nome.get()}',"
+        self.atualiza = Tecnico().atualiza_banco(set=(f"nome = '{self.cx_nome.get()}',"
                                                                 f"telefone = '{self.cx_tel.get()}',"
                                                                 f"turno = '{self.cx_turno.get()}',"
-                                                                f"nome_equipe = '{self.cx_equipe.get()}'",where=f"cpf = '{self.cx_cpf.get()}'")
+                                                                f"nome_equipe = '{self.cx_equipe.get()}'"),
+                                                where=f"cpf = '{self.cx_cpf.get()}'")
         if self.atualiza:
             tkinter.messagebox.showinfo("Editar técnico", "Técnico Editado com Sucesso!")
+            self.principal.destroy()
         else:
             tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar o técnico. Por favor, tente novamente.")
-
-        self.principal.lift()
+            self.principal.lift()
