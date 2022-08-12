@@ -35,6 +35,7 @@ class GraficoConsultaTecnico:
         self.cx_busca = Entry(self.principal, width=35, font='32')
         self.cx_opcoes = ttk.Combobox(self.principal, width=10, state="readonly")
         self.cx_opcoes['values'] = ("Nome", "CPF", "Equipe")
+        self.cx_opcoes.current(0)
 
         ## Lista de Técnicos
         self.nomes_colunas = ('col1', 'col2', 'col3')
@@ -90,8 +91,18 @@ class GraficoConsultaTecnico:
             self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
 
     def pesquisa_tecnico(self):
+        match self.cx_opcoes.get():
+            case "Nome":
+                var_busca = 'nome'
+            case "Equipe":
+                var_busca = 'nome_equipe'
+            case "CPF":
+                var_busca = 'cpf'
+            case _:
+                var_busca = 'nome'
+
         self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
-        self.consulta = Banco().consultar_nomes('tecnico', 'nome', like=self.cx_busca.get())
+        self.consulta = Banco().consultar_nomes('tecnico', var_busca, like=self.cx_busca.get())
 
         for valor in self.consulta:
             self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
