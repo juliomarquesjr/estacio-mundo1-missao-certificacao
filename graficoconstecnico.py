@@ -33,7 +33,7 @@ class GraficoConsultaTecnico:
 
         ## Caixas de texto.
         self.cx_busca = Entry(self.principal, width=35, font='32')
-        self.cx_opcoes = ttk.Combobox(self.principal, width=10)
+        self.cx_opcoes = ttk.Combobox(self.principal, width=10, state="readonly")
         self.cx_opcoes['values'] = ("Nome", "CPF", "Equipe")
 
         ## Lista de Técnicos
@@ -54,7 +54,7 @@ class GraficoConsultaTecnico:
         self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
         self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoTecnico)
         self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22, command=self.editar_tecnico)
-        self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5, height=22, command=self.remover_tecncio)
+        self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5, height=22, command=self.remover_tecnico)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
 
         ## Alinhamento dos componentes
@@ -100,7 +100,7 @@ class GraficoConsultaTecnico:
         self.cx_busca.delete(0, 'end')
         #self.consulta_tecnicos()
 
-    def remover_tecncio(self):
+    def remover_tecnico(self):
         self.cpf_selecionado = False
         for iten_selcionado in self.lista_tecnicos.selection():
             self.cpf_selecionado = self.lista_tecnicos.item(iten_selcionado)['values'][1]

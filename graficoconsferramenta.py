@@ -35,7 +35,7 @@ class GraficoConsultaFerramenta:
 
         ## Caixas de texto.
         self.cx_busca = Entry(self.principal, width=35, font='32')
-        self.cx_opcoes = ttk.Combobox(self.principal, width=10)
+        self.cx_opcoes = ttk.Combobox(self.principal, width=10, state="readonly")
         self.cx_opcoes['values'] = ("Nome", "Código", "Fabricante")
 
         ## Lista de Ferramentas

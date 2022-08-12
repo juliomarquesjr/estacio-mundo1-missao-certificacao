@@ -42,7 +42,7 @@ class GraficoTecnico:
         self.cx_cpf = Entry(self.principal, width=22)
         self.cx_tel = Entry(self.principal, width=20)
         self.cx_equipe = Entry(self.principal, width=22)
-        self.cx_turno = ttk.Combobox(self.principal, width=17)
+        self.cx_turno = ttk.Combobox(self.principal, width=17, state="readonly")
         self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
 
         ## Botoes
