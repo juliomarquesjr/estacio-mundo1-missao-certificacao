@@ -1,4 +1,6 @@
 import tkinter
+from tkcalendar import DateEntry
+
 from tkinter import Label, Button, Entry, PhotoImage
 from sistema.centraliza_janelas import center
 
@@ -10,13 +12,16 @@ class GraficoReserva():
         self.principal.resizable(height=False, width=False)
         center(self.principal)
 
+        ## Variaveis do tkinter - Usadas no calendário
+        self.sel_retirada = tkinter.StringVar()  # declaring string variable
+        self.sel_devolucao = tkinter.StringVar()  # declaring string variable
 
         ## Labels
         self.lb_nome = Label(self.principal, text="Nome: ")
         self.lb_cpf = Label(self.principal, text="CPF: ")
         self.lb_codigo = Label(self.principal, text="Código da Ferramenta: ")
-        self.lb_dataretirada = Label(self.principal, text="Data/Hora da Retirada: ")
-        self.lb_datadevol = Label(self.principal, text="Previsão de Devolução: ")
+        self.lb_dataretirada = Label(self.principal, text="Data Retirada: ")
+        self.lb_datadevol = Label(self.principal, text="Data Devolução: ")
         self.lb_descricao = Label(self.principal, text="Descrição: ")
 
         ## Icones
@@ -27,8 +32,8 @@ class GraficoReserva():
         self.cx_nome = Entry(self.principal, width=60)
         self.cx_cpf = Entry(self.principal, width=20)
         self.cx_codigo = Entry(self.principal, width=15)
-        self.cx_dataretirada = Entry(self.principal, width=10)
-        self.cx_datadevol = Entry(self.principal, width=10)
+        self.cx_dataretirada = DateEntry(self.principal, selectmode='day', textvariable=self.sel_retirada, date_pattern='dd/MM/yyyy')
+        self.cx_datadevol = DateEntry(self.principal, selectmode='day', textvariable=self.sel_devolucao, date_pattern='dd/MM/yyyy')
         self.cx_descricao = Entry(self.principal, width=68)
 
         ## Botoes
@@ -40,14 +45,14 @@ class GraficoReserva():
         self.lb_cpf.place(x=10, y=40)
         self.lb_codigo.place(x=195, y=40)
         self.lb_dataretirada.place(x=10, y=70)
-        self.lb_datadevol.place(x=225, y=70)
+        self.lb_datadevol.place(x=215, y=70)
         self.lb_descricao.place(x=10, y=100)
 
         self.cx_nome.place(x=60,y=10)
         self.cx_cpf.place(x=45, y=40)
         self.cx_codigo.place(x=330, y=40)
-        self.cx_dataretirada.place(x=140, y=70)
-        self.cx_datadevol.place(x=360, y=70)
+        self.cx_dataretirada.place(x=100, y=70)
+        self.cx_datadevol.place(x=330, y=70)
         self.cx_descricao.place(x=10, y=130)
 
         self.bt_salvar.place(x=285,y=170)
