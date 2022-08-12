@@ -107,15 +107,15 @@ class GraficoConsultaTecnico:
 
         if self.cpf_selecionado == False:
             tkinter.messagebox.showerror("Falha ao remover",
-                                         "Por favor, selecione um técnico para realizar a remoção.")
+                                         "Por favor, selecione um técnico para realizar a remoção.", parent=self.principal)
         else:
             self.consulta = Banco().remover_dados('tecnico', where=f"cpf = '{self.cpf_selecionado}'")
 
 
             if self.consulta:
-                tkinter.messagebox.showinfo("Remover técnico", "Técnico Removido com sucesso!")
+                tkinter.messagebox.showinfo("Remover técnico", "Técnico Removido com sucesso!", parent=self.principal)
             else:
-                tkinter.messagebox.showerror("Falha ao remover", "Não foi possível remover o técnico. Por favor, tente novamente.")
+                tkinter.messagebox.showerror("Falha ao remover", "Não foi possível remover o técnico. Por favor, tente novamente.", parent=self.principal)
 
         self.principal.lift()
         self.consulta_tecnicos()

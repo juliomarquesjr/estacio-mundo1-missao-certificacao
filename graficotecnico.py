@@ -89,10 +89,10 @@ class GraficoTecnico:
                                     self.cx_equipe.get())
 
         if self.novo_tecnico.cadastra_banco():
-            tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!")
+            tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!", parent=self.principal)
             self.principal.destroy()
         else:
-            tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")
+            tkinter.messagebox.showerror("Falha ao cadastrar", "Não foi possível cadastrar os dados. Por favor verifique os campos novamente!", parent=self.principal)
             self.principal.lift()
 
     def preencher_campos(self):
@@ -112,8 +112,8 @@ class GraficoTecnico:
                                                                 f"nome_equipe = '{self.cx_equipe.get()}'"),
                                                 where=f"cpf = '{self.cx_cpf.get()}'")
         if self.atualiza:
-            tkinter.messagebox.showinfo("Editar técnico", "Técnico Editado com Sucesso!")
+            tkinter.messagebox.showinfo("Editar técnico", "Técnico editado com sucesso!", parent=self.principal)
             self.principal.destroy()
         else:
-            tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar o técnico. Por favor, tente novamente.")
+            tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar o técnico. Por favor, tente novamente.", parent=self.principal)
             self.principal.lift()
