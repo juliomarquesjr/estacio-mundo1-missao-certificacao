@@ -37,6 +37,7 @@ class GraficoConsultaFerramenta:
         self.cx_busca = Entry(self.principal, width=35, font='32')
         self.cx_opcoes = ttk.Combobox(self.principal, width=10, state="readonly")
         self.cx_opcoes['values'] = ("Nome", "Código", "Fabricante")
+        self.cx_opcoes.current(0)
 
         ## Lista de Ferramentas
         self.nomes_colunas = ('col1', 'col2', 'col3', 'col4')
