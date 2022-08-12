@@ -99,7 +99,6 @@ class GraficoTecnico:
     def preencher_campos(self):
         self.dados = Banco().consultar_dados(tabela='tecnico', where=f"cpf = '{self.cpf}'")
 
-        print(f'CPF Recebido: {self.cpf}')
         self.cx_nome.insert(0, self.dados[0][0])
         self.cx_cpf.insert(0, self.dados[0][1])
         self.cx_cpf.config(state='disabled')
