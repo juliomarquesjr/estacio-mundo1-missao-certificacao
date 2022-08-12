@@ -121,8 +121,13 @@ class GraficoConsultaTecnico:
         self.consulta_tecnicos()
 
     def editar_tecnico(self):
+        self.cpf_selecionado = False
+
         for item_selecionado in self.lista_tecnicos.selection():
             self.cpf_selecionado = \
             self.lista_tecnicos.item(item_selecionado)['values'][1]
 
-        GraficoTecnico(self.cpf_selecionado)
+        if self.cpf_selecionado == False:
+            tkinter.messagebox.showerror("Erro ao abrir técnico", "Por favor, selecione um técnico na lista para realizar a visualizção/edição", parent=self.principal)
+        else:
+            GraficoTecnico(self.cpf_selecionado)
