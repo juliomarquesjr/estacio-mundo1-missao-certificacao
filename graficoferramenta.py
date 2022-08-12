@@ -108,10 +108,10 @@ class GraficoFerramenta:
                                           self.cx_temp.get())
 
         if self.nova_ferramenta.cadastra_banco():
-            tkinter.messagebox.showinfo("Cadastro de Ferramenta", "Cadastro realizado com sucesso!")
+            tkinter.messagebox.showinfo("Cadastro de Ferramenta", "Cadastro realizado com sucesso!", parent=self.principal)
             self.principal.destroy()
         else:
-            tkinter.messagebox.showerror("Falha ao cadastrar", "Deu uma ruim maluco!")
+            tkinter.messagebox.showerror("Falha ao cadastrar", "Erro ao salvar os dados. Por favor, verifique os campos novamente!", parent=self.principal)
             self.principal.lift()
 
     def editar(self):
@@ -126,11 +126,11 @@ class GraficoFerramenta:
                                                                 f"tempo_max_reserva = '{self.cx_temp.get()}'",where=f"cod_ferramenta = '{self.cx_codigo.get()}'")
 
         if self.atualiza:
-            tkinter.messagebox.showinfo("Editar ferramenta", "Ferramenta Editada com Sucesso!")
+            tkinter.messagebox.showinfo("Editar ferramenta", "Ferramenta Editada com Sucesso!", parent=self.principal)
+            self.principal.destroy()
         else:
-            tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar a ferramenta. Por favor, tente novamente.")
-
-        self.principal.lift()
+            tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar a ferramenta. Por favor, tente novamente.", parent=self.principal)
+            self.principal.lift()
 
     def preencher_campo(self):
         self.dados = Banco().consultar_dados(tabela='ferramenta',

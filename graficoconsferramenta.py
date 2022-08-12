@@ -4,6 +4,7 @@ from tkinter.ttk import Treeview
 
 from sistema.banco import Banco
 from graficoferramenta import GraficoFerramenta
+from ferramenta import Ferramenta
 from sistema.centraliza_janelas import center
 
 class GraficoConsultaFerramenta:
@@ -37,15 +38,17 @@ class GraficoConsultaFerramenta:
         self.cx_opcoes['values'] = ("Nome", "Código", "Fabricante")
 
         ## Lista de Ferramentas
-        self.nomes_colunas = ('col1', 'col2', 'col3')
+        self.nomes_colunas = ('col1', 'col2', 'col3', 'col4')
         self.lista_ferramentas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
-        self.lista_ferramentas.column('col1', width=217, stretch=False)
-        self.lista_ferramentas.column('col2', width=245, stretch=False)
-        self.lista_ferramentas.column('col3', width=205, stretch=False)
+        self.lista_ferramentas.column('col1', width=157, stretch=False)
+        self.lista_ferramentas.column('col2', width=215, stretch=False)
+        self.lista_ferramentas.column('col3', width=195, stretch=False)
+        self.lista_ferramentas.column('col4', width=110, stretch=False)
 
         self.lista_ferramentas.heading('col1', text='Código')
         self.lista_ferramentas.heading('col2', text='Nome da Ferramenta')
         self.lista_ferramentas.heading('col3', text="Fabricante")
+        self.lista_ferramentas.heading('col4', text="Tempo")
         ## Fim da lista de reserva
 
         ## Botões.
@@ -89,32 +92,36 @@ class GraficoConsultaFerramenta:
         consulta = Banco().consultar_dados('ferramenta')
 
         for valor in consulta:
-            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2]))
+            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2], f'{valor[9]} horas'))
 
     def pesquisa_ferramenta(self):
         self.lista_ferramentas.delete(*self.lista_ferramentas.get_children())
         self.consulta = Banco().consultar_nomes('ferramenta', 'descricao_ferramenta', like=self.cx_busca.get())
 
         for valor in self.consulta:
-            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2]))
+            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2], f'{valor[9]} horas'))
 
     def limpar_pesquisa(self):
         self.cx_busca.delete(0, 'end')
-        #self.consulta_ferramentas()
 
     def remover_ferramenta(self):
+        self.cod_selecionado = False
         for iten_selcionado in self.lista_ferramentas.selection():
             self.cod_selecionado = self.lista_ferramentas.item(iten_selcionado)['values'][0]
 
-        self.consulta = Banco().remover_dados('ferramenta', where=f"cod_ferramenta = '{self.cod_selecionado}'")
-
-        if self.consulta:
-            tkinter.messagebox.showinfo("Remover ferramenta", "Ferramenta removida com sucesso!")
+        if self.cod_selecionado == False:
+            tkinter.messagebox.showerror("Falha ao remover",
+                                         "Por favor, selecione uma ferramenta para realizar a remoção.", parent=self.principal)
         else:
-            tkinter.messagebox.showerror("Falha ao remover", "Não foi possível remover a ferramenta. Por favor, tente novamente.")
+            self.consulta = Ferramenta().remover_banco(self.cod_selecionado)
 
-        self.consulta_ferramentas()
-        self.principal.lift()
+            if self.consulta:
+                tkinter.messagebox.showinfo("Remover ferramenta", "Ferramenta removida com sucesso!", parent=self.principal)
+            else:
+                tkinter.messagebox.showerror("Falha ao remover", "Não foi possível remover a ferramenta. Por favor, tente novamente.", parent=self.principal)
+
+            self.principal.lift()
+            self.consulta_ferramentas()
 
     def preencher_ferramenta(self):
         for item_selecionado in self.lista_ferramentas.selection():

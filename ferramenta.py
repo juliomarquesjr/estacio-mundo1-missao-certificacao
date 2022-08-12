@@ -1,8 +1,8 @@
 from sistema.banco import Banco
 
 class Ferramenta:
-    def __init__(self, cod_ferramenta, descricao, fabricante, voltagem, part_number,
-                 tamanho, und_medida, tipo_ferramenta, material_ferramenta, tempo_max_reserva):
+    def __init__(self, cod_ferramenta=False, descricao=False, fabricante=False, voltagem=False, part_number=False,
+                 tamanho=False, und_medida=False, tipo_ferramenta=False, material_ferramenta=False, tempo_max_reserva=False):
 
         self._cod_ferramenta = cod_ferramenta
         self._descricao = descricao
@@ -36,12 +36,12 @@ class Ferramenta:
                                                                         self._tempo_max_reserva))
         return self.resp
 
+    def remover_banco(self, cod_ferramenta):
+        self.resp = Banco().remover_dados(tabela='ferramenta',
+                                          where=f"cod_ferramenta = '{cod_ferramenta}'")
+
+        return self.resp
+
     def __str__(self):
         return f'Cod: {self._cod_ferramenta} - {self._descricao} / {self._fabricante} - ' \
                f'{self._voltagem} - Tempo Máximo de Reserva: {self._tempo_max_reserva} horas'
-
-
-## Somente será usado para testar a classe isoladamente,
-# sem vinculo com o restante do sistema
-if __name__ == "__main__":
-    print(Ferramenta('001','Furadeira', 'Bosh', '220V', '0809221431', 35, 'cm', 'Eletrica', 'Plastico ABS', 48))
