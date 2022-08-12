@@ -36,7 +36,7 @@ class GraficoConsultaFerramenta:
         ## Caixas de texto.
         self.cx_busca = Entry(self.principal, width=35, font='32')
         self.cx_opcoes = ttk.Combobox(self.principal, width=10, state="readonly")
-        self.cx_opcoes['values'] = ("Nome", "Código", "Fabricante")
+        self.cx_opcoes['values'] = ("Nome", "Fabricante")
         self.cx_opcoes.current(0)
 
         ## Lista de Ferramentas
@@ -97,8 +97,18 @@ class GraficoConsultaFerramenta:
             self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2], f'{valor[9]} horas'))
 
     def pesquisa_ferramenta(self):
+        match self.cx_opcoes.get():
+            case "Nome":
+                var_busca = 'descricao_ferramenta'
+
+            case 'Fabricante':
+                var_busca = 'fabricante'
+
+            case _:
+                var_busca = 'descricao_ferramenta'
+
         self.lista_ferramentas.delete(*self.lista_ferramentas.get_children())
-        self.consulta = Banco().consultar_nomes('ferramenta', 'descricao_ferramenta', like=self.cx_busca.get())
+        self.consulta = Banco().consultar_nomes('ferramenta', var_busca, like=self.cx_busca.get())
 
         for valor in self.consulta:
             self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2], f'{valor[9]} horas'))
