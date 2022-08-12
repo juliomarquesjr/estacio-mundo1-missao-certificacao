@@ -32,8 +32,8 @@ class GraficoReserva():
         self.cx_nome = Entry(self.principal, width=60)
         self.cx_cpf = Entry(self.principal, width=20)
         self.cx_codigo = Entry(self.principal, width=15)
-        self.cx_dataretirada = DateEntry(self.principal, selectmode='day', textvariable=self.sel_retirada, date_pattern='dd/MM/yyyy')
-        self.cx_datadevol = DateEntry(self.principal, selectmode='day', textvariable=self.sel_devolucao, date_pattern='dd/MM/yyyy')
+        self.cx_dataretirada = DateEntry(self.principal, selectmode='day', textvariable=self.sel_retirada, date_pattern='dd/MM/yyyy', state="readonly")
+        self.cx_datadevol = DateEntry(self.principal, selectmode='day', textvariable=self.sel_devolucao, date_pattern='dd/MM/yyyy', state="readonly")
         self.cx_descricao = Entry(self.principal, width=68)
 
         ## Botoes
