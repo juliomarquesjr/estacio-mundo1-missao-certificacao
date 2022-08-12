@@ -21,7 +21,7 @@ class GraficoTecnico:
         self.principal = tkinter.Toplevel()
         self.cpf = cpf
 
-        self.principal.geometry("400x150")
+        self.principal.geometry("400x140")
         self.principal.title('Técnicos')
         self.principal.resizable(height=False, width=False)
         center(self.principal)
@@ -62,8 +62,8 @@ class GraficoTecnico:
         self.cx_equipe.place(x=60, y=70)
         self.cx_turno.place(x=265, y=70)
 
-        self.bt_salvar.place(x=245,y=110)
-        self.bt_fechar.place(x=320,y=110)
+        self.bt_salvar.place(x=245,y=100)
+        self.bt_fechar.place(x=320,y=100)
 
         self.principal.focus_force() #Mantem o focus na janela ativa
         self.principal.grab_set() #Matem no top até ser fechada

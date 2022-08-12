@@ -53,7 +53,7 @@ class GraficoConsultaFerramenta:
         self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoFerramenta)
         self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22, command=self.preencher_ferramenta)
         self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5, height=22, command=self.remover_ferramenta)
-        self.bt_imprimir = Button(self.principal, text="Imprimir", image=self.icon_imprimir, compound='left', padx=5, height=22, command=self.principal.destroy)
+        self.bt_imprimir = Button(self.principal, text="Imprimir", image=self.icon_imprimir, compound='left', padx=5, height=22)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
 
         ## Alinhamento dos componentes
