@@ -76,7 +76,6 @@ class GraficoTecnico:
 
     ## Função para verificar se está no modo edição para salvar ou atualizar no banco
     def salvar(self):
-        print(self.cpf)
         if self.cpf == False:
             self.cadastrar()
         else:
