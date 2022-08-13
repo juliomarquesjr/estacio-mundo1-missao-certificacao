@@ -96,41 +96,56 @@ class GraficoFerramenta:
             self.editar()
 
     def cadastrar(self):
-        self.nova_ferramenta = Ferramenta(self.cx_codigo.get(),
-                                          self.cx_desc.get(),
-                                          self.cx_fab.get(),
-                                          self.cx_volts.get(),
-                                          self.cx_ref.get(),
-                                          self.cx_tamanho.get(),
-                                          self.cx_und.get(),
-                                          self.cx_tipo.get(),
-                                          self.cx_mat.get(),
-                                          self.cx_temp.get())
-
-        if self.nova_ferramenta.cadastra_banco():
-            tkinter.messagebox.showinfo("Cadastro de Ferramenta", "Cadastro realizado com sucesso!", parent=self.principal)
-            self.principal.destroy()
+        if(self.cx_codigo.get() and self.cx_desc.get() and self.cx_fab.get() and self.cx_volts.get()
+           and self.cx_ref.get() and self.cx_tamanho.get() and self.cx_und.get() and self.cx_tipo.get()
+           and self.cx_mat.get() and self.cx_temp.get()) == '':
+            tkinter.messagebox.showerror("Validação de campos",
+                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente",
+                                         parent=self.principal)
         else:
-            tkinter.messagebox.showerror("Falha ao cadastrar", "Erro ao salvar os dados. Por favor, verifique os campos novamente!", parent=self.principal)
-            self.principal.lift()
+            self.nova_ferramenta = Ferramenta(self.cx_codigo.get(),
+                                              self.cx_desc.get(),
+                                              self.cx_fab.get(),
+                                              self.cx_volts.get(),
+                                              self.cx_ref.get(),
+                                              self.cx_tamanho.get(),
+                                              self.cx_und.get(),
+                                              self.cx_tipo.get(),
+                                              self.cx_mat.get(),
+                                              self.cx_temp.get())
+
+            if self.nova_ferramenta.cadastra_banco():
+                tkinter.messagebox.showinfo("Cadastro de Ferramenta", "Cadastro realizado com sucesso!", parent=self.principal)
+                self.principal.destroy()
+            else:
+                tkinter.messagebox.showerror("Falha ao cadastrar", "Erro ao salvar os dados. Por favor, verifique os campos novamente!", parent=self.principal)
+                self.principal.lift()
 
     def editar(self):
-        self.atualiza = Banco().atualizar_dados('ferramenta', set= f"descricao_ferramenta = '{self.cx_desc.get()}',"
-                                                                f"fabricante = '{self.cx_fab.get()}',"
-                                                                f"voltagem = '{self.cx_volts.get()}',"
-                                                                f"part_number = '{self.cx_ref.get()}',"
-                                                                f"tamanho = '{self.cx_tamanho.get()}',"
-                                                                f"und_medida = '{self.cx_und.get()}',"
-                                                                f"tipo_ferramenta = '{self.cx_tipo.get()}',"
-                                                                f"material_ferramenta = '{self.cx_mat.get()}',"
-                                                                f"tempo_max_reserva = '{self.cx_temp.get()}'",where=f"cod_ferramenta = '{self.cx_codigo.get()}'")
+        if (self.cx_codigo.get() and self.cx_desc.get() and self.cx_fab.get() and self.cx_volts.get()
+            and self.cx_ref.get() and self.cx_tamanho.get() and self.cx_und.get() and self.cx_tipo.get()
+            and self.cx_mat.get() and self.cx_temp.get()) == '':
+            tkinter.messagebox.showerror("Validação de campos",
+                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente",
+                                         parent=self.principal)
 
-        if self.atualiza:
-            tkinter.messagebox.showinfo("Editar ferramenta", "Ferramenta Editada com Sucesso!", parent=self.principal)
-            self.principal.destroy()
         else:
-            tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar a ferramenta. Por favor, tente novamente.", parent=self.principal)
-            self.principal.lift()
+            self.atualiza = Banco().atualizar_dados('ferramenta', set= f"descricao_ferramenta = '{self.cx_desc.get()}',"
+                                                                    f"fabricante = '{self.cx_fab.get()}',"
+                                                                    f"voltagem = '{self.cx_volts.get()}',"
+                                                                    f"part_number = '{self.cx_ref.get()}',"
+                                                                    f"tamanho = '{self.cx_tamanho.get()}',"
+                                                                    f"und_medida = '{self.cx_und.get()}',"
+                                                                    f"tipo_ferramenta = '{self.cx_tipo.get()}',"
+                                                                    f"material_ferramenta = '{self.cx_mat.get()}',"
+                                                                    f"tempo_max_reserva = '{self.cx_temp.get()}'",where=f"cod_ferramenta = '{self.cx_codigo.get()}'")
+
+            if self.atualiza:
+                tkinter.messagebox.showinfo("Editar ferramenta", "Ferramenta Editada com Sucesso!", parent=self.principal)
+                self.principal.destroy()
+            else:
+                tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar a ferramenta. Por favor, tente novamente.", parent=self.principal)
+                self.principal.lift()
 
     def preencher_campo(self):
         self.dados = Banco().consultar_dados(tabela='ferramenta',
