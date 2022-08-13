@@ -91,15 +91,14 @@ class GraficoConsultaTecnico:
             self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
 
     def pesquisa_tecnico(self):
-        match self.cx_opcoes.get():
-            case "Nome":
-                var_busca = 'nome'
-            case "Equipe":
-                var_busca = 'nome_equipe'
-            case "CPF":
-                var_busca = 'cpf'
-            case _:
-                var_busca = 'nome'
+        var_busca = 'nome'
+
+        if self.cx_opcoes.get() == "Nome":
+            var_busca = 'nome'
+        elif self.cx_opcoes.get() == "Equipe":
+            var_busca = 'nome_equipe'
+        elif self.cx_opcoes.get() == "CPF":
+            var_busca = 'cpf'
 
         self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
         self.consulta = Banco().consultar_nomes('tecnico', var_busca, like=self.cx_busca.get())

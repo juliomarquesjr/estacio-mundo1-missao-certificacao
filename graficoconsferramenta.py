@@ -97,15 +97,14 @@ class GraficoConsultaFerramenta:
             self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2], f'{valor[9]} horas'))
 
     def pesquisa_ferramenta(self):
-        match self.cx_opcoes.get():
-            case "Nome":
-                var_busca = 'descricao_ferramenta'
+        var_busca = 'descricao_ferramenta'
 
-            case 'Fabricante':
-                var_busca = 'fabricante'
+        if self.cx_opcoes.get() == "Nome":
+            var_busca = 'descricao_ferramenta'
 
-            case _:
-                var_busca = 'descricao_ferramenta'
+        elif self.cx_opcoes.get() == 'Fabricante':
+            var_busca = 'fabricante'
+
 
         self.lista_ferramentas.delete(*self.lista_ferramentas.get_children())
         self.consulta = Banco().consultar_nomes('ferramenta', var_busca, like=self.cx_busca.get())
