@@ -85,20 +85,23 @@ class GraficoTecnico :
             self.editar()
 
     def cadastrar(self):
-        self.novo_tecnico = Tecnico(self.cx_nome.get(),
-                                    self.cx_cpf.get(),
-                                    self.cx_tel.get(),
-                                    self.cx_turno.get(),
-                                    self.cx_equipe.get())
-
-        if self.novo_tecnico.cadastra_banco():
-            tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!", parent=self.principal)
-            self.principal.destroy()
+        if(self.cx_nome.get() and self.cx_cpf.get() and self.cx_tel.get() and self.cx_turno.get() and self.cx_equipe.get()) == '':
+            tkinter.messagebox.showerror("Validação de campos", "Um ou mais campos estão em branco. Verifique os campos e tente novamente", parent=self.principal)
         else:
-            tkinter.messagebox.showerror("Falha ao cadastrar",
-                                         "Não foi possível cadastrar os dados. Por favor verifique os campos novamente!",
-                                         parent=self.principal)
-            self.principal.lift()
+            self.novo_tecnico = Tecnico(self.cx_nome.get(),
+                                        self.cx_cpf.get(),
+                                        self.cx_tel.get(),
+                                        self.cx_turno.get(),
+                                        self.cx_equipe.get())
+
+            if self.novo_tecnico.cadastra_banco():
+                tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!", parent=self.principal)
+                self.principal.destroy()
+            else:
+                tkinter.messagebox.showerror("Falha ao cadastrar",
+                                             "Não foi possível cadastrar os dados. Por favor verifique os campos novamente!",
+                                             parent=self.principal)
+                self.principal.lift()
 
     def preencher_campos(self):
         self.dados = Tecnico().consulta_banco(self.cpf)
@@ -111,16 +114,22 @@ class GraficoTecnico :
         self.cx_turno.insert(0, self.dados[0][3])
 
     def editar(self):
-        self.atualiza = Tecnico().atualiza_banco(set=(f"nome = '{self.cx_nome.get()}',"
-                                                      f"telefone = '{self.cx_tel.get()}',"
-                                                      f"turno = '{self.cx_turno.get()}',"
-                                                      f"nome_equipe = '{self.cx_equipe.get()}'"),
-                                                 where=f"cpf = '{self.cx_cpf.get()}'")
-        if self.atualiza:
-            tkinter.messagebox.showinfo("Editar técnico", "Técnico editado com sucesso!", parent=self.principal)
-            self.principal.destroy()
-        else:
-            tkinter.messagebox.showerror("Falha ao editar",
-                                         "Não foi possível editar o técnico. Por favor, tente novamente.",
+        if (
+                self.cx_nome.get() and self.cx_cpf.get() and self.cx_tel.get() and self.cx_turno.get() and self.cx_equipe.get()) == '':
+            tkinter.messagebox.showerror("Validação de campos",
+                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente",
                                          parent=self.principal)
-            self.principal.lift()
+        else:
+            self.atualiza = Tecnico().atualiza_banco(set=(f"nome = '{self.cx_nome.get()}',"
+                                                          f"telefone = '{self.cx_tel.get()}',"
+                                                          f"turno = '{self.cx_turno.get()}',"
+                                                          f"nome_equipe = '{self.cx_equipe.get()}'"),
+                                                     where=f"cpf = '{self.cx_cpf.get()}'")
+            if self.atualiza:
+                tkinter.messagebox.showinfo("Editar técnico", "Técnico editado com sucesso!", parent=self.principal)
+                self.principal.destroy()
+            else:
+                tkinter.messagebox.showerror("Falha ao editar",
+                                             "Não foi possível editar o técnico. Por favor, tente novamente.",
+                                             parent=self.principal)
+                self.principal.lift()
