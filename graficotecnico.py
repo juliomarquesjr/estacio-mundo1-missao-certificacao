@@ -41,6 +41,9 @@ class GraficoTecnico :
         ## Caixas de Texto
         self.cx_nome = Entry(self.principal, width=54)
         self.cx_cpf = Entry(self.principal, width=22)
+
+        self.cx_cpf.bind("<KeyRelease>", self.format_cpf)
+
         self.cx_tel = Entry(self.principal, width=20)
         self.cx_equipe = Entry(self.principal, width=22)
         self.cx_turno = ttk.Combobox(self.principal, width=17, state="readonly")
@@ -133,3 +136,21 @@ class GraficoTecnico :
                                              "Não foi possível editar o técnico. Por favor, tente novamente.",
                                              parent=self.principal)
                 self.principal.lift()
+
+    def format_cpf(self, event=None):
+        texto = self.cx_cpf.get().replace(".", "").replace("-", "")[:11]
+        novo_texto = ""
+
+        if event.keysym.lower() == "backspace": return
+
+        for index in range(len(texto)):
+            if not texto[index] in "0123456789": continue
+            if index in [2, 5]:
+                novo_texto += texto[index] + "."
+            elif index == 8:
+                novo_texto += texto[index] + "-"
+            else:
+                novo_texto += texto[index]
+
+        self.cx_cpf.delete(0, "end")
+        self.cx_cpf.insert(0, novo_texto)
