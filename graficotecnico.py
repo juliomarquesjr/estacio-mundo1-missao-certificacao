@@ -5,7 +5,7 @@ from sistema.centraliza_janelas import center
 from tecnico import Tecnico
 from sistema.banco import Banco
 
-#class Validadores:
+# class Validadores:
 #    def validadores_entry2(self, text):
 #        if text == "": return True
 #        try:
@@ -16,10 +16,11 @@ from sistema.banco import Banco
 #    def ValidarEntradas(self):
 #     self.vcmd2 = (self.reserva(self.validadores_entry2), "%P")
 
-class GraficoTecnico:
+class GraficoTecnico :
     def __init__(self, cpf=False):
         self.principal = tkinter.Toplevel()
         self.cpf = cpf
+
 
         self.principal.geometry("400x140")
         self.principal.title('Técnicos')
@@ -46,33 +47,35 @@ class GraficoTecnico:
         self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
 
         ## Botoes
-        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5, height=22, command=self.salvar)
-        self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5, height=22, command=self.principal.destroy)
+        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5,
+                                height=22, command=self.salvar)
+        self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5,
+                                height=22, command=self.principal.destroy)
 
         ## Alinhamento dos componentes
-        self.lb_nome.place(x=10,y=10)
+        self.lb_nome.place(x=10, y=10)
         self.lb_cpf.place(x=10, y=40)
         self.lb_tel.place(x=205, y=40)
         self.lb_equipe.place(x=10, y=70)
         self.lb_turno.place(x=205, y=70)
 
-        self.cx_nome.place(x=60,y=10)
+        self.cx_nome.place(x=60, y=10)
         self.cx_cpf.place(x=60, y=40)
         self.cx_tel.place(x=265, y=40)
         self.cx_equipe.place(x=60, y=70)
         self.cx_turno.place(x=265, y=70)
 
-        self.bt_salvar.place(x=245,y=100)
-        self.bt_fechar.place(x=320,y=100)
+        self.bt_salvar.place(x=245, y=100)
+        self.bt_fechar.place(x=320, y=100)
 
-        self.principal.focus_force() #Mantem o focus na janela ativa
-        self.principal.grab_set() #Matem no top até ser fechada
+        self.principal.focus_force()  # Mantem o focus na janela ativa
+        self.principal.grab_set()  # Matem no top até ser fechada
 
         ## Se estiver CPF, preenche os campos ativando o modo Edição
         if self.cpf:
             self.preencher_campos()
 
-        self.principal.mainloop() ## Abre a janela no momento em que a classe é estanciada
+        self.principal.mainloop()  ## Abre a janela no momento em que a classe é estanciada
 
     ## Função para verificar se está no modo edição para salvar ou atualizar no banco
     def salvar(self):
@@ -92,7 +95,9 @@ class GraficoTecnico:
             tkinter.messagebox.showinfo("Cadastro de Tecnico", "Cadastro realizado com sucesso!", parent=self.principal)
             self.principal.destroy()
         else:
-            tkinter.messagebox.showerror("Falha ao cadastrar", "Não foi possível cadastrar os dados. Por favor verifique os campos novamente!", parent=self.principal)
+            tkinter.messagebox.showerror("Falha ao cadastrar",
+                                         "Não foi possível cadastrar os dados. Por favor verifique os campos novamente!",
+                                         parent=self.principal)
             self.principal.lift()
 
     def preencher_campos(self):
@@ -107,13 +112,15 @@ class GraficoTecnico:
 
     def editar(self):
         self.atualiza = Tecnico().atualiza_banco(set=(f"nome = '{self.cx_nome.get()}',"
-                                                                f"telefone = '{self.cx_tel.get()}',"
-                                                                f"turno = '{self.cx_turno.get()}',"
-                                                                f"nome_equipe = '{self.cx_equipe.get()}'"),
-                                                where=f"cpf = '{self.cx_cpf.get()}'")
+                                                      f"telefone = '{self.cx_tel.get()}',"
+                                                      f"turno = '{self.cx_turno.get()}',"
+                                                      f"nome_equipe = '{self.cx_equipe.get()}'"),
+                                                 where=f"cpf = '{self.cx_cpf.get()}'")
         if self.atualiza:
             tkinter.messagebox.showinfo("Editar técnico", "Técnico editado com sucesso!", parent=self.principal)
             self.principal.destroy()
         else:
-            tkinter.messagebox.showerror("Falha ao editar", "Não foi possível editar o técnico. Por favor, tente novamente.", parent=self.principal)
+            tkinter.messagebox.showerror("Falha ao editar",
+                                         "Não foi possível editar o técnico. Por favor, tente novamente.",
+                                         parent=self.principal)
             self.principal.lift()

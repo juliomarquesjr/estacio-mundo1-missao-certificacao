@@ -8,7 +8,7 @@ from sistema.banco import Banco
 class GraficoFerramenta:
     def __init__(self, codigo_ferramenta=False):
         self.principal = tkinter.Toplevel()   # Top Level pois ela é filha de graficomain.py
-
+        self.valid2 = ()
         ## Ajustar tamanho da janela e não permitir maximizar.
         self.principal.geometry("570x200")
         self.principal.resizable(width=False, height=False)
@@ -34,7 +34,7 @@ class GraficoFerramenta:
         self.lb_temp = Label(self.principal, text="Tempo Limite: ")
 
         ## Caixas de texto.
-        self.cx_codigo = Entry(self.principal, width=30)
+        self.cx_codigo = Entry(self.principal, width=30, validatecommand= self.valid2)
         self.cx_desc = Entry(self.principal, width=76)
         self.cx_fab = Entry(self.principal, width=30)
         self.cx_volts = Entry(self.principal, width=30)
