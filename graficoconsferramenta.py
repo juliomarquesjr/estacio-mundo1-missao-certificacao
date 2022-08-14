@@ -135,11 +135,18 @@ class GraficoConsultaFerramenta:
             self.consulta_ferramentas()
 
     def preencher_ferramenta(self):
+        self.cod_ferramenta_selecionado = False
+
         for item_selecionado in self.lista_ferramentas.selection():
             self.cod_ferramenta_selecionado = \
-            self.lista_ferramentas.item(item_selecionado)['values'][0]
+                self.lista_ferramentas.item(item_selecionado)['values'][0]
 
-        GraficoFerramenta(self.cod_ferramenta_selecionado)
+        if self.cod_ferramenta_selecionado == False:
+            tkinter.messagebox.showerror("Erro ao abrir ferramenta",
+                                         "Por favor, selecione uma ferramenta na lista para realizar sua Visualização/Edição.",
+                                         parent=self.principal)
+        else:
+            GraficoFerramenta(self.cod_ferramenta_selecionado)
 
     def exportar_csv(self):
         self.data_banco = Banco().consultar_dados('ferramenta')

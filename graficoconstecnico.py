@@ -138,6 +138,6 @@ class GraficoConsultaTecnico:
             self.lista_tecnicos.item(item_selecionado)['values'][1]
 
         if self.cpf_selecionado == False:
-            tkinter.messagebox.showerror("Erro ao abrir técnico", "Por favor, selecione um técnico na lista para realizar a visualizção/edição", parent=self.principal)
+            tkinter.messagebox.showerror("Erro ao abrir técnico", "Por favor, selecione um técnico na lista para realizar sua Visualização/Edição.", parent=self.principal)
         else:
             GraficoTecnico(self.cpf_selecionado)
