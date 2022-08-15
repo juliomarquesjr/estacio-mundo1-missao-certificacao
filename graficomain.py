@@ -55,18 +55,18 @@ class GraficoMain:
         ## Inicio da Lista de Reservas
         self.nomes_colunas = ('col1', 'col2', 'col3', 'col4', 'col5', 'col6')
         self.lista_reservas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=14)
-        self.lista_reservas.column('col1', width=40, stretch=False)
-        self.lista_reservas.column('col2', width=170, stretch=False)
-        self.lista_reservas.column('col3', width=170, stretch=False)
-        self.lista_reservas.column('col4', width=100, stretch=False)
-        self.lista_reservas.column('col5', width=100, stretch=False)
-        self.lista_reservas.column('col6', width=200, stretch=False)
+        self.lista_reservas.column('col1', width=55, stretch=False)
+        self.lista_reservas.column('col2', width=150, stretch=False)
+        self.lista_reservas.column('col3', width=150, stretch=False)
+        self.lista_reservas.column('col4', width=90, stretch=False)
+        self.lista_reservas.column('col5', width=90, stretch=False)
+        self.lista_reservas.column('col6', width=245, stretch=False)
 
-        self.lista_reservas.heading('col1', text='Cod')
+        self.lista_reservas.heading('col1', text='Código')
         self.lista_reservas.heading('col2', text='Ferramenta')
-        self.lista_reservas.heading('col3', text='Tecnico')
-        self.lista_reservas.heading('col4', text="Retirada")
-        self.lista_reservas.heading('col5', text="Entrega")
+        self.lista_reservas.heading('col3', text='Técnico')
+        self.lista_reservas.heading('col4', text="Data/Retirada")
+        self.lista_reservas.heading('col5', text="Data/Entrega")
         self.lista_reservas.heading('col6', text="Descrição")
 
         ## Fim da lista de reserva
@@ -92,7 +92,7 @@ class GraficoMain:
         self.cx_pesquisa.delete(0, 'end')
 
     def sobre(self):
-        tk.messagebox.showinfo('Criadores', 'Diego Gomes\nJulio Marques\nKauã Marques\nValéria Souza ')
+        tk.messagebox.showinfo('Criadores', 'Desenvolvido por:\nDiego Gomes;\nJulio Marques;\nKauã Marques;\nValéria Souza.')
 
 if __name__ == "__main__":
     GraficoMain()

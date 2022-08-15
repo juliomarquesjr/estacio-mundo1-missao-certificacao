@@ -89,7 +89,7 @@ class GraficoTecnico :
 
     def cadastrar(self):
         if(self.cx_nome.get() and self.cx_cpf.get() and self.cx_tel.get() and self.cx_turno.get() and self.cx_equipe.get()) == '':
-            tkinter.messagebox.showerror("Validação de campos", "Um ou mais campos estão em branco. Verifique os campos e tente novamente", parent=self.principal)
+            tkinter.messagebox.showerror("Validação de campos", "Um ou mais campos estão em branco. Verifique os campos e tente novamente.", parent=self.principal)
         else:
             self.novo_tecnico = Tecnico(self.cx_nome.get(),
                                         self.cx_cpf.get(),

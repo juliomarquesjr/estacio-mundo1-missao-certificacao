@@ -100,7 +100,7 @@ class GraficoFerramenta:
            and self.cx_ref.get() and self.cx_tamanho.get() and self.cx_und.get() and self.cx_tipo.get()
            and self.cx_mat.get() and self.cx_temp.get()) == '':
             tkinter.messagebox.showerror("Validação de campos",
-                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente",
+                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente.",
                                          parent=self.principal)
         else:
             self.nova_ferramenta = Ferramenta(self.cx_codigo.get(),
