@@ -8,6 +8,7 @@ from graficoconfig import GraficoConfig
 from graficoconsferramenta import GraficoConsultaFerramenta
 from graficoconstecnico import GraficoConsultaTecnico
 from graficoreserva import GraficoReserva
+#from teste import GraficoReserva #Para testar, só trocar essa pela importação acima;
 
 from sistema.centraliza_janelas import center
 
