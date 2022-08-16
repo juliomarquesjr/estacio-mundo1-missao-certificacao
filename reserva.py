@@ -1,19 +1,31 @@
-#class Reserva:
-#    def __init__(self, id_ferramenta, cpf, descricao, data_retirada, data_devolucao):
-#        self.id_ferramenta = id_ferramentaself.cpf = cpf
-#        self.descricao = descricao
-#        self.data_retirada = data_retirada
-#        self.data_devolucao = data_devolucao
-#        self.
+from sistema.banco import Banco
 
-#    def reserva(self):
-#        pass
+class Reserva:
 
-#    def envia_email(self):
-#        pass
+    def reservar_ferramenta(self, tecnico, ferramenta, data_retirada, data_entrega):
+        dados = f"'{tecnico}', "
+        f"'{ferramenta}', "
+        f"'{data_retirada}', "
+        f"'{data_entrega}'"
 
-#    def consulta_reserva(self):
-#        pass
+        print(dados)
 
-#    def impressao_reservas(self):
-#        pass
+        # self.banco = Banco().adicionar_dados(tabela='reserva', dados=f"'{tecnico}', "
+        #                                                              f"'{ferramenta}', "
+        #                                                              f"'{data_retirada}', "
+        #                                                              f"'{data_entrega}'")
+        # if self.banco:
+        #     pass
+        # else:
+        #     pass
+
+    def envia_email(self):
+       pass
+
+    def listar_tecnicos_cadastrados(self):
+        self.lista_tecnicos = Banco().consultar_dados(tabela='tecnico')
+        return self.lista_tecnicos
+
+    def listar_ferramentas_cadastradas(self):
+        self.lista_ferramentas = Banco().consultar_dados(tabela='ferramenta')
+        return self.lista_ferramentas
