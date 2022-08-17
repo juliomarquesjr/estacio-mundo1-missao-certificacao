@@ -46,17 +46,17 @@ class GraficoConsultaReserva:
         ## Inicio da Lista de Reservas
         self.nomes_colunas = ('col1', 'col2', 'col3', 'col4', 'col5')
         self.lista_reservas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
-        self.lista_reservas.column('col1', width=60, stretch=False)
-        self.lista_reservas.column('col2', width=190, stretch=False)
-        self.lista_reservas.column('col3', width=190, stretch=False)
-        self.lista_reservas.column('col4', width=115, stretch=False)
-        self.lista_reservas.column('col5', width=115, stretch=False)
+        self.lista_reservas.column('col1', width=55, stretch=False)
+        self.lista_reservas.column('col2', width=175, stretch=False)
+        self.lista_reservas.column('col3', width=164, stretch=False)
+        self.lista_reservas.column('col4', width=138, stretch=False)
+        self.lista_reservas.column('col5', width=138, stretch=False)
 
         self.lista_reservas.heading('col1', text='Código')
         self.lista_reservas.heading('col2', text='Técnico')
         self.lista_reservas.heading('col3', text='Ferramenta')
-        self.lista_reservas.heading('col4', text="Data/Retirada")
-        self.lista_reservas.heading('col5', text="Data/Devolução")
+        self.lista_reservas.heading('col4', text="Data e Hora/Retirada")
+        self.lista_reservas.heading('col5', text="Data e Hora/Devolução")
 
         ## Fim da lista de reserva
 
