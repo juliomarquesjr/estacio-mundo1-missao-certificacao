@@ -42,13 +42,13 @@ class GraficoConsultaFerramenta:
         ## Lista de Ferramentas
         self.nomes_colunas = ('col1', 'col2', 'col3', 'col4')
         self.lista_ferramentas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
-        self.lista_ferramentas.column('col1', width=157, stretch=False)
-        self.lista_ferramentas.column('col2', width=215, stretch=False)
+        self.lista_ferramentas.column('col1', width=215, stretch=False)
+        self.lista_ferramentas.column('col2', width=157, stretch=False)
         self.lista_ferramentas.column('col3', width=195, stretch=False)
-        self.lista_ferramentas.column('col4', width=110, stretch=False)
+        self.lista_ferramentas.column('col4', width=105, stretch=False)
 
-        self.lista_ferramentas.heading('col1', text='Código')
-        self.lista_ferramentas.heading('col2', text='Nome da Ferramenta')
+        self.lista_ferramentas.heading('col1', text='Nome da Ferramenta')
+        self.lista_ferramentas.heading('col2', text='Código')
         self.lista_ferramentas.heading('col3', text="Fabricante")
         self.lista_ferramentas.heading('col4', text="Tempo")
         ## Fim da lista de reserva
@@ -58,7 +58,7 @@ class GraficoConsultaFerramenta:
         self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5,height=22, command=self.consulta_ferramentas)
         self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5, height=22, command=self.limpar_pesquisa)
         self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5, height=22, command=GraficoFerramenta)
-        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22, command=self.preencher_ferramenta)
+        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left', padx=5, height=22, command=self.editar_ferramenta)
         self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5, height=22, command=self.remover_ferramenta)
         self.bt_imprimir = Button(self.principal, text="Imprimir", image=self.icon_imprimir, compound='left', padx=5, height=22, command=self.exportar_csv)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_saida, compound='left', padx=5, height=22, command=self.principal.destroy)
@@ -94,7 +94,7 @@ class GraficoConsultaFerramenta:
         consulta = Banco().consultar_dados('ferramenta')
 
         for valor in consulta:
-            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2], f'{valor[9]} horas'))
+            self.lista_ferramentas.insert('', tkinter.END, values=(valor[1], valor[0], valor[2], f'{valor[9]} horas'))
 
     def pesquisa_ferramenta(self):
         var_busca = 'descricao_ferramenta'
@@ -134,19 +134,19 @@ class GraficoConsultaFerramenta:
             self.principal.lift()
             self.consulta_ferramentas()
 
-    def preencher_ferramenta(self):
-        self.cod_ferramenta_selecionado = False
+    def editar_ferramenta(self):
+        self.cpf_selecionado = False
 
         for item_selecionado in self.lista_ferramentas.selection():
-            self.cod_ferramenta_selecionado = \
-                self.lista_ferramentas.item(item_selecionado)['values'][0]
+            self.cpf_selecionado = \
+                self.lista_ferramentas.item(item_selecionado)['values'][1]
 
-        if self.cod_ferramenta_selecionado == False:
-            tkinter.messagebox.showerror("Erro ao abrir ferramenta",
-                                         "Por favor, selecione uma ferramenta na lista para realizar sua Visualização/Edição.",
+        if self.cpf_selecionado == False:
+            tkinter.messagebox.showerror("Erro ao abrir técnico",
+                                         "Por favor, selecione um técnico na lista para realizar sua Visualização/Edição.",
                                          parent=self.principal)
         else:
-            GraficoFerramenta(self.cod_ferramenta_selecionado)
+            GraficoFerramenta(self.cpf_selecionado)
 
     def exportar_csv(self):
         self.data_banco = Banco().consultar_dados('ferramenta')
@@ -155,4 +155,5 @@ class GraficoConsultaFerramenta:
         if self.resultado == True:
             tkinter.messagebox.showinfo("Exportar Excel", "Exportação realizada com sucesso", parent=self.principal)
         else:
-            tkinter.messagebox.showerror("Exportar Excel", "Falha ao realizar a exportação. Verifique com o administrador do sistema.", self.principal)
+            tkinter.messagebox.showerror("Exportar Excel", "Falha ao realizar a exportação. Verifique com o administrador do sistema.",
+                                         parent=self.principal)

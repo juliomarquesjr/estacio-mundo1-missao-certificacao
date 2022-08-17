@@ -45,6 +45,9 @@ class GraficoTecnico :
         self.cx_cpf.bind("<KeyRelease>", self.format_cpf)
 
         self.cx_tel = Entry(self.principal, width=20)
+
+        self.cx_tel.bind("<KeyRelease>", self.format_telefone)
+
         self.cx_equipe = Entry(self.principal, width=22)
         self.cx_turno = ttk.Combobox(self.principal, width=17, state="readonly")
         self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
@@ -154,3 +157,21 @@ class GraficoTecnico :
 
         self.cx_cpf.delete(0, "end")
         self.cx_cpf.insert(0, novo_texto)
+
+    def format_telefone(self, event=None):
+        texto = self.cx_tel.get().replace(".", "").replace("-", "")[:13]
+        novo_texto = "("
+
+        if event.keysym.lower() == "backspace": return
+
+        for index in range(len(texto)):
+            if not texto[index] in "0123456789": continue
+            if index in [2]:
+                novo_texto += texto[index] + ")"
+            elif index == 8:
+                novo_texto += texto[index] + "-"
+            else:
+                novo_texto += texto[index]
+
+        self.cx_tel.delete(0, "end")
+        self.cx_tel.insert(0, novo_texto)

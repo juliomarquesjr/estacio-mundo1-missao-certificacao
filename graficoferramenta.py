@@ -45,6 +45,8 @@ class GraficoFerramenta:
         self.cx_mat = Entry(self.principal, width=30)
         self.cx_temp = Entry(self.principal, width=15)
 
+        self.cx_temp.bind("<KeyRelease>", self.format_tempo)
+
         ## Botões.
         self.btsalvar = Button(self.principal, image=self.icon_salvar, compound='left', height=22, padx=5,
                                text="Salvar", command=self.salvar)
@@ -87,6 +89,25 @@ class GraficoFerramenta:
         self.principal.grab_set()  # Matem no top até ser fechada
 
         self.principal.mainloop()
+
+
+    def format_tempo(self, event=None):
+        texto = self.cx_temp.get().replace(".", "").replace("-", "")[:6]
+        novo_texto = ""
+
+        if event.keysym.lower() == "backspace": return
+
+        for index in range(len(texto)):
+            if not texto[index] in "0123456789": continue
+            if index in [1]:
+                novo_texto += texto[index] + ":"
+            elif index == 4:
+                novo_texto += texto[index] + ":00"
+            else:
+                novo_texto += texto[index]
+
+        self.cx_temp.delete(0, "end")
+        self.cx_temp.insert(0, novo_texto)
 
     ## Função para verificar se está no modo edição para salvar ou atualizar no banco
     def salvar(self):
