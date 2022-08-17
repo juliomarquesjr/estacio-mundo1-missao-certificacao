@@ -35,12 +35,12 @@ class GraficoConsultaReserva:
         self.cx_opcoes.current(0)
 
         ## Botões
-        self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5,height=22)
-        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5,height=22)
-        self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5,height=22)
+        self.bt_atualizar = Button(self.principal, text="Atualizar", image=self.icon_atualizar, compound='left', padx=5,height=22, command=self.consulta_reserva)
+        self.bt_pesquisa = Button(self.principal, text="Pesquisar", image=self.icon_pesquisar, compound='left', padx=5,height=22, command=self.pesquisa_reserva)
+        self.bt_limpar = Button(self.principal, text="Limpar", image=self.icon_limpar, compound='left', padx=5,height=22, command=self.limpar_pesquisa)
         self.bt_cadastrar = Button(self.principal, text="Cadastrar", image=self.icon_cadastrar, compound='left', padx=5,height=22, command=GraficoReserva)
-        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left',padx=5, height=22)
-        self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5,height=22)
+        self.bt_visul_edit = Button(self.principal, text="Visualizar/Editar", image=self.icon_editar, compound='left',padx=5, height=22, command=self.editar_reserva)
+        self.bt_remover = Button(self.principal, text="Remover", image=self.icon_remover, compound='left', padx=5,height=22, command=self.remover_reserva)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_saida, compound='left', padx=5,height=22, command=self.principal.destroy)
 
         ## Inicio da Lista de Reservas
@@ -81,3 +81,18 @@ class GraficoConsultaReserva:
         #self.consulta_reservas()
 
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
+
+    def consulta_reserva(self):
+        pass
+
+    def pesquisa_reserva(self):
+        pass
+
+    def limpar_pesquisa(self):
+        self.cx_busca.delete(0, 'end')
+
+    def remover_reserva(self):
+        pass
+
+    def editar_reserva(self):
+        pass
