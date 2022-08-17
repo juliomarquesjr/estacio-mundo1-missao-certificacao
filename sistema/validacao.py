@@ -1,6 +1,6 @@
 class Validadores:
-    def __init__(self, valid1):
-        self.validadores_entry ("")
+    def __init__(self,validadores2):
+        self.validadores_entry()
     def validadores_entry(self, text):
         if text == "": return True
         try:
