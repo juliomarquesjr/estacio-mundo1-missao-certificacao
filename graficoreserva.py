@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, Button, Entry, PhotoImage, Listbox, Scrollbar, Frame
+from tkinter import Label, Button, Entry, PhotoImage, Listbox, Scrollbar, messagebox
 from tkcalendar import DateEntry
 
 from sistema.centraliza_janelas import center
@@ -38,6 +38,7 @@ class GraficoReserva(Reserva):
             self.index1 = self.selection1[0]
             self.value1 = event.widget.get(self.index1)
             self.lb_tecnicosel = Label(self.principal, text = self.value1)
+            self.texto_lb_tecnico = self.value1
             self.lb_tecnicosel.place(x=10, y=34)
             self.listbox_tecnico.configure(state=tkinter.DISABLED)
 
@@ -46,6 +47,7 @@ class GraficoReserva(Reserva):
             self.index2 = self.selection2[0]
             self.value2 = event.widget.get(self.index2)
             self.lb_ferramentasel = Label(self.principal, text = self.value2)
+            self.texto_lb_ferramenta = self.value2
             self.lb_ferramentasel.place(x=270, y=34)
             self.listbox_ferramenta.configure(state=tkinter.DISABLED)
 
@@ -53,7 +55,15 @@ class GraficoReserva(Reserva):
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
         self.icon_fechar = PhotoImage(file="assets/icones/icon_saida.png")
 
+        self.texto_lb_tecnico = tkinter.StringVar()
+        self.texto_lb_tecnico = ""
+        self.texto_lb_ferramenta = tkinter.StringVar()
+        self.texto_lb_ferramenta = ""
+
         ## Labels
+        self.lb_tecnicosel = Label(self.principal, text=self.texto_lb_tecnico)
+        self.lb_ferramentasel = Label(self.principal, text=self.texto_lb_ferramenta)
+
         self.lb_nome = Label(self.principal, text="Nome: ")
         self.lb_codigo = Label(self.principal, text="Código da Ferramenta: ")
         self.lb_dataretirada = Label(self.principal, text="Data/Retirada: ")
@@ -86,7 +96,9 @@ class GraficoReserva(Reserva):
         self.cx_temp_devolucao = Entry(self.principal, width=8)
         self.cx_temp_devolucao.bind("<KeyRelease>", self.format_tempo_devolucao)
         self.cx_descricao = Entry(self.principal, width=74)
-        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5,height=22)
+
+        ## Botoes
+        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5,height=22, command=self.cadastrar)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5,height=22, command=self.principal.destroy)
 
         lista_tecnicos = self.listar_tecnicos_cadastrados()
@@ -154,3 +166,16 @@ class GraficoReserva(Reserva):
 
         self.cx_temp_devolucao.delete(0, "end")
         self.cx_temp_devolucao.insert(0, novo_texto)
+
+    def cadastrar(self):
+        tecnico = self.texto_lb_tecnico.split(' > ')
+        ferramenta = self.texto_lb_ferramenta.split(' > ')
+
+        cadastro = self.reservar_ferramenta(tecnico[0], tecnico[1], ferramenta[0], ferramenta[1],
+                                            self.cx_dataretirada.get(), self.cx_temp_retirada.get(),
+                                            self.cx_datadevol.get(), self.cx_temp_devolucao.get(), self.cx_descricao.get())
+
+        if cadastro:
+            tkinter.messagebox.showinfo("Cadastro de Reserva", "Reserva cadastrada com sucesso!", parent=self.principal)
+        else:
+            tkinter.messagebox.showerror("Falha ao cadastrar", "Ocorreu um erro ao cadastrar a reserva, por favor, verifique os campos e tente novamente!")

@@ -4,10 +4,9 @@ from tkinter.ttk import Treeview
 
 from graficoreserva import GraficoReserva
 from sistema.centraliza_janelas import center
+from reserva import Reserva
 
-from sistema.banco import Banco
-
-class GraficoConsultaReserva:
+class GraficoConsultaReserva(Reserva):
     def __init__(self):
         self.principal = tkinter.Toplevel()
         self.principal.geometry("692x360")
@@ -78,15 +77,32 @@ class GraficoConsultaReserva:
         self.bt_remover.place(x=235, y=320)
         self.bt_fechar.place(x=610, y=320)
 
-        #self.consulta_reservas()
+        self.consulta_reserva()
 
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
     def consulta_reserva(self):
-        pass
+        self.lista_reservas.delete(*self.lista_reservas.get_children())
+        consulta = self.listar_reservas_cadastradas()
+
+        for valor in consulta:
+            self.lista_reservas.insert('', tkinter.END, values=(valor[9], valor[1], valor[3],
+                                                                f'{valor[4]} - {valor[5]}', f'{valor[6]} - {valor[7]}'))
 
     def pesquisa_reserva(self):
-        pass
+        var_busca = 'nome_tecnico'
+
+        if self.cx_opcoes.get() == "Técnico":
+            var_busca = 'nome_tecnico'
+        elif self.cx_opcoes.get() == "Ferramenta":
+            var_busca = 'nome_ferramenta'
+
+        self.lista_reservas.delete(*self.lista_reservas.get_children())
+        consulta = self.pesquisar_banco(campo=var_busca, pesquisa=self.cx_busca.get())
+
+        for valor in consulta:
+            self.lista_reservas.insert('', tkinter.END, values=(valor[9], valor[1], valor[3],
+                                                                f'{valor[4]} - {valor[5]}', f'{valor[6]} - {valor[7]}'))
 
     def limpar_pesquisa(self):
         self.cx_busca.delete(0, 'end')
