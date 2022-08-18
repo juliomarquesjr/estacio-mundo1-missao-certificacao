@@ -18,7 +18,7 @@ class GraficoReserva(Reserva):
             self.listbox_tecnico.delete(0, 'end')
             codigos_tecnicos = []
             for item in tecnicos:
-                self.listbox_tecnico.insert('end', f'{item[1]} - {item[0]}')
+                self.listbox_tecnico.insert('end', f'{item[1]} > {item[0]}')
                 codigos_tecnicos.append(item[1])
 
             return codigos_tecnicos
@@ -28,7 +28,7 @@ class GraficoReserva(Reserva):
             codigos_ferramentas = []
 
             for item in ferramentas:
-                self.listbox_ferramenta.insert('end', f'{item[0]} - {item[1]}')
+                self.listbox_ferramenta.insert('end', f'{item[0]} > {item[1]}')
                 codigos_ferramentas.append(item[0])
 
             return codigos_ferramentas
