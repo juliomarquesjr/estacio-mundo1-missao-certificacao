@@ -136,12 +136,3 @@ class Banco:
         finally:
             self.cursor.close()
             self.conexao.close()
-
-## Somente será usado para testar a classe isoladamente,
-# sem vinculo com o restante do sistema
-if __name__ == "__main__":
-    #print(Banco().adicionar_dados('configuracoes', ('mail.maximweb.com.br', 'julio@maximweb.com.br', 'bTv6Y7QHw1ZT', 465)))
-    #print(Banco().remover_dados('testes','id = 4'))
-
-    print(Banco().consultar_dados(tabela='tecnico'))
-
