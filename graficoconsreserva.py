@@ -108,7 +108,21 @@ class GraficoConsultaReserva(Reserva):
         self.cx_busca.delete(0, 'end')
 
     def remover_reserva(self):
-        pass
+        self.codigo_selecionado = False
+
+        for item_selecionado in self.lista_reservas.selection():
+            self.codigo_selecionado = \
+                self.lista_reservas.item(item_selecionado)['values'][0]
+
+        if self.codigo_selecionado:
+            banco = self.remover_banco(self.codigo_selecionado)
+
+            if banco:
+                tkinter.messagebox.showinfo('Reserva removida', 'A reserva selecionada foi removida com sucesso!', parent=self.principal)
+                self.consulta_reserva()
+        else:
+            tkinter.messagebox.showerror('Erro ao remover reserva', 'Por favor, selecione uma reserva na lista para realizar sua remoção', parent=self.principal)
+            self.principal.lift()
 
     def editar_reserva(self):
         self.codigo_selecionado = False
@@ -118,8 +132,8 @@ class GraficoConsultaReserva(Reserva):
                 self.lista_reservas.item(item_selecionado)['values'][0]
 
         if self.codigo_selecionado == False:
-            tkinter.messagebox.showerror("Erro ao abrir técnico",
-                                         "Por favor, selecione um técnico na lista para realizar sua Visualização/Edição.",
+            tkinter.messagebox.showerror("Erro ao abrir reserva",
+                                         "Por favor, selecione uma reserva na lista para realizar sua Visualização/Edição.",
                                          parent=self.principal)
         else:
             GraficoReserva(self.codigo_selecionado)

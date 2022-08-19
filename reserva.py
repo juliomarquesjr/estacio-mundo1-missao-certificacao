@@ -30,9 +30,9 @@ class Reserva:
         self.resp = Banco().atualizar_dados(tabela='reserva', set=set, where=where)
         return self.resp
 
-    def remover_banco(self):
+    def remover_banco(self, id):
         self.resp = Banco().remover_dados(tabela='reserva',
-                                          where="id = '{}'".format(oi))
+                                          where="id = '{}'".format(id))
         return self.resp
 
     def envia_email(self):
