@@ -2,13 +2,13 @@ import smtplib as smt
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from banco import Banco
+from sistema.banco import Banco as bd
 
 class Email:
     def __init__(self, destinatario):
 
         #Consulta configurações no banco
-        config_data = Banco().consultar_dados('configuracoes')[0]
+        config_data = bd().consultar_dados('configuracoes')[0]
 
         self._host = config_data[0]
         self._senha = config_data[2]
@@ -32,10 +32,3 @@ class Email:
             return False
         finally:
             server.quit()
-
-## Somente será usado para testar a classe isoladamente,
-# sem vinculo com o restante do sistema
-if __name__ == "__main__":
-    #pass
-    email = Email('juliomarquesjr@yahoo.com.br')
-    print(email.enviar_mensagem('Teste de email da classe Email com banco'))

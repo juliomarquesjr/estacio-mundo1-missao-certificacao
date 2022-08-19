@@ -6,6 +6,7 @@ from  datetime import date
 from sistema.centraliza_janelas import center
 
 from reserva import Reserva
+from sistema.enviaEmail import Email
 
 class GraficoReserva:
     def __init__(self, codigo=False):
@@ -220,7 +221,7 @@ class GraficoReserva:
                                              "Um ou mais campos estão em branco. Verifique os campos e tente novamente.",
                                              parent=self.principal)
             else:
-                self.nova_reserva = Reserva(tecnico[0],
+                nova_reserva = Reserva(tecnico[0],
                                             tecnico[1],
                                             ferramenta[0],
                                             ferramenta[1],
@@ -230,9 +231,18 @@ class GraficoReserva:
                                             self.cx_temp_devolucao.get(),
                                             self.cx_descricao.get())
 
-                if self.nova_reserva.reservar_ferramenta():
+                if nova_reserva.reservar_ferramenta():
                     tkinter.messagebox.showinfo("Cadastro de Reserva", "Reserva cadastrada com sucesso!",
                                                 parent=self.principal)
+
+                    destinatario = 'juliomarquesjr@yahoo.com.br'
+                    mensagem = f"Nova reserva: CPF: {tecnico[0]} / Tecnico: {tecnico[1]} / Ferramenta: {ferramenta[1]} / " \
+                               f"Retirada: {self.cx_dataretirada.get()} - {self.cx_temp_retirada.get()} / Devolução: {self.cx_datadevol.get()} - {self.cx_temp_devolucao.get()} / " \
+                               f"Descrição: {self.cx_descricao.get()}"
+                    email = Email(destinatario).enviar_mensagem(mensagem=mensagem)
+
+                    if email:
+                        tkinter.messagebox.showinfo("Envio de mensagem", f"Uma mensagem foi enviada para: {destinatario}", parent=self.principal)
                     self.principal.destroy()
                 else:
                     tkinter.messagebox.showerror("Falha ao cadastrar",
