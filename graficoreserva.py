@@ -198,55 +198,84 @@ class GraficoReserva:
         self.cx_temp_devolucao.delete(0, "end")
         self.cx_temp_devolucao.insert(0, novo_texto)
 
+    def validar_tempo(self, dataretirada, tempretirada, datadevolucao,tempdevolucao, tempolimite):
+        print(dataretirada)
+        print(tempretirada)
+        print(datadevolucao)
+        print(tempdevolucao)
+        tempopedido = 1
+        if tempopedido < tempolimite:
+            return True
+        else:
+            return False
+
     def cadastrar(self):
+        x = 10
+        resultado = self.validar_tempo(self.cx_dataretirada.get(), self.cx_temp_retirada.get(),self.cx_datadevol.get(), self.cx_temp_devolucao.get(),x)
         tecnico = self.texto_lb_tecnico.split(' > ')
         ferramenta = self.texto_lb_ferramenta.split(' > ')
-        if (tecnico and ferramenta and self.cx_dataretirada.get() and self.cx_temp_retirada.get() and self.cx_datadevol.get() and self.cx_temp_devolucao.get() and self.cx_descricao.get()) == '':
-            tkinter.messagebox.showerror("Validação de campos",
-                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente.",
-                                         parent=self.principal)
-        else:
-            self.nova_reserva = Reserva(tecnico[0],
-                                        tecnico[1],
-                                        ferramenta[0],
-                                        ferramenta[1],
-                                        self.cx_dataretirada.get(),
-                                        self.cx_temp_retirada.get(),
-                                        self.cx_datadevol.get(),
-                                        self.cx_temp_devolucao.get(),
-                                        self.cx_descricao.get())
-
-            if self.nova_reserva.reservar_ferramenta():
-                tkinter.messagebox.showinfo("Cadastro de Reserva", "Reserva cadastrada com sucesso!", parent=self.principal)
-                self.principal.destroy()
+        if resultado == True:
+            if (tecnico and ferramenta and self.cx_dataretirada.get() and self.cx_temp_retirada.get() and self.cx_datadevol.get() and self.cx_temp_devolucao.get() and self.cx_descricao.get()) == '':
+                tkinter.messagebox.showerror("Validação de campos",
+                                             "Um ou mais campos estão em branco. Verifique os campos e tente novamente.",
+                                             parent=self.principal)
             else:
-                tkinter.messagebox.showerror("Falha ao cadastrar", "Ocorreu um erro ao cadastrar a reserva, por favor, verifique os campos e tente novamente!",parent=self.principal)
-                self.principal.lift()
+                self.nova_reserva = Reserva(tecnico[0],
+                                            tecnico[1],
+                                            ferramenta[0],
+                                            ferramenta[1],
+                                            self.cx_dataretirada.get(),
+                                            self.cx_temp_retirada.get(),
+                                            self.cx_datadevol.get(),
+                                            self.cx_temp_devolucao.get(),
+                                            self.cx_descricao.get())
+
+                if self.nova_reserva.reservar_ferramenta():
+                    tkinter.messagebox.showinfo("Cadastro de Reserva", "Reserva cadastrada com sucesso!",
+                                                parent=self.principal)
+                    self.principal.destroy()
+                else:
+                    tkinter.messagebox.showerror("Falha ao cadastrar",
+                                                 "Ocorreu um erro ao cadastrar a reserva, por favor, verifique os campos e tente novamente!",
+                                                 parent=self.principal)
+                    self.principal.lift()
+        else:
+            tkinter.messagebox.showerror("Falha ao cadastrar",
+                                         "Tempo de reserva não permitido, insira outro!",
+                                         parent=self.principal)
 
 
     def editar(self):
+        x = 10
+        resultado = self.validar_tempo(self.cx_dataretirada.get(), self.cx_temp_retirada.get(), self.cx_datadevol.get(),self.cx_temp_devolucao.get(), x)
         tecnico = self.texto_lb_tecnico.split(' > ')
         ferramenta = self.texto_lb_ferramenta.split(' > ')
-        if (tecnico and ferramenta and self.cx_dataretirada.get() and self.cx_temp_retirada.get() and self.cx_datadevol.get() and self.cx_temp_devolucao.get() and self.cx_descricao.get()) == '':
-            tkinter.messagebox.showerror("Validação de campos",
-                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente",
-                                         parent=self.principal)
-        else:
-            self.atualiza = Reserva().atualiza_banco(set=(f"cpf_tecnico = '{tecnico[0]}',"
-                                                          f"nome_tecnico = '{tecnico[1]}',"
-                                                          f"cod_ferramenta = '{ferramenta[0]}',"
-                                                          f"nome_ferramenta = '{ferramenta[1]}',"
-                                                          f"data_retirada = '{self.cx_dataretirada.get()}',"
-                                                          f"hora_retirada = '{self.cx_temp_retirada.get()}',"
-                                                          f"data_devolucao = '{self.cx_datadevol.get()}',"
-                                                          f"hora_devolucao = '{self.cx_temp_devolucao.get()}',"
-                                                          f"descricao = '{self.cx_descricao.get()}'"),
-                                                     where=f"id = '{self.codigo}'")
-            if self.atualiza:
-                tkinter.messagebox.showinfo("Editar reserva", "Reserva editada com sucesso!", parent=self.principal)
-                self.principal.destroy()
-            else:
-                tkinter.messagebox.showerror("Falha ao editar",
-                                             "Não foi possível editar a reserva. Por favor, tente novamente.",
+        if resultado == True:
+            if (
+                    tecnico and ferramenta and self.cx_dataretirada.get() and self.cx_temp_retirada.get() and self.cx_datadevol.get() and self.cx_temp_devolucao.get() and self.cx_descricao.get()) == '':
+                tkinter.messagebox.showerror("Validação de campos",
+                                             "Um ou mais campos estão em branco. Verifique os campos e tente novamente",
                                              parent=self.principal)
-                self.principal.lift()
+            else:
+                self.atualiza = Reserva().atualiza_banco(set=(f"cpf_tecnico = '{tecnico[0]}',"
+                                                              f"nome_tecnico = '{tecnico[1]}',"
+                                                              f"cod_ferramenta = '{ferramenta[0]}',"
+                                                              f"nome_ferramenta = '{ferramenta[1]}',"
+                                                              f"data_retirada = '{self.cx_dataretirada.get()}',"
+                                                              f"hora_retirada = '{self.cx_temp_retirada.get()}',"
+                                                              f"data_devolucao = '{self.cx_datadevol.get()}',"
+                                                              f"hora_devolucao = '{self.cx_temp_devolucao.get()}',"
+                                                              f"descricao = '{self.cx_descricao.get()}'"),
+                                                         where=f"id = '{self.codigo}'")
+                if self.atualiza:
+                    tkinter.messagebox.showinfo("Editar reserva", "Reserva editada com sucesso!", parent=self.principal)
+                    self.principal.destroy()
+                else:
+                    tkinter.messagebox.showerror("Falha ao editar",
+                                                 "Não foi possível editar a reserva. Por favor, tente novamente.",
+                                                 parent=self.principal)
+                    self.principal.lift()
+        else:
+            tkinter.messagebox.showerror("Falha ao editar",
+                                         "Tempo de reserva não permitido, insira outro!",
+                                         parent=self.principal)

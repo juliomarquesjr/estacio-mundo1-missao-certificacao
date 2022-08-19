@@ -94,16 +94,16 @@ class GraficoFerramenta:
 
 
     def format_tempo(self, event=None):
-        texto = self.cx_temp.get().replace(".", "").replace("-", "")[:6]
+        texto = self.cx_temp.get().replace(".", "").replace("-", "")[:7]
         novo_texto = ""
 
         if event.keysym.lower() == "backspace": return
 
         for index in range(len(texto)):
             if not texto[index] in "0123456789": continue
-            if index in [1]:
+            if index in [2]:
                 novo_texto += texto[index] + ":"
-            elif index == 4:
+            elif index == 5:
                 novo_texto += texto[index] + ":00"
             else:
                 novo_texto += texto[index]
