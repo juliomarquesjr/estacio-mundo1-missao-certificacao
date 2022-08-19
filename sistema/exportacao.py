@@ -11,8 +11,10 @@ class Exportacao:
 
         # Adiciona as linhas ao WB onde será gerado o arquivo
         for linha in self.tabela:
-            ws.append([linha[0], linha[1], linha[2], linha[3], linha[4]])
-            print(linha[0])
+            ws.append([linha[9], linha[0], linha[1],
+                       linha[2], linha[3], linha[4],
+                       linha[5], linha[6], linha[7],
+                       linha[8]])
 
         # Salvando o arquivo e revisando se irá ocorrer erro
         try:

@@ -94,7 +94,7 @@ class GraficoConsultaFerramenta:
         consulta = Banco().consultar_dados('ferramenta')
 
         for valor in consulta:
-            self.lista_ferramentas.insert('', tkinter.END, values=(valor[1], valor[0], valor[2], f'{valor[9]} horas'))
+            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[9], valor[1], f'{valor[8]} horas'))
 
     def pesquisa_ferramenta(self):
         var_busca = 'descricao_ferramenta'
@@ -110,7 +110,7 @@ class GraficoConsultaFerramenta:
         self.consulta = Banco().consultar_nomes('ferramenta', var_busca, like=self.cx_busca.get())
 
         for valor in self.consulta:
-            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[1], valor[2], f'{valor[9]} horas'))
+            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[9], valor[1], f'{valor[8]} horas'))
 
     def limpar_pesquisa(self):
         self.cx_busca.delete(0, 'end')
@@ -118,7 +118,7 @@ class GraficoConsultaFerramenta:
     def remover_ferramenta(self):
         self.cod_selecionado = False
         for iten_selcionado in self.lista_ferramentas.selection():
-            self.cod_selecionado = self.lista_ferramentas.item(iten_selcionado)['values'][0]
+            self.cod_selecionado = self.lista_ferramentas.item(iten_selcionado)['values'][1]
 
         if self.cod_selecionado == False:
             tkinter.messagebox.showerror("Falha ao remover",
@@ -135,18 +135,18 @@ class GraficoConsultaFerramenta:
             self.consulta_ferramentas()
 
     def editar_ferramenta(self):
-        self.cpf_selecionado = False
+        self.cod_ferramenta = False
 
         for item_selecionado in self.lista_ferramentas.selection():
-            self.cpf_selecionado = \
+            self.cod_ferramenta = \
                 self.lista_ferramentas.item(item_selecionado)['values'][1]
 
-        if self.cpf_selecionado == False:
+        if self.cod_ferramenta == False:
             tkinter.messagebox.showerror("Erro ao abrir técnico",
                                          "Por favor, selecione um técnico na lista para realizar sua Visualização/Edição.",
                                          parent=self.principal)
         else:
-            GraficoFerramenta(self.cpf_selecionado)
+            GraficoFerramenta(self.cod_ferramenta)
 
     def exportar_csv(self):
         self.data_banco = Banco().consultar_dados('ferramenta')

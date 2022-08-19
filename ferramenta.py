@@ -1,10 +1,10 @@
 from sistema.banco import Banco
 
 class Ferramenta:
-    def __init__(self, cod_ferramenta=False, descricao=False, fabricante=False, voltagem=False, part_number=False,
+    def __init__(self, descricao=False, fabricante=False, voltagem=False, part_number=False,
                  tamanho=False, und_medida=False, tipo_ferramenta=False, material_ferramenta=False, tempo_max_reserva=False):
 
-        self._cod_ferramenta = cod_ferramenta
+
         self._descricao = descricao
         self._fabricante = fabricante
         self._voltagem = voltagem
@@ -16,16 +16,11 @@ class Ferramenta:
         self._tempo_max_reserva = tempo_max_reserva
 
     @property
-    def cod_ferramenta(self):
-        return self._cod_ferramenta
-
-    @property
     def tempo_max_reserva(self):
         return self._tempo_max_reserva
 
     def cadastra_banco(self):
-        self.resp = Banco().adicionar_dados(tabela='ferramenta', dados=(self._cod_ferramenta,
-                                                                        self._descricao,
+        self.resp = Banco().adicionar_dados(tabela='ferramenta', dados=(self._descricao,
                                                                         self._fabricante,
                                                                         self._voltagem,
                                                                         self._part_number,
@@ -34,11 +29,12 @@ class Ferramenta:
                                                                         self._tipo_ferramenta,
                                                                         self._material_ferramenta,
                                                                         self._tempo_max_reserva))
+
         return self.resp
 
     def remover_banco(self, cod_ferramenta):
         self.resp = Banco().remover_dados(tabela='ferramenta',
-                                          where=f"cod_ferramenta = '{cod_ferramenta}'")
+                                          where=f"id = '{cod_ferramenta}'")
 
         return self.resp
 

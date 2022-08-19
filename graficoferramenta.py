@@ -160,7 +160,7 @@ class GraficoFerramenta:
                                                                     f"und_medida = '{self.cx_und.get()}',"
                                                                     f"tipo_ferramenta = '{self.cx_tipo.get()}',"
                                                                     f"material_ferramenta = '{self.cx_mat.get()}',"
-                                                                    f"tempo_max_reserva = '{self.cx_temp.get()}'",where=f"cod_ferramenta = '{self.cx_codigo.get()}'")
+                                                                    f"tempo_max_reserva = '{self.cx_temp.get()}'",where=f"id = '{self.cx_codigo.get()}'")
 
             if self.atualiza:
                 tkinter.messagebox.showinfo("Editar ferramenta", "Ferramenta Editada com Sucesso!", parent=self.principal)
@@ -171,15 +171,16 @@ class GraficoFerramenta:
 
     def preencher_campo(self):
         self.dados = Banco().consultar_dados(tabela='ferramenta',
-                                                where=f"cod_ferramenta = {self.cod_ferramenta}")
-        self.cx_codigo.insert(0, self.dados[0][0])
+                                                where=f"id = {self.cod_ferramenta}")
+
+        self.cx_codigo.insert(0, self.dados[0][9])
         self.cx_codigo.config(state='disabled')
-        self.cx_desc.insert(0, self.dados[0][1])
-        self.cx_fab.insert(0, self.dados[0][2])
-        self.cx_volts.insert(0, self.dados[0][3])
-        self.cx_ref.insert(0, self.dados[0][4])
-        self.cx_tamanho.insert(0, self.dados[0][5])
-        self.cx_und.insert(0, self.dados[0][6])
-        self.cx_tipo.insert(0, self.dados[0][7])
-        self.cx_mat.insert(0, self.dados[0][8])
-        self.cx_temp.insert(0, self.dados[0][9])
+        self.cx_desc.insert(0, self.dados[0][0])
+        self.cx_fab.insert(0, self.dados[0][1])
+        self.cx_volts.insert(0, self.dados[0][2])
+        self.cx_ref.insert(0, self.dados[0][3])
+        self.cx_tamanho.insert(0, self.dados[0][4])
+        self.cx_und.insert(0, self.dados[0][5])
+        self.cx_tipo.insert(0, self.dados[0][6])
+        self.cx_mat.insert(0, self.dados[0][7])
+        self.cx_temp.insert(0, self.dados[0][8])
