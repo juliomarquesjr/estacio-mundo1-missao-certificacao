@@ -42,9 +42,9 @@ class GraficoConsultaFerramenta:
         ## Lista de Ferramentas
         self.nomes_colunas = ('col1', 'col2', 'col3', 'col4')
         self.lista_ferramentas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
-        self.lista_ferramentas.column('col1', width=215, stretch=False)
-        self.lista_ferramentas.column('col2', width=157, stretch=False)
-        self.lista_ferramentas.column('col3', width=195, stretch=False)
+        self.lista_ferramentas.column('col1', width=295, stretch=False)
+        self.lista_ferramentas.column('col2', width=107, stretch=False)
+        self.lista_ferramentas.column('col3', width=165, stretch=False)
         self.lista_ferramentas.column('col4', width=105, stretch=False)
 
         self.lista_ferramentas.heading('col1', text='Nome da Ferramenta')
