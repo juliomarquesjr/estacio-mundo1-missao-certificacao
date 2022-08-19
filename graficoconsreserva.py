@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Label, PhotoImage, Button, Entry, ttk
+from tkinter import Label, PhotoImage, Button, Entry, ttk, messagebox
 from tkinter.ttk import Treeview
 
 from graficoreserva import GraficoReserva
@@ -111,4 +111,15 @@ class GraficoConsultaReserva(Reserva):
         pass
 
     def editar_reserva(self):
-        pass
+        self.codigo_selecionado = False
+
+        for item_selecionado in self.lista_reservas.selection():
+            self.codigo_selecionado = \
+                self.lista_reservas.item(item_selecionado)['values'][0]
+
+        if self.codigo_selecionado == False:
+            tkinter.messagebox.showerror("Erro ao abrir técnico",
+                                         "Por favor, selecione um técnico na lista para realizar sua Visualização/Edição.",
+                                         parent=self.principal)
+        else:
+            GraficoReserva(self.codigo_selecionado)

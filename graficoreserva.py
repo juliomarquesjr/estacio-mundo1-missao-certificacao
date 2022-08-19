@@ -1,18 +1,20 @@
 import tkinter
 from tkinter import Label, Button, Entry, PhotoImage, Listbox, Scrollbar, messagebox
 from tkcalendar import DateEntry
+from  datetime import date
 
 from sistema.centraliza_janelas import center
 
 from reserva import Reserva
 
-class GraficoReserva(Reserva):
-    def __init__(self):
+class GraficoReserva:
+    def __init__(self, codigo=False):
         self.principal = tkinter.Toplevel()
         self.principal.geometry("535x265")
         self.principal.title('Reservas')
         self.principal.resizable(height=False, width=False)
         center(self.principal)
+        self.codigo = codigo
 
         def exibe_tecnicos(tecnicos):
             self.listbox_tecnico.delete(0, 'end')
@@ -98,14 +100,14 @@ class GraficoReserva(Reserva):
         self.cx_descricao = Entry(self.principal, width=74)
 
         ## Botoes
-        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5,height=22, command=self.cadastrar)
+        self.bt_salvar = Button(self.principal, text="Salvar", image=self.icon_salvar, compound='left', padx=5,height=22, command=self.salvar)
         self.bt_fechar = Button(self.principal, text="Fechar", image=self.icon_fechar, compound='left', padx=5,height=22, command=self.principal.destroy)
 
-        lista_tecnicos = self.listar_tecnicos_cadastrados()
-        lista_ferramentas = self.listar_ferramentas_cadastradas()
+        self.lista_tecnicos = Reserva().listar_tecnicos_cadastrados
+        self.lista_ferramentas = Reserva().listar_ferramentas_cadastradas
 
-        self.lista_codigos_tecnicos = exibe_tecnicos(lista_tecnicos)
-        self.lista_codigos_ferramentas = exibe_ferramentas(lista_ferramentas)
+        self.lista_codigos_tecnicos = exibe_tecnicos(self.lista_tecnicos())
+        self.lista_codigos_ferramentas = exibe_ferramentas(self.lista_ferramentas())
 
         ## Alinhamento dos elementos
         self.lb_nome.place(x=10, y=12)
@@ -129,7 +131,36 @@ class GraficoReserva(Reserva):
         self.principal.focus_force()
         self.principal.grab_set()
 
+        if self.codigo:
+            self.preencher_campos()
+
         self.principal.mainloop()
+
+    def salvar(self):
+        if self.codigo == False:
+            self.cadastrar()
+        else:
+            self.editar()
+
+    def preencher_campos(self):
+        self.dados = Reserva().consulta_banco(self.codigo)
+        self.lb_tecnicosel = Label(self.principal, text=self.dados[0][0] + ' > ' + self.dados[0][1])
+        self.lb_tecnicosel.place(x=10, y=34)
+        self.lb_ferramentasel = Label(self.principal, text=self.dados[0][2] + ' > ' + self.dados[0][3])
+        self.lb_ferramentasel.place(x=270, y=34)
+        x1 = self.dados[0][4]
+        y1 = x1.split("/")
+        z1 = list(map(int, y1))
+        dt1 = date(z1[2], z1[1], z1[0])
+        self.cx_dataretirada.set_date(dt1)
+        self.cx_temp_retirada.insert(0, self.dados[0][5])
+        x2 = self.dados[0][6]
+        y2 = x2.split("/")
+        z2 = list(map(int, y2))
+        dt2 = date(z2[2], z2[1], z2[0])
+        self.cx_datadevol.set_date(dt2)
+        self.cx_temp_devolucao.insert(0, self.dados[0][7])
+        self.cx_descricao.insert(0, self.dados[0][8])
 
     def format_tempo_retirada(self, event=None):
         texto = self.cx_temp_retirada.get().replace(".", "").replace("-", "")[:6]
@@ -170,12 +201,52 @@ class GraficoReserva(Reserva):
     def cadastrar(self):
         tecnico = self.texto_lb_tecnico.split(' > ')
         ferramenta = self.texto_lb_ferramenta.split(' > ')
-
-        cadastro = self.reservar_ferramenta(tecnico[0], tecnico[1], ferramenta[0], ferramenta[1],
-                                            self.cx_dataretirada.get(), self.cx_temp_retirada.get(),
-                                            self.cx_datadevol.get(), self.cx_temp_devolucao.get(), self.cx_descricao.get())
-
-        if cadastro:
-            tkinter.messagebox.showinfo("Cadastro de Reserva", "Reserva cadastrada com sucesso!", parent=self.principal)
+        if (tecnico and ferramenta and self.cx_dataretirada.get() and self.cx_temp_retirada.get() and self.cx_datadevol.get() and self.cx_temp_devolucao.get() and self.cx_descricao.get()) == '':
+            tkinter.messagebox.showerror("Validação de campos",
+                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente.",
+                                         parent=self.principal)
         else:
-            tkinter.messagebox.showerror("Falha ao cadastrar", "Ocorreu um erro ao cadastrar a reserva, por favor, verifique os campos e tente novamente!")
+            self.nova_reserva = Reserva(tecnico[0],
+                                        tecnico[1],
+                                        ferramenta[0],
+                                        ferramenta[1],
+                                        self.cx_dataretirada.get(),
+                                        self.cx_temp_retirada.get(),
+                                        self.cx_datadevol.get(),
+                                        self.cx_temp_devolucao.get(),
+                                        self.cx_descricao.get())
+
+            if self.nova_reserva.reservar_ferramenta():
+                tkinter.messagebox.showinfo("Cadastro de Reserva", "Reserva cadastrada com sucesso!", parent=self.principal)
+                self.principal.destroy()
+            else:
+                tkinter.messagebox.showerror("Falha ao cadastrar", "Ocorreu um erro ao cadastrar a reserva, por favor, verifique os campos e tente novamente!",parent=self.principal)
+                self.principal.lift()
+
+
+    def editar(self):
+        tecnico = self.texto_lb_tecnico.split(' > ')
+        ferramenta = self.texto_lb_ferramenta.split(' > ')
+        if (tecnico and ferramenta and self.cx_dataretirada.get() and self.cx_temp_retirada.get() and self.cx_datadevol.get() and self.cx_temp_devolucao.get() and self.cx_descricao.get()) == '':
+            tkinter.messagebox.showerror("Validação de campos",
+                                         "Um ou mais campos estão em branco. Verifique os campos e tente novamente",
+                                         parent=self.principal)
+        else:
+            self.atualiza = Reserva().atualiza_banco(set=(f"cpf_tecnico = '{tecnico[0]}',"
+                                                          f"nome_tecnico = '{tecnico[1]}',"
+                                                          f"cod_ferramenta = '{ferramenta[0]}',"
+                                                          f"nome_ferramenta = '{ferramenta[1]}',"
+                                                          f"data_retirada = '{self.cx_dataretirada.get()}',"
+                                                          f"hora_retirada = '{self.cx_temp_retirada.get()}',"
+                                                          f"data_devolucao = '{self.cx_datadevol.get()}',"
+                                                          f"hora_devolucao = '{self.cx_temp_devolucao.get()}',"
+                                                          f"descricao = '{self.cx_descricao.get()}'"),
+                                                     where=f"id = '{self.codigo}'")
+            if self.atualiza:
+                tkinter.messagebox.showinfo("Editar reserva", "Reserva editada com sucesso!", parent=self.principal)
+                self.principal.destroy()
+            else:
+                tkinter.messagebox.showerror("Falha ao editar",
+                                             "Não foi possível editar a reserva. Por favor, tente novamente.",
+                                             parent=self.principal)
+                self.principal.lift()

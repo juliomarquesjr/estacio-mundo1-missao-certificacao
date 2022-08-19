@@ -84,6 +84,8 @@ class GraficoFerramenta:
         ## Se estiver o código da ferramenta, preenche os campos ativando o modo Edição
         if self.cod_ferramenta:
             self.preencher_campo()
+        else:
+            self.cx_codigo.config(state='disabled')
 
         self.principal.focus_force()  # Mantem o focus na janela ativa
         self.principal.grab_set()  # Matem no top até ser fechada
@@ -117,15 +119,14 @@ class GraficoFerramenta:
             self.editar()
 
     def cadastrar(self):
-        if(self.cx_codigo.get() and self.cx_desc.get() and self.cx_fab.get() and self.cx_volts.get()
+        if(self.cx_desc.get() and self.cx_fab.get() and self.cx_volts.get()
            and self.cx_ref.get() and self.cx_tamanho.get() and self.cx_und.get() and self.cx_tipo.get()
            and self.cx_mat.get() and self.cx_temp.get()) == '':
             tkinter.messagebox.showerror("Validação de campos",
                                          "Um ou mais campos estão em branco. Verifique os campos e tente novamente.",
                                          parent=self.principal)
         else:
-            self.nova_ferramenta = Ferramenta(self.cx_codigo.get(),
-                                              self.cx_desc.get(),
+            self.nova_ferramenta = Ferramenta(self.cx_desc.get(),
                                               self.cx_fab.get(),
                                               self.cx_volts.get(),
                                               self.cx_ref.get(),

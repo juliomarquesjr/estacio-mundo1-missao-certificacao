@@ -1,22 +1,39 @@
 from sistema.banco import Banco
 
 class Reserva:
+    def __init__(self, cpf_tecnico=False, tecnico=False, cod_ferramenta=False,
+                            ferramenta=False, data_retirada=False, hora_retirada=False, data_devolucao=False,
+                            hora_devolucao=False, descricao=False):
+        self._cpf_tecnico = cpf_tecnico
+        self._tecnico = tecnico
+        self._cod_ferramenta = cod_ferramenta
+        self._ferramenta = ferramenta
+        self._data_retirada = data_retirada
+        self._hora_retirada = hora_retirada
+        self._data_devolucao = data_devolucao
+        self._hora_devolucao = hora_devolucao
+        self._descricao = descricao
 
-    def reservar_ferramenta(self, cpf_tecnico, tecnico, cod_ferramenta,
-                            ferramenta, data_retirada, hora_retirada, data_devolucao,
-                            hora_devolucao, descricao):
+    def reservar_ferramenta(self):
+        self.resp = Banco().adicionar_dados(tabela='reserva', dados=f"('{self._cpf_tecnico}', "
+                                                                     f"'{self._tecnico}', "
+                                                                     f"'{self._cod_ferramenta}', "
+                                                                     f"'{self._ferramenta}', "
+                                                                     f"'{self._data_retirada}', "
+                                                                     f"'{self._hora_retirada}', "
+                                                                     f"'{self._data_devolucao}', "
+                                                                     f"'{self._hora_devolucao}', "
+                                                                     f"'{self._descricao}')")
+        return self.resp
 
+    def atualiza_banco(self, set, where):
+        self.resp = Banco().atualizar_dados(tabela='reserva', set=set, where=where)
+        return self.resp
 
-        self.banco = Banco().adicionar_dados(tabela='reserva', dados=f"('{cpf_tecnico}', "
-                                                                     f"'{tecnico}', "
-                                                                     f"'{cod_ferramenta}', "
-                                                                     f"'{ferramenta}', "
-                                                                     f"'{data_retirada}', "
-                                                                     f"'{hora_retirada}', "
-                                                                     f"'{data_devolucao}', "
-                                                                     f"'{hora_devolucao}', "
-                                                                     f"'{descricao}')")
-        return self.banco
+    def remover_banco(self):
+        self.resp = Banco().remover_dados(tabela='reserva',
+                                          where="id = '{}'".format(oi))
+        return self.resp
 
     def envia_email(self):
        pass
@@ -36,3 +53,7 @@ class Reserva:
     def pesquisar_banco(self, campo, pesquisa):
         lista_pesquisa_reserva = Banco().consultar_nomes('reserva', campo, like=pesquisa)
         return lista_pesquisa_reserva
+
+    def consulta_banco(self, codigo):
+        self.resp = Banco().consultar_dados(tabela='reserva', where=f"id = '{codigo}'")
+        return self.resp
