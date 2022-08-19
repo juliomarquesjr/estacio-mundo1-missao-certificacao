@@ -90,11 +90,14 @@ class GraficoConsultaFerramenta:
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
     def consulta_ferramentas(self):
-        self.lista_ferramentas.delete(*self.lista_ferramentas.get_children())
-        consulta = Banco().consultar_dados('ferramenta')
+        if self.cx_busca.get() != '':
+            self.pesquisa_ferramenta()
+        else:
+            self.lista_ferramentas.delete(*self.lista_ferramentas.get_children())
+            consulta = Banco().consultar_dados('ferramenta')
 
-        for valor in consulta:
-            self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[9], valor[1], f'{valor[8]} horas'))
+            for valor in consulta:
+                self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[9], valor[1], f'{valor[8]} horas'))
 
     def pesquisa_ferramenta(self):
         var_busca = 'descricao_ferramenta'

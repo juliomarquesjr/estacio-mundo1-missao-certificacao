@@ -85,10 +85,13 @@ class GraficoConsultaTecnico:
 
 
     def consulta_tecnicos(self):
-        self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
-        consulta = Banco().consultar_dados('tecnico')
-        for valor in consulta:
-            self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
+        if self.cx_busca.get() != '':
+            self.pesquisa_tecnico()
+        else:
+            self.lista_tecnicos.delete(*self.lista_tecnicos.get_children())
+            consulta = Banco().consultar_dados('tecnico')
+            for valor in consulta:
+                self.lista_tecnicos.insert('', tkinter.END, values=(valor[0], valor[1], valor[4]))
 
     def pesquisa_tecnico(self):
         var_busca = 'nome'
@@ -108,7 +111,6 @@ class GraficoConsultaTecnico:
 
     def limpar_pesquisa(self):
         self.cx_busca.delete(0, 'end')
-        #self.consulta_tecnicos()
 
     def remover_tecnico(self):
         self.cpf_selecionado = False

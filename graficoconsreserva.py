@@ -82,12 +82,15 @@ class GraficoConsultaReserva(Reserva):
         self.principal.mainloop() ## Abre a janela no momento que a classe é chamada ou estanciada!
 
     def consulta_reserva(self):
-        self.lista_reservas.delete(*self.lista_reservas.get_children())
-        consulta = self.listar_reservas_cadastradas()
+        if self.cx_busca.get() != '':
+            self.pesquisa_reserva()
+        else:
+            self.lista_reservas.delete(*self.lista_reservas.get_children())
+            consulta = self.listar_reservas_cadastradas()
 
-        for valor in consulta:
-            self.lista_reservas.insert('', tkinter.END, values=(valor[9], valor[1], valor[3],
-                                                                f'{valor[4]} - {valor[5]}', f'{valor[6]} - {valor[7]}'))
+            for valor in consulta:
+                self.lista_reservas.insert('', tkinter.END, values=(valor[9], valor[1], valor[3],
+                                                                    f'{valor[4]} - {valor[5]}', f'{valor[6]} - {valor[7]}'))
 
     def pesquisa_reserva(self):
         var_busca = 'nome_tecnico'

@@ -28,10 +28,11 @@ class GraficoReserva:
 
         def exibe_ferramentas(ferramentas):
             self.listbox_ferramenta.delete(0, 'end')
+            print(ferramentas)
             codigos_ferramentas = []
 
             for item in ferramentas:
-                self.listbox_ferramenta.insert('end', f'{item[0]} > {item[1]}')
+                self.listbox_ferramenta.insert('end', f'{item[9]} > {item[0]}')
                 codigos_ferramentas.append(item[0])
 
             return codigos_ferramentas
