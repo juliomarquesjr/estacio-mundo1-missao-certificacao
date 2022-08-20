@@ -1,7 +1,6 @@
 import tkinter
 from tkinter import Label, PhotoImage, Button, messagebox
 import tkinter as tk
-import tkinter.font as tkFont
 
 from graficoconfig import GraficoConfig
 from graficoconsferramenta import GraficoConsultaFerramenta
@@ -30,7 +29,7 @@ class GraficoMain:
         self.icon_saida = PhotoImage(file="assets/icones/icon_saida.png")
 
         ## Labels
-        self.lb_cabecalho = Label(self.principal, text="Conteúdo Audiovisual LTDA",font=tkFont.Font(size=12))
+        self.lb_cabecalho = Label(self.principal, text="Conteúdo Audiovisual LTDA", font='Helvetica 12 bold')
 
         ## Botões
         self.bt_tecnico = Button(self.principal, image=self.icon_tecnico, height=22, width=100, compound='left', padx=5, text="Técnicos", command=GraficoConsultaTecnico)

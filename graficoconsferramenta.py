@@ -44,8 +44,8 @@ class GraficoConsultaFerramenta:
         self.lista_ferramentas = Treeview(self.principal, columns=self.nomes_colunas, show='headings', height=10)
         self.lista_ferramentas.column('col1', width=295, stretch=False)
         self.lista_ferramentas.column('col2', width=107, stretch=False)
-        self.lista_ferramentas.column('col3', width=165, stretch=False)
-        self.lista_ferramentas.column('col4', width=105, stretch=False)
+        self.lista_ferramentas.column('col3', width=135, stretch=False)
+        self.lista_ferramentas.column('col4', width=135, stretch=False)
 
         self.lista_ferramentas.heading('col1', text='Nome da Ferramenta')
         self.lista_ferramentas.heading('col2', text='Código')
@@ -97,7 +97,7 @@ class GraficoConsultaFerramenta:
             consulta = Banco().consultar_dados('ferramenta')
 
             for valor in consulta:
-                self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[9], valor[1], f'{valor[8]} horas'))
+                self.lista_ferramentas.insert('', tkinter.END, values=(valor[0], valor[9], valor[1], f'{valor[8]} Horas'))
 
     def pesquisa_ferramenta(self):
         var_busca = 'descricao_ferramenta'
