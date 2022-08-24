@@ -11,18 +11,21 @@ class GraficoConfig(Config):
         self.principal = tkinter.Toplevel() #Top Level pois ela é filha de graficomain.py
 
         ## Ajustar tamanho da janela e não permitir maximizar.
-        self.principal.geometry("250x200")
+        self.principal.geometry("260x310")
         self.principal.resizable(width=False, height=False)
 
         self.principal.title('Config Email')
         center(self.principal)
 
         ## Labels.
+        self.lb_banco = Label(self.principal, font='Helvetica 12 bold', text="Acesso ao Banco de Dados")
         self.lb_host = Label(self.principal, text="Host: ")
         self.lb_usuario = Label(self.principal, text="Usuário: ")
         self.lb_senha = Label(self.principal, text="Senha: ")
         self.lb_porta = Label(self.principal, text="Porta: ")
-        self.lb_remetente = Label(self.principal, text="Remente: ")
+        self.lb_remetente = Label(self.principal, text="Remetente: ")
+        self.lb_reserva = Label(self.principal, font='Helvetica 12 bold', text="Envio de Reservas")
+        self.lb_email = Label(self.principal, text="Email: ")
 
         ## Icones.
         self.icon_salvar = PhotoImage(file="assets/icones/icon_salvar.png")
@@ -34,6 +37,7 @@ class GraficoConfig(Config):
         self.cx_senha = Entry(self.principal, width=27)
         self.cx_porta = Entry(self.principal, width=15)
         self.cx_remetente = Entry(self.principal, width=27)
+        self.cx_email = Entry(self.principal, width=27)
 
         ## Botões.
         self.bt_salvar = Button(self.principal, image=self.icon_salvar, compound='left', height=22, padx=5,
@@ -42,20 +46,24 @@ class GraficoConfig(Config):
                                command=self.principal.destroy)
 
         ## Alinhamento dos componentes
-        self.lb_host.place(x=5, y=10)
-        self.lb_usuario.place(x=5, y=40)
-        self.lb_senha.place(x=5, y=70)
-        self.lb_porta.place(x=5, y=100)
-        self.lb_remetente.place(x=5, y=130)
+        self.lb_banco.place(x=20, y=10)
+        self.lb_host.place(x=10, y=40)
+        self.lb_usuario.place(x=10, y=70)
+        self.lb_senha.place(x=10, y=100)
+        self.lb_porta.place(x=10, y=130)
+        self.lb_remetente.place(x=10, y=160)
+        self.lb_reserva.place(x=60, y=210)
+        self.lb_email.place(x=10, y=240)
 
-        self.cx_host.place(x=75, y=10)
-        self.cx_usuario.place(x=75, y=40)
-        self.cx_senha.place(x=75, y=70)
-        self.cx_porta.place(x=75, y=100)
-        self.cx_remetente.place(x=75, y=130)
+        self.cx_host.place(x=80, y=40)
+        self.cx_usuario.place(x=80, y=70)
+        self.cx_senha.place(x=80, y=100)
+        self.cx_porta.place(x=80, y=130)
+        self.cx_remetente.place(x=80, y=160)
+        self.cx_email.place(x=80, y=240)
 
-        self.bt_salvar.place(x=95, y=165)
-        self.bt_fechar.place(x=170, y=165)
+        self.bt_salvar.place(x=105, y=270)
+        self.bt_fechar.place(x=180, y=270)
 
         self._preenche_campos() ## Função para preencher os campos no momento que a classe é estanciada.
 

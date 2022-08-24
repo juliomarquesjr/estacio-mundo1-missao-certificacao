@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import Label, Button, Entry, PhotoImage, Listbox, Scrollbar, messagebox
 from tkcalendar import DateEntry
+import datetime
 from  datetime import date
 
 from sistema.centraliza_janelas import center
@@ -201,10 +202,22 @@ class GraficoReserva:
         self.cx_temp_devolucao.insert(0, novo_texto)
 
     def validar_tempo(self, dataretirada, tempretirada, datadevolucao,tempdevolucao, tempolimite):
-        print(dataretirada)
-        print(tempretirada)
-        print(datadevolucao)
-        print(tempdevolucao)
+        print(dataretirada)#20/08/2022
+        print(tempretirada)#11:00:00
+        print(datadevolucao)#24/08/2022
+        print(tempdevolucao)#12:00:00
+        #x = dataretirada.split("/")
+        #print(x)
+        #d2 = datetime.date(x[2], int(x[1]), int(x[0]))
+        #print(d2)
+        #y = dataretirada.split("/")
+        #print(y)
+        #d1 = datetime.date(y[2], int(y[1]), int(y[0]))
+        #print(d1)
+        #quantidade_dias = abs((d2 - d1).days) - 1
+        #print(quantidade_dias)
+
+
         tempopedido = 1
         if tempopedido < tempolimite:
             return True
