@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from sistema.banco import Banco as bd
 
 class Email:
-    def __init__(self, destinatario):
+    def __init__(self):
 
         #Consulta configurações no banco
         config_data = bd().consultar_dados('configuracoes')[0]
@@ -13,11 +13,15 @@ class Email:
         self._host = config_data[0]
         self._senha = config_data[2]
         self._porta = config_data[3]
+        self._email_destinatario = config_data[6]
 
         self.msg = MIMEMultipart()
         self.msg['From'] = config_data[1]
-        self.msg['To'] = destinatario
+        self.msg['To'] = self._email_destinatario
         self.msg['Subject'] = config_data[5]
+
+    def get_email_destinatario(self):
+        return self._email_destinatario
 
     def enviar_mensagem(self, mensagem):
         self. msg.attach(MIMEText(mensagem, 'plain'))

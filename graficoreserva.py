@@ -249,14 +249,14 @@ class GraficoReserva:
                     tkinter.messagebox.showinfo("Cadastro de Reserva", "Reserva cadastrada com sucesso!",
                                                 parent=self.principal)
 
-                    destinatario = 'juliomarquesjr@yahoo.com.br'
                     mensagem = f"Nova reserva: CPF: {tecnico[0]} / Tecnico: {tecnico[1]} / Ferramenta: {ferramenta[1]} / " \
                                f"Retirada: {self.cx_dataretirada.get()} - {self.cx_temp_retirada.get()} / Devolução: {self.cx_datadevol.get()} - {self.cx_temp_devolucao.get()} / " \
                                f"Descrição: {self.cx_descricao.get()}"
-                    email = Email(destinatario).enviar_mensagem(mensagem=mensagem)
+                    email = Email()
+                    email.enviar_mensagem(mensagem=mensagem)
 
                     if email:
-                        tkinter.messagebox.showinfo("Envio de mensagem", f"Uma mensagem foi enviada para: {destinatario}", parent=self.principal)
+                        tkinter.messagebox.showinfo("Envio de mensagem", f"Uma mensagem foi enviada para: {email.get_email_destinatario()}", parent=self.principal)
                     self.principal.destroy()
                 else:
                     tkinter.messagebox.showerror("Falha ao cadastrar",
