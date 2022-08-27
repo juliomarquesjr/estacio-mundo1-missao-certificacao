@@ -21,7 +21,6 @@ class GraficoTecnico :
         self.principal = tkinter.Toplevel()
         self.cpf = cpf
 
-
         self.principal.geometry("400x140")
         self.principal.title('Técnicos')
         self.principal.resizable(height=False, width=False)
@@ -49,7 +48,7 @@ class GraficoTecnico :
         self.cx_tel.bind("<KeyRelease>", self.format_telefone)
 
         self.cx_equipe = Entry(self.principal, width=22)
-        self.cx_turno = ttk.Combobox(self.principal, width=17, state="readonly")
+        self.cx_turno = ttk.Combobox(self.principal, width=17)
         self.cx_turno['values'] = ("Manhã", "Tarde", "Noite")
 
         ## Botoes
