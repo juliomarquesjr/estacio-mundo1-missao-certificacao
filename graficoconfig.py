@@ -83,6 +83,7 @@ class GraficoConfig(Config):
             self.cx_senha.insert(0, dados[2])
             self.cx_porta.insert(0, dados[3])
             self.cx_remetente.insert(0, dados[5])
+            self.cx_email.insert(0, dados[6])
 
     ## Salva dados no banco.
     def _salvar(self):
@@ -90,7 +91,8 @@ class GraficoConfig(Config):
                                                     self.cx_usuario.get(),
                                                     self.cx_senha.get(),
                                                     self.cx_porta.get(),
-                                                    self.cx_remetente.get()))
+                                                    self.cx_remetente.get(),
+                                                    self.cx_email.get()))
 
         ## Mostra alert de sucesso ou erro dependendo da resposta do banco.
         if resposta:
